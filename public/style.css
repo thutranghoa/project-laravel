@@ -1,0 +1,81 @@
+img{
+	width: 100px;
+}
+.action-buttons{
+	text-align: right;
+}
+
+a.button{
+	color:#fff;
+	text-decoration: none;
+	background-color: blue;
+	padding:2px 5px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.wrapper{
+	width: 1000px;
+	padding:10px;
+	background-color: #efefef;
+	margin: 0 auto;
+	position: relative;
+}
+.message{
+	height: 30px;
+	line-height: 30px;
+	width: 500px;
+	background-color: lightgreen;
+	text-align: center;
+	position: absolute;
+	top: 0;
+	left: 250px;
+	transition: all 3s;
+	animation:displaymess 5s;
+	border-radius: 5px;
+}
+.message:empty{
+	display: none;
+}
+
+@keyframes displaymess{
+	0%{
+		opacity: 0;
+	}
+	50%{
+		opacity: 1;
+	}
+	100%{
+		opacity: 0;
+		z-index: -1;
+	}
+}
+.menu{
+	display: flex;
+	list-style: none;
+	background-color: blue;
+	padding:0px;
+	margin:10px 0px;
+}
+.menu>li{padding:5px 20px;
+border-right: 1px solid #fff;}
+.menu>li:hover{
+	background-color: yellow;
+}
+.menu>li:hover a{
+	color: red;
+}
+.menu a{color: #fff; text-decoration: none}
+.search-form{
+	text-align: center;
+	width: 500px;
+	margin: 20px auto;
+}
+.search-form>form>input[type=text]{
+	width: 60%;
+	padding:5px 10px;
+}
+.search-form>form>input[type=submit]{
+	padding: 5px;
+	background-color: lightblue;
+	border-radius: 5px;
+}
