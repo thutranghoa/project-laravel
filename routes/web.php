@@ -30,15 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::prefix('test')->group(function(){
-    Route::get('index', [KhiemController::class, 'showdata'])->name('showdata.get');
-    Route::get('them_data', [KhiemController::class, 'themdulieu_get'])->name('themdulieu.get');
-    Route::post('them_data', [KhiemController::class, 'themdulieu_post'])->name('themdulieu.post');
 
-    Route::get('sua_data/{id}', [KhiemController::class, 'suadulieu_get'])->name('suadulieu.get');
-    Route::post('sua_data/{id}', [KhiemController::class, 'suadulieu_post'])->name('suadulieu.post');
-
-    Route::post('xoa_data/{id}', [KhiemController::class, 'xoadulieu'])->name('xoadulieu.post');
-});
 
 require __DIR__.'/auth.php';
+require __DIR__.'/khiem_route.php';
