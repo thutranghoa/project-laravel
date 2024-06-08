@@ -41,7 +41,7 @@ class KhiemController extends Controller
         return view('khiem/suadata', compact('student'));
     }
 
-    public function suadulieu_post(KhiemModels $request, $id){
+    public function suadulieu_post(Request $request, $id){
         $student = KhiemModels::findOrFail($id);
         $student->update($request->only(['ten', 'img', 'gmail']));
         return redirect()->route('showdata.get')->with('success', 'Dữ liệu đã được cập nhật thành công.');

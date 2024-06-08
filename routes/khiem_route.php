@@ -12,5 +12,6 @@ Route::prefix('test')->group(function(){
     Route::get('sua_data/{id}', [KhiemController::class, 'suadulieu_get'])->name('suadulieu.get');
     Route::post('sua_data/{id}', [KhiemController::class, 'suadulieu_post'])->name('suadulieu.post');
 
-    Route::post('xoa_data/{id}', [KhiemController::class, 'xoadulieu'])->name('xoadulieu.post');
+    Route::delete('xoa_data/{id}', [KhiemController::class, 'xoadulieu'])->name('xoadulieu.post');
+
 });
