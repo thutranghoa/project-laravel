@@ -4,6 +4,8 @@
 <html>
 <head>
     <title>Show Students Data</title>
+    <link rel="stylesheet" href="{{ asset('assets/css/test.css') }}">
+
 </head>
 <body>
     <h3><a href='{{route('themdulieu.get')}}'>thêm dữ liệu</a></h3>
