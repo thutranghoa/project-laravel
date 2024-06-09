@@ -19,9 +19,9 @@
 </head>
 <body>
     <h1>Quiz Result</h1>
-    <p>Your score is: {{ $score }}</p>
+    <p>Điểm của bạn: {{ $score }}</p>
 
-    <h2>Details:</h2>
+    <h2>Bài làm:</h2>
     @foreach ($results as $result)
         <div class="question">
             <h3>{{ $result['question']->content }}</h3>
