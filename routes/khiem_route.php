@@ -15,3 +15,11 @@ Route::prefix('test')->group(function(){
     Route::delete('xoa_data/{id}', [KhiemController::class, 'xoadulieu'])->name('xoadulieu.post');
 
 });
+
+
+Route::prefix('lam_bai')->group(function(){
+
+    Route::get('/quiz', [KhiemController::class, 'showQuestions'])->name('quiz.show');
+    Route::post('/quiz', [KhiemController::class, 'submitAnswers'])->name('quiz.submit');
+
+});
