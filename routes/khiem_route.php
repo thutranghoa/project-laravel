@@ -18,8 +18,8 @@ Route::prefix('test')->group(function(){
 
 
 Route::prefix('lam_bai')->group(function(){
-
-    Route::get('/quiz', [KhiemController::class, 'showQuestions'])->name('quiz.show');
-    Route::post('/quiz', [KhiemController::class, 'submitAnswers'])->name('quiz.submit');
+    
+    Route::get('/quiz', [KhiemController::class, 'showQuestions'])->middleware(['auth', 'verified'])->name('quiz.show');
+    Route::post('/quiz', [KhiemController::class, 'submitAnswers'])->middleware(['auth', 'verified'])->name('quiz.submit');
 
 });

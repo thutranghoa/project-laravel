@@ -66,7 +66,7 @@ class KhiemController extends Controller
 
     public function showQuestions(){
         // Lấy danh sách câu hỏi và câu trả lời
-        $questions = Question::with('answers')->inRandomOrder()->take(5)->get();
+        $questions = Question::with('answers')->inRandomOrder()->take(10)->get();
         return view('khiem/showcauhoi', compact('questions'));
     }
 
