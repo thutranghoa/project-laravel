@@ -62,19 +62,23 @@ class KhiemController extends Controller
 
 
 
-
+    
 
     public function showQuestions(){
+        $socauhoi = 10;
         // Lấy danh sách câu hỏi và câu trả lời
-        $questions = Question::with('answers')->inRandomOrder()->take(10)->get();
-        return view('khiem/showcauhoi', compact('questions'));
+        $questions = Question::with('answers')->inRandomOrder()->take($socauhoi)->get();
+        return view('khiem/showcauhoi', compact('questions','socauhoi'));
     }
 
     public function submitAnswers(Request $request){
         $score = 0;
         $results = [];
 
+        $tongcauhoi = count($request->answers);
+
         foreach ($request->answers as $questionId => $answerId) {
+
             $question = Question::with('answers')->find($questionId);
             $selectedAnswer = Answer::find($answerId);
             $isCorrect = $selectedAnswer->is_correct;
@@ -90,7 +94,7 @@ class KhiemController extends Controller
             ];
         }
 
-        return view('khiem.showketqua', compact('score', 'results'));
+        return view('khiem.showketqua', compact('score', 'results', 'tongcauhoi'));
     }
 
 

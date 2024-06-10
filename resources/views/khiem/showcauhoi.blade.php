@@ -27,8 +27,9 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
-                        
+
                         <h1>Quiz</h1>
+                        <h3>Số lượng câu hỏi: {{$socauhoi}}</h3>
                         <form action="{{ route('quiz.submit') }}" method="POST">
                             @csrf
                             @foreach ($questions as $question)
@@ -37,7 +38,7 @@
                                     <div class="answers">
                                         @foreach ($question->answers as $answer)
                                             <div>
-                                                <input type="radio" id="answer_{{ $answer->id }}" name="answers[{{ $question->id }}]" value="{{ $answer->id }}">
+                                                <input type="radio" id="answer_{{ $answer->id }}" name="answers[{{ $question->id }}]" value="{{ $answer->id }}" required>
                                                 <label for="answer_{{ $answer->id }}">{{ $answer->content }}</label>
                                             </div>
                                         @endforeach
@@ -46,6 +47,7 @@
                             @endforeach
                             <button type="submit">Submit</button>
                         </form>
+                        
                     </div>
                 </div>
             </div>
