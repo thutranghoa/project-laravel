@@ -11,6 +11,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
                     <h3><a href="{{ route('quiz.show') }}">Bài tập: câu hỏi trắc nghiệm</a></h3>
+                    <h3><a href="{{route('showquestionaudio.show',['id' => 1])}}">Bài tập: Luyện nghe</a></h3>
                 </div>
             </div>
         </div>

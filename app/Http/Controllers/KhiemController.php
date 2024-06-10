@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\KhiemModels;
 use App\Models\Answer;
 use App\Models\Question;
+use App\Models\quiz;
+use App\Models\AudioFile;
+
 
 use Illuminate\Http\Request;
 
@@ -66,10 +69,10 @@ class KhiemController extends Controller
 
     public function showQuestions(){
         $socauhoi = 10;
-        // Lấy danh sách câu hỏi và câu trả lời
-        $questions = Question::with('answers')->inRandomOrder()->take($socauhoi)->get();
+        $questions = Question::with('answers')->inRandomOrder()->where('quiz_id',"!=" ,9)->take($socauhoi)->get();
         return view('khiem/showcauhoi', compact('questions','socauhoi'));
     }
+
 
     public function submitAnswers(Request $request){
         $score = 0;
@@ -96,6 +99,23 @@ class KhiemController extends Controller
 
         return view('khiem.showketqua', compact('score', 'results', 'tongcauhoi'));
     }
+
+
+
+    
+    public function show_question_audio($id){
+        $audioFile = AudioFile::find($id);
+
+        if (!$audioFile) {
+            abort(404, 'Audio file not found.');
+        }
+
+        $socauhoi = 10;
+        $questions = Question::with('answers')->where('quiz_id', 9)->take($socauhoi)->get();
+
+        return view('khiem.showcauhoiaudio', compact('audioFile','questions','socauhoi'));
+    }
+
 
 
 
