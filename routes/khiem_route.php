@@ -16,10 +16,13 @@ Route::prefix('test')->group(function(){
 
 });
 
-
+Route::get('/danh_sach_mon_hoc', [KhiemController::class, 'listmonhoc'])->middleware(['auth', 'verified'])->name('monhoc.show');
 Route::prefix('lam_bai')->group(function(){
+
+    Route::get('/danh_sach_bai_hoc/{id_mon}', [KhiemController::class, 'listbaihoc'])->middleware(['auth', 'verified'])->name('baihoc.show');
+
     
-    Route::get('/quiz', [KhiemController::class, 'showQuestions'])->middleware(['auth', 'verified'])->name('quiz.show');
+    Route::get('/quiz/{id_mon}/{exercise_id}', [KhiemController::class, 'showQuestions'])->middleware(['auth', 'verified'])->name('quiz.show');
     Route::post('/quiz', [KhiemController::class, 'submitAnswers'])->middleware(['auth', 'verified'])->name('quiz.submit');
 
     Route::get('/quiz_audio/{id}', [KhiemController::class, 'show_question_audio'])->middleware(['auth', 'verified'])->name('showquestionaudio.show');

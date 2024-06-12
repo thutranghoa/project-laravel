@@ -53,7 +53,7 @@
                             </div>
                         @endforeach
 
-                        <a href="{{ route('quiz.show') }}">Take another quiz</a>
+                        <a href="{{route('monhoc.show')}}">về danh sách môn học</a>
                     </div>
                 </div>
             </div>

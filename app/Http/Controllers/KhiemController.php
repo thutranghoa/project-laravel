@@ -7,6 +7,8 @@ use App\Models\Answer;
 use App\Models\Question;
 use App\Models\quiz;
 use App\Models\AudioFile;
+use App\Models\danhsachmonhoc;
+use App\Models\danhsachbaihoc;
 
 
 use Illuminate\Http\Request;
@@ -65,11 +67,24 @@ class KhiemController extends Controller
 
 
 
+
+    public function listmonhoc(){
+        $danhsachmonhocs = danhsachmonhoc::all();
+        return view('khiem/show_danh_sach_mon_hoc', compact('danhsachmonhocs'));
+    }
+
+
+    public function listbaihoc($id_mon){
+        $danhsachbaihocs = danhsachbaihoc::where('id_mon', $id_mon)->get();
+        return view('khiem/show_danh_sach_bai_hoc', compact('danhsachbaihocs'));
+    }
+
+
     
 
-    public function showQuestions(){
+    public function showQuestions($id_mon, $exercise_id){
         $socauhoi = 10;
-        $questions = Question::with('answers')->inRandomOrder()->where('quiz_id',"!=" ,9)->take($socauhoi)->get();
+        $questions = Question::with('answers')->inRandomOrder()->where(['quiz_id' => $id_mon, 'exercise_id' => $exercise_id])->take($socauhoi)->get();
         return view('khiem/showcauhoi', compact('questions','socauhoi'));
     }
 

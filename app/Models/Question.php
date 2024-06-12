@@ -9,7 +9,7 @@ class Question extends Model
 {
     use HasFactory;
     protected $table = 'questions'; 
-    protected $fillable = ['content', 'quiz_id'];
+    protected $fillable = ['content', 'quiz_id', 'exercise_id', 'difficulty_level'];
 
     public function answers()
     {
