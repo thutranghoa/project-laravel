@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
+
 use App\Models\KhiemModels;
 use App\Models\Answer;
 use App\Models\Question;
@@ -9,6 +12,7 @@ use App\Models\quiz;
 use App\Models\AudioFile;
 use App\Models\danhsachmonhoc;
 use App\Models\danhsachbaihoc;
+use App\Models\exam_histories;
 
 
 use Illuminate\Http\Request;
@@ -69,7 +73,7 @@ class KhiemController extends Controller
 
 
     public function listmonhoc(){
-        $danhsachmonhocs = danhsachmonhoc::all();
+        $danhsachmonhocs = quiz::all();
         return view('khiem/show_danh_sach_mon_hoc', compact('danhsachmonhocs'));
     }
 
@@ -82,10 +86,24 @@ class KhiemController extends Controller
 
     
 
-    public function showQuestions($id_mon, $exercise_id){
+    public function showQuestions($id_mon, $exercise_id, Request $request){
         $socauhoi = 10;
         $questions = Question::with('answers')->inRandomOrder()->where(['quiz_id' => $id_mon, 'exercise_id' => $exercise_id])->take($socauhoi)->get();
-        return view('khiem/showcauhoi', compact('questions','socauhoi'));
+        $exercises = DanhSachBaiHoc::where(['id_mon' => $id_mon, 'ma_de' => $exercise_id])->first();
+        $time = $exercises->time;
+
+        $userId = Auth::id();
+        $id_exercise = $exercises->id;
+        
+
+        exam_histories::create([
+            'user_id' =>  $userId,
+            'exam_id' => $id_exercise
+        ]);
+        
+        
+        
+        return view('khiem/showcauhoi', compact('questions','socauhoi', 'time'));
     }
 
 
@@ -104,6 +122,15 @@ class KhiemController extends Controller
             if ($isCorrect) {
                 $score++;
             }
+
+            //$userId = Auth::id();
+            //ExamHistory::where('id', $userId)->update(['score' => $score]);
+            $latestExamHistory = exam_histories::latest()->first();
+            if ($latestExamHistory) {
+                $latestExamHistory->score = $score;
+                $latestExamHistory->save();
+            }
+
 
             $results[] = [
                 'question' => $question,

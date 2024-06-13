@@ -17,16 +17,24 @@
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Tên bài học
                                 </th>
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Thời gian
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             @foreach($danhsachbaihocs as $danhsanhbaihoc)
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
+                                        {{$danhsanhbaihoc->exercise_name}}                                
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <p>{{$danhsanhbaihoc->time}} phút</p>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
                                     <a href="{{route("quiz.show",['id_mon' => $danhsanhbaihoc->id_mon, 'exercise_id' => $danhsanhbaihoc->ma_de])}}">
-                                        {{$danhsanhbaihoc->exercise_name}}
+                                        <button type="button">Bắt đầu làm bài</button>
                                     </a>
-                                    
                                 </td>
                             </tr>
                             @endforeach

@@ -12,7 +12,12 @@
         .answers {
             margin-left: 20px;
         }
+        .phan_tren{
+            display: flex;
+            justify-content: space-around;
+        }
     </style>
+    
 </head>
 <body>
 
@@ -29,8 +34,22 @@
                     <div class="p-6 text-gray-900 dark:text-gray-100">
 
                         <h1>Quiz</h1>
+                        <div class="phan_tren">
+                            
+                            <div></div>
+                            <div>
+                                <div>
+                                    <strong>Thời gian còn lại: </strong>
+                                    <span id="m">00</span>:
+                                    <span id="s">00</span>
+                                    <span>s</span>
+                                </div>
+                            
+                            </div>
+                            
+                        </div>
                         <h3>Số lượng câu hỏi: {{$socauhoi}}</h3>
-                        <form action="{{ route('quiz.submit') }}" method="POST">
+                        <form id="quiz-form" action="{{ route('quiz.submit') }}" method="POST">
                             @csrf
                             @foreach ($questions as $question)
                                 <div class="question">
@@ -55,4 +74,40 @@
     </x-app-layout>
     
 </body>
+<script language="javascript">
+    var m = {{$time}}; 
+    var s = 00;  
+    var timeout = null; 
+
+    function start() {
+        if (s === -1) {
+            m -= 1;
+            s = 59;
+        }
+
+        if (m === -1) {
+            clearTimeout(timeout);
+            alert('Hết giờ');
+            document.getElementById('quiz-form').submit();
+            return false;
+        }
+
+        document.getElementById('m').innerText = m.toString();
+        document.getElementById('s').innerText = s.toString();
+
+        timeout = setTimeout(function() {
+            s--;
+            start();
+        }, 1000);
+    }
+
+    function stop() {
+        clearTimeout(timeout);
+    }
+
+    window.onload = function() {
+        start();
+    }
+</script>
+
 </html>

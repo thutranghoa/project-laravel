@@ -31,7 +31,7 @@
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         <h1>Quiz Result</h1>
-                        <p>Điểm của bạn: {{ $score }}/{{$tongcauhoi}}</p>
+                        <p>Điểm của bạn: {{ $score }}/10</p>
                         <h2>Bài làm:</h2>
                         @foreach ($results as $result)
                             <div class="question">
