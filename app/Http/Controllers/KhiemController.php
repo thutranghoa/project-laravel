@@ -12,7 +12,7 @@ use App\Models\quiz;
 use App\Models\AudioFile;
 use App\Models\danhsachmonhoc;
 use App\Models\danhsachbaihoc;
-use App\Models\exam_histories;
+use App\Models\ExamHistory;
 
 
 use Illuminate\Http\Request;
@@ -96,7 +96,7 @@ class KhiemController extends Controller
         $id_exercise = $exercises->id;
         
 
-        exam_histories::create([
+        ExamHistory::create([
             'user_id' =>  $userId,
             'exam_id' => $id_exercise
         ]);
@@ -125,7 +125,7 @@ class KhiemController extends Controller
 
             //$userId = Auth::id();
             //ExamHistory::where('id', $userId)->update(['score' => $score]);
-            $latestExamHistory = exam_histories::latest()->first();
+            $latestExamHistory = ExamHistory::latest()->first();
             if ($latestExamHistory) {
                 $latestExamHistory->score = $score;
                 $latestExamHistory->save();

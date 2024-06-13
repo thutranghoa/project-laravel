@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 12, 2024 lúc 12:48 PM
+-- Thời gian đã tạo: Th6 13, 2024 lúc 04:43 PM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.2.0
 
@@ -386,9 +386,9 @@ INSERT INTO `answers` (`id`, `question_id`, `content`, `is_correct`, `created_at
 (439, 88, 'Tổng chiều dài ba cạnh', 1, '2024-06-12 04:52:48', '2024-06-12 04:52:48'),
 (440, 88, 'Chiều cao x chiều dài', 0, '2024-06-12 04:52:48', '2024-06-12 04:52:48'),
 (441, 89, '30', 0, '2024-06-12 04:52:48', '2024-06-12 04:52:48'),
-(442, 89, '32', 1, '2024-06-12 04:52:48', '2024-06-12 04:52:48'),
+(442, 89, '32', 0, '2024-06-12 04:52:48', '2024-06-12 19:00:18'),
 (443, 89, '34', 0, '2024-06-12 04:52:48', '2024-06-12 04:52:48'),
-(444, 89, '36', 0, '2024-06-12 04:52:48', '2024-06-12 04:52:48'),
+(444, 89, '36', 1, '2024-06-12 04:52:48', '2024-06-12 19:00:23'),
 (445, 90, '20', 0, '2024-06-12 04:52:48', '2024-06-12 04:52:48'),
 (446, 90, '25', 0, '2024-06-12 04:52:48', '2024-06-12 04:52:48'),
 (447, 90, '30', 1, '2024-06-12 04:52:48', '2024-06-12 04:52:48'),
@@ -928,35 +928,6 @@ INSERT INTO `audio_files` (`id`, `file_name`, `file_path`, `file_size`, `format`
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `categories`
---
-
-CREATE TABLE `categories` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `description` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `categories`
---
-
-INSERT INTO `categories` (`id`, `name`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'Toán', 'Môn học về các con số và phép toán', '2024-06-09 12:55:44', '2024-06-09 12:55:44'),
-(2, 'Lý', 'Môn học về vật lý', '2024-06-09 12:55:44', '2024-06-09 12:55:44'),
-(3, 'Hóa', 'Môn học về hóa học', '2024-06-09 12:55:44', '2024-06-09 12:55:44'),
-(4, 'Sinh', 'Môn học về sinh học', '2024-06-09 12:55:44', '2024-06-09 12:55:44'),
-(5, 'Sử', 'Môn học về lịch sử', '2024-06-09 12:55:44', '2024-06-09 12:55:44'),
-(6, 'Địa', 'Môn học về địa lý', '2024-06-09 12:55:44', '2024-06-09 12:55:44'),
-(7, 'Văn', 'Môn học về ngữ văn', '2024-06-09 12:55:44', '2024-06-09 12:55:44'),
-(8, 'Tiếng Anh', 'Môn học về tiếng Anh', '2024-06-09 12:55:44', '2024-06-09 12:55:44'),
-(9, 'Tiếng Anh Nghe', 'Môn học về tiếng anh nhưng mà nghe', '2024-06-10 16:24:19', '2024-06-10 16:24:19');
-
--- --------------------------------------------------------
-
---
 -- Cấu trúc bảng cho bảng `difficulty_levels`
 --
 
@@ -977,6 +948,35 @@ INSERT INTO `difficulty_levels` (`difficulty_level`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `exam_histories`
+--
+
+CREATE TABLE `exam_histories` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `exam_id` int(11) NOT NULL,
+  `score` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `exam_histories`
+--
+
+INSERT INTO `exam_histories` (`id`, `user_id`, `exam_id`, `score`, `created_at`, `updated_at`) VALUES
+(1, 4, 8, NULL, '2024-06-13 02:30:00', '2024-06-13 02:30:00'),
+(2, 4, 3, NULL, '2024-06-13 02:31:33', '2024-06-13 02:31:33'),
+(3, 4, 1, NULL, '2024-06-13 02:34:37', '2024-06-13 02:34:37'),
+(4, 4, 1, 9, '2024-06-13 02:40:25', '2024-06-13 02:42:17'),
+(5, 4, 10, 2, '2024-06-13 02:49:01', '2024-06-13 02:50:57'),
+(6, 5, 3, 3, '2024-06-13 06:11:18', '2024-06-13 06:11:50'),
+(7, 5, 5, 6, '2024-06-13 06:12:25', '2024-06-13 06:12:42'),
+(8, 5, 8, NULL, '2024-06-13 07:37:51', '2024-06-13 07:37:51');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `exercises`
 --
 
@@ -984,25 +984,28 @@ CREATE TABLE `exercises` (
   `id` int(11) NOT NULL,
   `exercise_name` varchar(255) DEFAULT NULL,
   `id_mon` int(11) DEFAULT NULL,
-  `ma_de` int(11) DEFAULT NULL
+  `ma_de` int(11) DEFAULT NULL,
+  `time` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `exercises`
 --
 
-INSERT INTO `exercises` (`id`, `exercise_name`, `id_mon`, `ma_de`) VALUES
-(1, 'Bài tập toán 1', 1, 1),
-(2, 'Bài tập toán 2', 1, 2),
-(3, 'Bài tập toán 3', 1, 3),
-(4, 'Bài tập Vật lý 1', 2, 1),
-(5, 'Bài tập Vật lý 2', 2, 2),
-(6, 'Bài tập Vật lý 3', 2, 3),
-(7, 'Bài tập Vật lý 4', 2, 4),
-(8, 'Bài tập Hóa Học 1', 3, 1),
-(9, 'Bài tập Hóa Học 2', 3, 2),
-(10, 'Bài tập Hóa Học 3', 3, 3),
-(11, 'Bài tập Hóa Học 4', 3, 4);
+INSERT INTO `exercises` (`id`, `exercise_name`, `id_mon`, `ma_de`, `time`, `created_at`, `updated_at`) VALUES
+(1, 'Bài tập toán 1', 1, 1, 1, '2024-06-13 08:45:27', '2024-06-13 08:45:27'),
+(2, 'Bài tập toán 2', 1, 2, 15, '2024-06-13 08:45:27', '2024-06-13 08:45:27'),
+(3, 'Bài tập toán 3', 1, 3, 30, '2024-06-13 08:45:27', '2024-06-13 08:45:27'),
+(4, 'Bài tập Vật lý 1', 2, 1, 40, '2024-06-13 08:45:27', '2024-06-13 08:45:27'),
+(5, 'Bài tập Vật lý 2', 2, 2, 20, '2024-06-13 08:45:27', '2024-06-13 08:45:27'),
+(6, 'Bài tập Vật lý 3', 2, 3, 20, '2024-06-13 08:45:27', '2024-06-13 08:45:27'),
+(7, 'Bài tập Vật lý 4', 2, 4, 20, '2024-06-13 08:45:27', '2024-06-13 08:45:27'),
+(8, 'Bài tập Hóa Học 1', 3, 1, 20, '2024-06-13 08:45:27', '2024-06-13 08:45:27'),
+(9, 'Bài tập Hóa Học 2', 3, 2, 20, '2024-06-13 08:45:27', '2024-06-13 08:45:27'),
+(10, 'Bài tập Hóa Học 3', 3, 3, 20, '2024-06-13 08:45:27', '2024-06-13 08:45:27'),
+(11, 'Bài tập Hóa H4 ', 3, 4, 20, '2024-06-13 08:45:27', '2024-06-13 14:36:31');
 
 -- --------------------------------------------------------
 
@@ -1029,27 +1032,27 @@ INSERT INTO `questions` (`id`, `quiz_id`, `content`, `created_at`, `updated_at`,
 (2, 1, '4 x 3 bằng bao nhiêu?', '2024-06-09 12:55:56', '2024-06-12 03:32:53', 1, 1),
 (3, 2, 'Định luật Newton thứ 2 nói về điều gì?', '2024-06-09 12:55:56', '2024-06-12 09:28:15', 1, 1),
 (4, 2, 'Lực tác dụng và phản lực có đặc điểm gì?', '2024-06-09 12:55:56', '2024-06-12 09:28:21', 2, 1),
-(5, 3, 'Nguyên tố hóa học nào có ký hiệu là H?', '2024-06-09 12:55:56', '2024-06-09 12:55:56', NULL, NULL),
-(6, 3, 'Phản ứng hóa học nào là đúng?', '2024-06-09 12:55:56', '2024-06-09 12:55:56', NULL, NULL),
-(7, 4, 'Tế bào động vật khác tế bào thực vật ở điểm nào?', '2024-06-09 12:55:56', '2024-06-09 12:55:56', NULL, NULL),
-(8, 4, 'Gen là gì?', '2024-06-09 12:55:56', '2024-06-09 12:55:56', NULL, NULL),
-(9, 5, 'Trận chiến nào đã đánh dấu sự kết thúc của chiến tranh thế giới thứ nhất?', '2024-06-09 12:55:56', '2024-06-09 12:55:56', NULL, NULL),
-(10, 5, 'Nhà sử học nào nổi tiếng với các tác phẩm về lịch sử cổ đại?', '2024-06-09 12:55:56', '2024-06-09 12:55:56', NULL, NULL),
-(11, 6, 'Châu lục nào lớn nhất trên thế giới?', '2024-06-09 12:55:56', '2024-06-09 12:55:56', NULL, NULL),
-(12, 6, 'Sông nào dài nhất Việt Nam?', '2024-06-09 12:55:56', '2024-06-09 12:55:56', NULL, NULL),
-(13, 7, 'Truyện Kiều là tác phẩm của ai?', '2024-06-09 12:55:56', '2024-06-09 12:55:56', NULL, NULL),
-(14, 7, 'Cấu trúc câu trong tiếng Việt có gì đặc biệt?', '2024-06-09 12:55:56', '2024-06-09 12:55:56', NULL, NULL),
-(15, 8, 'What is the past tense of \"go\"?', '2024-06-09 12:55:56', '2024-06-09 12:55:56', NULL, NULL),
-(16, 8, 'Which of the following words is a noun?', '2024-06-09 12:55:56', '2024-06-09 12:55:56', NULL, NULL),
-(19, 9, 'What does the principal want the students to do?', '2024-06-10 17:01:46', '2024-06-10 17:01:46', NULL, NULL),
-(20, 9, 'What is the purpose of the talk?', '2024-06-10 17:01:46', '2024-06-10 17:01:46', NULL, NULL),
-(21, 9, 'What does the teacher want the students to do?', '2024-06-10 17:01:46', '2024-06-10 17:01:46', NULL, NULL),
-(22, 9, 'What does the teacher want Sarah Palin to do?', '2024-06-10 17:01:46', '2024-06-10 17:01:46', NULL, NULL),
-(23, 9, 'What is the teacher explaining?', '2024-06-10 17:01:46', '2024-06-10 17:01:46', NULL, NULL),
-(24, 9, 'Which of the following is true?', '2024-06-10 17:01:46', '2024-06-10 17:01:46', NULL, NULL),
-(25, 9, 'What is the purpose of the talk?', '2024-06-10 17:01:46', '2024-06-10 17:01:46', NULL, NULL),
-(26, 9, 'What is the purpose of the talk?', '2024-06-10 17:01:46', '2024-06-10 17:01:46', NULL, NULL),
-(27, 9, 'What is the purpose of the talk?', '2024-06-10 17:01:46', '2024-06-10 17:01:46', NULL, NULL),
+(5, 3, 'Nguyên tố hóa học nào có ký hiệu là H?', '2024-06-09 12:55:56', '2024-06-12 18:44:56', 4, 1),
+(6, 3, 'Phản ứng hóa học nào là đúng?', '2024-06-09 12:55:56', '2024-06-12 18:45:00', 3, 1),
+(7, 4, 'Tế bào động vật khác tế bào thực vật ở điểm nào?', '2024-06-09 12:55:56', '2024-06-12 18:44:01', NULL, 1),
+(8, 4, 'Gen là gì?', '2024-06-09 12:55:56', '2024-06-12 18:44:03', NULL, 1),
+(9, 5, 'Trận chiến nào đã đánh dấu sự kết thúc của chiến tranh thế giới thứ nhất?', '2024-06-09 12:55:56', '2024-06-12 18:44:05', NULL, 1),
+(10, 5, 'Nhà sử học nào nổi tiếng với các tác phẩm về lịch sử cổ đại?', '2024-06-09 12:55:56', '2024-06-12 18:44:07', NULL, 1),
+(11, 6, 'Châu lục nào lớn nhất trên thế giới?', '2024-06-09 12:55:56', '2024-06-12 18:44:09', NULL, 1),
+(12, 6, 'Sông nào dài nhất Việt Nam?', '2024-06-09 12:55:56', '2024-06-12 18:44:11', NULL, 1),
+(13, 7, 'Truyện Kiều là tác phẩm của ai?', '2024-06-09 12:55:56', '2024-06-12 18:44:12', NULL, 1),
+(14, 7, 'Cấu trúc câu trong tiếng Việt có gì đặc biệt?', '2024-06-09 12:55:56', '2024-06-12 18:44:16', NULL, 1),
+(15, 8, 'What is the past tense of \"go\"?', '2024-06-09 12:55:56', '2024-06-12 18:44:18', NULL, 1),
+(16, 8, 'Which of the following words is a noun?', '2024-06-09 12:55:56', '2024-06-12 18:44:20', NULL, 1),
+(19, 9, 'What does the principal want the students to do?', '2024-06-10 17:01:46', '2024-06-12 18:44:21', NULL, 1),
+(20, 9, 'What is the purpose of the talk?', '2024-06-10 17:01:46', '2024-06-12 18:44:23', NULL, 1),
+(21, 9, 'What does the teacher want the students to do?', '2024-06-10 17:01:46', '2024-06-12 18:44:24', NULL, 1),
+(22, 9, 'What does the teacher want Sarah Palin to do?', '2024-06-10 17:01:46', '2024-06-12 18:44:26', NULL, 1),
+(23, 9, 'What is the teacher explaining?', '2024-06-10 17:01:46', '2024-06-12 18:44:28', NULL, 1),
+(24, 9, 'Which of the following is true?', '2024-06-10 17:01:46', '2024-06-12 18:44:30', NULL, 1),
+(25, 9, 'What is the purpose of the talk?', '2024-06-10 17:01:46', '2024-06-12 18:44:32', NULL, 1),
+(26, 9, 'What is the purpose of the talk?', '2024-06-10 17:01:46', '2024-06-12 18:44:34', NULL, 1),
+(27, 9, 'What is the purpose of the talk?', '2024-06-10 17:01:46', '2024-06-12 18:44:35', NULL, 1),
 (28, 9, 'Why is the teacher talking about the activity?', '2024-06-10 17:01:46', '2024-06-10 17:01:46', NULL, NULL),
 (29, 9, 'What happened to the girl?', '2024-06-10 17:01:46', '2024-06-10 17:01:46', NULL, NULL),
 (30, 9, 'What\'s wrong with the girl\'s mother?', '2024-06-10 17:01:46', '2024-06-10 17:01:46', NULL, NULL),
@@ -1250,23 +1253,24 @@ CREATE TABLE `quizzes` (
   `duration` int(11) NOT NULL,
   `total_questions` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `quizzes`
 --
 
-INSERT INTO `quizzes` (`id`, `title`, `description`, `duration`, `total_questions`, `created_at`, `updated_at`) VALUES
-(1, 'Kiểm tra Toán cấp 1', 'Bài kiểm tra kiến thức Toán cơ bản cấp 1', 60, 10, '2024-06-10 17:00:44', '2024-06-10 17:00:44'),
-(2, 'Kiểm tra Lý cấp 2', 'Bài kiểm tra kiến thức Vật lý cấp 2', 45, 8, '2024-06-10 17:00:44', '2024-06-10 17:00:44'),
-(3, 'Kiểm tra Hóa cấp 2', 'Bài kiểm tra kiến thức Hóa học cấp 2', 50, 10, '2024-06-10 17:00:44', '2024-06-10 17:00:44'),
-(4, 'Kiểm tra Sinh cấp 3', 'Bài kiểm tra kiến thức Sinh học cấp 3', 70, 12, '2024-06-10 17:00:44', '2024-06-10 17:00:44'),
-(5, 'Kiểm tra Sử cấp 3', 'Bài kiểm tra kiến thức Lịch sử cấp 3', 40, 15, '2024-06-10 17:00:44', '2024-06-10 17:00:44'),
-(6, 'Kiểm tra Địa cấp 3', 'Bài kiểm tra kiến thức Địa lý cấp 3', 55, 8, '2024-06-10 17:00:44', '2024-06-10 17:00:44'),
-(7, 'Kiểm tra Văn cấp 1', 'Bài kiểm tra kiến thức Ngữ văn cấp 1', 65, 20, '2024-06-10 17:00:44', '2024-06-10 17:00:44'),
-(8, 'Kiểm tra Tiếng Anh cấp 3', 'Bài kiểm tra kiến thức Tiếng Anh cấp 3', 60, 10, '2024-06-10 17:00:44', '2024-06-10 17:00:44'),
-(9, 'Kiểm tra Tiếng Anh Nghe', 'Bài kiểm tra kiến thức Tiếng Anh Nghe', 60, 10, '2024-06-10 17:00:44', '2024-06-10 17:00:44');
+INSERT INTO `quizzes` (`id`, `title`, `description`, `duration`, `total_questions`, `created_at`, `updated_at`, `name`) VALUES
+(1, 'Kiểm tra Toán cấp 1', 'Bài kiểm tra kiến thức Toán cơ bản', 60, 10, '2024-06-10 17:00:44', '2024-06-13 02:27:58', 'Toán'),
+(2, 'Kiểm tra Lý cấp 2', 'Bài kiểm tra kiến thức Vật lý', 45, 8, '2024-06-10 17:00:44', '2024-06-13 02:28:18', 'Vật lý'),
+(3, 'Kiểm tra Hóa cấp 2', 'Bài kiểm tra kiến thức Hóa học ', 50, 10, '2024-06-10 17:00:44', '2024-06-13 02:28:26', 'Hóa học'),
+(4, 'Kiểm tra Sinh cấp 3', 'Bài kiểm tra kiến thức Sinh học', 70, 12, '2024-06-10 17:00:44', '2024-06-13 02:28:33', 'Sinh học'),
+(5, 'Kiểm tra Sử cấp 3', 'Bài kiểm tra kiến thức Lịch sử ', 40, 15, '2024-06-10 17:00:44', '2024-06-13 02:28:40', 'Lịch sử'),
+(6, 'Kiểm tra Địa cấp 3', 'Bài kiểm tra kiến thức Địa lý', 55, 8, '2024-06-10 17:00:44', '2024-06-13 02:28:45', 'Địa lý'),
+(7, 'Kiểm tra Văn cấp 1', 'Bài kiểm tra kiến thức Ngữ văn ', 65, 20, '2024-06-10 17:00:44', '2024-06-13 02:28:52', 'Văn'),
+(8, 'Kiểm tra Tiếng Anh cấp 3', 'Bài kiểm tra kiến thức Tiếng Anh ', 60, 10, '2024-06-10 17:00:44', '2024-06-13 02:28:58', 'Tiếng anh'),
+(9, 'Kiểm tra Tiếng Anh Nghe', 'Bài kiểm tra kiến thức Tiếng Anh Nghe', 60, 10, '2024-06-10 17:00:44', '2024-06-13 02:23:13', 'Tiếng anh nghe');
 
 -- --------------------------------------------------------
 
@@ -1292,7 +1296,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `created_at`, `u
 (1, 'Nguyen Van A', 'nguyenvana@example.com', 'hashed_password_1', 'user', '2024-06-09 12:53:39', '2024-06-09 12:53:39'),
 (2, 'Tran Thi B', 'tranthib@example.com', 'hashed_password_2', 'user', '2024-06-09 12:53:39', '2024-06-09 12:53:39'),
 (3, 'Le Van C', 'levanc@example.com', 'hashed_password_3', 'admin', '2024-06-09 12:53:39', '2024-06-09 12:53:39'),
-(4, 'khiem', 'trinhgiakhiem0112@gmail.com', '$2y$12$x4xOjZrKGK7AVta/Q8LgIuO.apuQSaQCuE0.t5dQgKYOBnZFLvWJy', 'user', '2024-06-09 20:16:24', '2024-06-09 20:52:28');
+(4, 'khiem', 'trinhgiakhiem0112@gmail.com', '$2y$12$x4xOjZrKGK7AVta/Q8LgIuO.apuQSaQCuE0.t5dQgKYOBnZFLvWJy', 'user', '2024-06-09 20:16:24', '2024-06-09 20:52:28'),
+(5, 'Tất Đạt Đa', '20010776@st.phenikaa-uni.edu.vn', '$2y$12$myzLUdPjs71ctV17HwoqrOLEPBmCiEd2VHdTKrphEGq2M10/hHkgy', 'user', '2024-06-13 06:11:09', '2024-06-13 07:20:24');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -1312,16 +1317,18 @@ ALTER TABLE `audio_files`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `categories`
---
-ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Chỉ mục cho bảng `difficulty_levels`
 --
 ALTER TABLE `difficulty_levels`
   ADD PRIMARY KEY (`difficulty_level`);
+
+--
+-- Chỉ mục cho bảng `exam_histories`
+--
+ALTER TABLE `exam_histories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `exam_id` (`exam_id`);
 
 --
 -- Chỉ mục cho bảng `exercises`
@@ -1366,10 +1373,10 @@ ALTER TABLE `audio_files`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT cho bảng `categories`
+-- AUTO_INCREMENT cho bảng `exam_histories`
 --
-ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+ALTER TABLE `exam_histories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `questions`
@@ -1387,7 +1394,7 @@ ALTER TABLE `quizzes`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -1398,6 +1405,13 @@ ALTER TABLE `users`
 --
 ALTER TABLE `answers`
   ADD CONSTRAINT `answers_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`) ON DELETE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `exam_histories`
+--
+ALTER TABLE `exam_histories`
+  ADD CONSTRAINT `exam_histories_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `exam_histories_ibfk_2` FOREIGN KEY (`exam_id`) REFERENCES `exercises` (`id`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `questions`
