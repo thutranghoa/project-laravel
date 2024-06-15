@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 15, 2024 lúc 10:03 AM
+-- Thời gian đã tạo: Th6 15, 2024 lúc 05:14 PM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.2.0
 
@@ -230,7 +230,7 @@ INSERT INTO `answers` (`id`, `question_id`, `content`, `is_correct`, `created_at
 (283, 49, '14 cm', 0, '2024-06-12 03:52:06', '2024-06-12 03:52:06'),
 (284, 49, '21 cm', 0, '2024-06-12 03:52:06', '2024-06-12 03:52:06'),
 (285, 50, '18', 0, '2024-06-12 03:52:06', '2024-06-12 03:52:06'),
-(286, 50, '30', 0, '2024-06-12 03:52:06', '2024-06-12 03:52:06'),
+(286, 50, '40', 0, '2024-06-12 03:52:06', '2024-06-15 10:17:04'),
 (287, 50, '15', 0, '2024-06-12 03:52:06', '2024-06-12 03:52:06'),
 (288, 50, '30', 1, '2024-06-12 03:52:06', '2024-06-12 03:52:06'),
 (289, 51, '7 m', 0, '2024-06-12 03:52:06', '2024-06-12 03:52:06'),
@@ -1045,7 +1045,10 @@ INSERT INTO `exam_histories` (`id`, `user_id`, `exam_id`, `score`, `created_at`,
 (76, 4, 1, 4, '2024-06-14 17:13:23', '2024-06-14 17:13:23', '00:10', NULL),
 (77, 4, 4, 3, '2024-06-14 17:32:13', '2024-06-14 17:32:13', '00:11', NULL),
 (78, 4, 1, 6, '2024-06-15 07:17:32', '2024-06-15 07:17:32', '00:32', '{\"_token\":\"prTtUiuZf503KWDBjN2E63ubxUjN9BFFkgNmyrhh\",\"elapsedTime\":\"32\",\"answers\":{\"36\":\"229\",\"74\":\"382\",\"63\":\"338\",\"86\":\"429\",\"44\":\"262\",\"66\":\"350\",\"57\":\"314\",\"42\":\"254\",\"80\":\"406\",\"89\":\"444\"}}'),
-(79, 4, 5, 8, '2024-06-15 07:45:22', '2024-06-15 07:45:22', '00:09', '{\"_token\":\"prTtUiuZf503KWDBjN2E63ubxUjN9BFFkgNmyrhh\",\"elapsedTime\":\"9\",\"answers\":{\"115\":\"466\",\"4\":\"109\",\"121\":\"489\",\"143\":\"578\",\"124\":\"502\",\"139\":\"562\",\"127\":\"515\",\"159\":\"642\",\"130\":\"526\",\"151\":\"609\"}}');
+(79, 4, 5, 8, '2024-06-15 07:45:22', '2024-06-15 07:45:22', '00:09', '{\"_token\":\"prTtUiuZf503KWDBjN2E63ubxUjN9BFFkgNmyrhh\",\"elapsedTime\":\"9\",\"answers\":{\"115\":\"466\",\"4\":\"109\",\"121\":\"489\",\"143\":\"578\",\"124\":\"502\",\"139\":\"562\",\"127\":\"515\",\"159\":\"642\",\"130\":\"526\",\"151\":\"609\"}}'),
+(80, 6, 1, 9, '2024-06-15 10:14:38', '2024-06-15 10:14:38', '00:33', '{\"_token\":\"jxoxiMLOv2kxvyngmzywGO7XyX5MwKbbH81se64U\",\"elapsedTime\":\"33\",\"answers\":{\"40\":\"246\",\"77\":\"394\",\"50\":\"286\",\"57\":\"313\",\"38\":\"238\",\"69\":\"364\",\"89\":\"444\",\"52\":\"294\",\"86\":\"429\",\"60\":\"326\"}}'),
+(81, 6, 4, 1, '2024-06-15 10:18:06', '2024-06-15 10:18:06', '00:15', '{\"_token\":\"jxoxiMLOv2kxvyngmzywGO7XyX5MwKbbH81se64U\",\"elapsedTime\":\"15\",\"answers\":{\"146\":\"590\",\"162\":\"654\",\"142\":\"576\",\"166\":\"670\",\"126\":\"511\",\"138\":\"560\",\"154\":\"622\",\"150\":\"607\",\"134\":\"542\",\"114\":\"461\"}}'),
+(82, 6, 1, 4, '2024-06-15 14:37:12', '2024-06-15 14:37:12', '00:18', '{\"_token\":\"TsmRS7ikYje3FVtBKAA9LRo6zseAqminFbpNcsqy\",\"elapsedTime\":\"18\",\"answers\":{\"42\":\"254\",\"72\":\"375\",\"36\":\"230\",\"2\":\"101\",\"74\":\"381\",\"46\":\"270\",\"40\":\"246\",\"66\":\"350\",\"60\":\"326\",\"54\":\"302\"}}');
 
 -- --------------------------------------------------------
 
@@ -1068,18 +1071,20 @@ CREATE TABLE `exercises` (
 --
 
 INSERT INTO `exercises` (`id`, `exercise_name`, `id_mon`, `ma_de`, `time`, `created_at`, `updated_at`) VALUES
-(0, 'Bài luyện nghe tiếng anh 1', 9, 1, 40, '2024-06-14 16:03:47', '2024-06-14 16:03:47'),
-(1, 'Bài tập toán 1', 1, 1, 1, '2024-06-13 08:45:27', '2024-06-13 08:45:27'),
-(2, 'Bài tập toán 2', 1, 2, 15, '2024-06-13 08:45:27', '2024-06-13 08:45:27'),
-(3, 'Bài tập toán 3', 1, 3, 30, '2024-06-13 08:45:27', '2024-06-13 08:45:27'),
-(4, 'Bài tập Vật lý 1', 2, 1, 40, '2024-06-13 08:45:27', '2024-06-13 08:45:27'),
-(5, 'Bài tập Vật lý 2', 2, 2, 20, '2024-06-13 08:45:27', '2024-06-13 08:45:27'),
-(6, 'Bài tập Vật lý 3', 2, 3, 20, '2024-06-13 08:45:27', '2024-06-13 08:45:27'),
-(7, 'Bài tập Vật lý 4', 2, 4, 20, '2024-06-13 08:45:27', '2024-06-13 08:45:27'),
-(8, 'Bài tập Hóa Học 1', 3, 1, 20, '2024-06-13 08:45:27', '2024-06-13 08:45:27'),
-(9, 'Bài tập Hóa Học 2', 3, 2, 20, '2024-06-13 08:45:27', '2024-06-13 08:45:27'),
-(10, 'Bài tập Hóa Học 3', 3, 3, 20, '2024-06-13 08:45:27', '2024-06-13 08:45:27'),
-(11, 'Bài tập Hóa H4 ', 3, 4, 20, '2024-06-13 08:45:27', '2024-06-13 14:36:31');
+(1, 'Bài luyện nghe tiếng anh 1', 9, 1, 40, '2024-06-14 09:03:47', '2024-06-14 09:03:47'),
+(2, 'Bài tập toán 1', 1, 1, 1, '2024-06-13 01:45:27', '2024-06-13 01:45:27'),
+(3, 'Bài tập toán 2', 1, 2, 15, '2024-06-13 01:45:27', '2024-06-13 01:45:27'),
+(4, 'Bài tập toán 3', 1, 3, 30, '2024-06-13 01:45:27', '2024-06-13 01:45:27'),
+(5, 'Bài tập Vật lý 1', 2, 1, 40, '2024-06-13 01:45:27', '2024-06-13 01:45:27'),
+(6, 'Bài tập Vật lý 2', 2, 2, 20, '2024-06-13 01:45:27', '2024-06-13 01:45:27'),
+(7, 'Bài tập Vật lý 3', 2, 3, 20, '2024-06-13 01:45:27', '2024-06-13 01:45:27'),
+(8, 'Bài tập Vật lý 4', 2, 4, 20, '2024-06-13 01:45:27', '2024-06-13 01:45:27'),
+(9, 'Bài tập Hóa Học 1', 3, 1, 20, '2024-06-13 01:45:27', '2024-06-13 01:45:27'),
+(10, 'Bài tập Hóa Học 2', 3, 2, 20, '2024-06-13 01:45:27', '2024-06-13 01:45:27'),
+(11, 'Bài tập Hóa Học 3', 3, 3, 20, '2024-06-13 01:45:27', '2024-06-13 01:45:27'),
+(12, 'Bài tập Hóa H4', 3, 4, 20, '2024-06-13 01:45:27', '2024-06-13 07:36:31'),
+(13, 'bài toán nâng cao', 1, 4, 20, '2024-06-15 15:03:45', '2024-06-15 15:03:45'),
+(14, 'bài hóa nân cáo', 3, 5, 50, '2024-06-15 15:10:33', '2024-06-15 15:10:33');
 
 -- --------------------------------------------------------
 
@@ -1371,7 +1376,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `created_at`, `u
 (2, 'Tran Thi B', 'tranthib@example.com', 'hashed_password_2', 'user', '2024-06-09 12:53:39', '2024-06-09 12:53:39'),
 (3, 'Le Van C', 'levanc@example.com', 'hashed_password_3', 'admin', '2024-06-09 12:53:39', '2024-06-09 12:53:39'),
 (4, 'khiem', 'trinhgiakhiem0112@gmail.com', '$2y$12$x4xOjZrKGK7AVta/Q8LgIuO.apuQSaQCuE0.t5dQgKYOBnZFLvWJy', 'user', '2024-06-09 20:16:24', '2024-06-09 20:52:28'),
-(5, 'Tất Đạt Đa', '20010776@st.phenikaa-uni.edu.vn', '$2y$12$myzLUdPjs71ctV17HwoqrOLEPBmCiEd2VHdTKrphEGq2M10/hHkgy', 'user', '2024-06-13 06:11:09', '2024-06-13 07:20:24');
+(5, 'Tất Đạt Đa', '20010776@st.phenikaa-uni.edu.vn', '$2y$12$myzLUdPjs71ctV17HwoqrOLEPBmCiEd2VHdTKrphEGq2M10/hHkgy', 'user', '2024-06-13 06:11:09', '2024-06-13 07:20:24'),
+(6, 'Trịnh Gia Khiêm', 'htoan3962@gmail.com', '$2y$12$cV6QyxWMdniFCVydJIHwY.2l4C236UDNxzurqNcUZShY/saIebmt.', 'user', '2024-06-15 10:13:52', '2024-06-15 10:13:52');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -1408,7 +1414,8 @@ ALTER TABLE `exam_histories`
 -- Chỉ mục cho bảng `exercises`
 --
 ALTER TABLE `exercises`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_mon` (`id_mon`);
 
 --
 -- Chỉ mục cho bảng `questions`
@@ -1450,7 +1457,13 @@ ALTER TABLE `audio_files`
 -- AUTO_INCREMENT cho bảng `exam_histories`
 --
 ALTER TABLE `exam_histories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+
+--
+-- AUTO_INCREMENT cho bảng `exercises`
+--
+ALTER TABLE `exercises`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT cho bảng `questions`
@@ -1468,7 +1481,7 @@ ALTER TABLE `quizzes`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -1486,6 +1499,12 @@ ALTER TABLE `answers`
 ALTER TABLE `exam_histories`
   ADD CONSTRAINT `exam_histories_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `exam_histories_ibfk_2` FOREIGN KEY (`exam_id`) REFERENCES `exercises` (`id`) ON DELETE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `exercises`
+--
+ALTER TABLE `exercises`
+  ADD CONSTRAINT `exercises_ibfk_1` FOREIGN KEY (`id_mon`) REFERENCES `quizzes` (`id`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `questions`

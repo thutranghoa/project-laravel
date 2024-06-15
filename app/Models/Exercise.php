@@ -9,7 +9,7 @@ class Exercise extends Model
 {
     use HasFactory;
     protected $table = 'exercises';
-    protected $fillable = ['exercise_name'];
+    protected $fillable = ['id','exercise_name', 'id_mon', 'ma_de', 'time'];
 
 }
 

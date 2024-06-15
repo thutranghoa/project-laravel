@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KhiemController;
+use App\Http\Controllers\AnController;
 
 
 Route::prefix('test')->group(function(){
@@ -29,4 +30,12 @@ Route::prefix('lam_bai')->group(function(){
 
 
     Route::get('/lich_su_chi_tiet/{exam_historie_id}/{exercise_name}', [KhiemController::class, 'historical_details'])->middleware(['auth', 'verified'])->name('historicaldetails.show');
+});
+
+
+Route::prefix('them_bai')->group(function(){
+    Route::get('/danh_sach_mon_hoc', [AnController::class, 'listmonhoc'])->name('admin.monhoc.show');
+
+    Route::get('/them_bai_thi/{id_mon}', [AnController::class, 'thembaithiget'])->name('admin.thembaihoc.show');
+    Route::post('/them_bai_thi', [AnController::class, 'submitBaiThi'])->name('admin.thembaihoc.submit');
 });
