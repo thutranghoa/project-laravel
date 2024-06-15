@@ -8,6 +8,7 @@ use App\Http\Controllers\QuestionController;
 Route::get('/', [QuizController::class, 'index']);
 
 Route::resource('quizzes', QuizController::class);
+Route::resource('quizzes.exercises.questions', QuestionController::class);
 
 Route::prefix('quizzes/{quiz}/exercises')->group(function () {
     Route::get('/', [ExerciseController::class, 'index'])->name('quizzes.exercises.index');

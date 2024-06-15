@@ -31,7 +31,7 @@
                     <td>
                         <a href="{{ route('quizzes.exercises.index', $quiz->id) }}" class="btn btn-info">View</a>
                         <a href="{{ route('quizzes.edit', $quiz->id) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('quizzes.destroy', $quiz->id) }}" method="POST" style="display:inline-block;">
+                        <form action="{{ route('quizzes.destroy', $quiz->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this quizz?')" style="display:inline-block;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>

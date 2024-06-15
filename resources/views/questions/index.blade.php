@@ -35,7 +35,7 @@
                         <td>{{ $question->difficulty_level }}</td>
                         <td class="d-flex justify-content-around">
                             <a href="{{ route('quizzes.exercises.questions.show', [$quiz->id, $exercise->id, $question->id]) }}" class="btn btn-info btn-sm mx-1">View</a>
-                            <a href="{{ route('quizzes.exercises.questions.edit', [$quiz->id, $exercise->id, $question->id]) }}" class="btn btn-warning btn-sm mx-1">Edit</a>
+                            <a href="{{ route('quizzes.exercises.questions.edit', [$quiz->id, $exercise->id, $question->id]) }}" class="btn btn-warning btn-sm">Edit</a>
                             <form action="{{ route('quizzes.exercises.questions.destroy', [$quiz->id, $exercise->id, $question->id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this question?')">
                                 @csrf
                                 @method('DELETE')

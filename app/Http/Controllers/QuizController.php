@@ -31,22 +31,27 @@ class QuizController extends Controller
         return redirect()->route('quizzes.index')->with('success', 'Quiz created successfully.');
     }*/
 
-    public function storeExam(Request $request, Quiz $quiz)
+    public function store(Request $request)
     {
-        // Validate the request
         $request->validate([
-            'name' => 'required',
-            'description' => 'nullable'
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'duration' => 'required|integer',
+            'total_questions' => 'required|integer',
+            'name' => 'nullable|string|max:255',
         ]);
-
-            Quiz::create([
-                'quiz_id' => $quiz->id,
-                'name' => $request->name,
-                'description' => $request->description,
-            ]);
-
-        return redirect()->route('quizzes.show', $quiz->id)->with('success', 'Exam created successfully.');
+    
+        $quiz = new Quiz;
+        $quiz->title = $request->title;
+        $quiz->description = $request->description;
+        $quiz->duration = $request->duration;
+        $quiz->total_questions = $request->total_questions;
+        $quiz->name = $request->name;
+        $quiz->save();
+    
+        return redirect()->route('quizzes.index')->with('success', 'Quiz created successfully');
     }
+    
 
 
     public function show(Quiz $quiz)
@@ -62,12 +67,20 @@ class QuizController extends Controller
     public function update(Request $request, Quiz $quiz)
     {
         $request->validate([
-            'title' => 'required',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
             'duration' => 'required|integer',
             'total_questions' => 'required|integer',
+            'name' => 'nullable|string|max:255',
         ]);
 
-        $quiz->update($request->all());
+        $quiz->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'duration' => $request->duration,
+            'total_questions' => $request->total_questions,
+            'name' => $request->name,
+        ]);
 
         return redirect()->route('quizzes.index')->with('success', 'Quiz updated successfully.');
     }

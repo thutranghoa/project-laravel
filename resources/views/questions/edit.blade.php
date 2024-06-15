@@ -18,7 +18,6 @@
             <input type="number" class="form-control" id="difficulty_level" name="difficulty_level" value="{{ $question->difficulty_level }}" required>
         </div>
 
-        <!-- Loop through answers -->
         @foreach ($question->answers as $key => $answer)
         <div class="form-group">
             <label for="answer{{ $key + 1 }}">Answer {{ $key + 1 }}:</label>
@@ -33,6 +32,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Update Question</button>
+        <a href="{{ route('quizzes.exercises.questions.index', [$quiz->id, $exercise->id]) }}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 @endsection

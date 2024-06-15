@@ -31,6 +31,7 @@ class ExerciseController extends Controller
             'exercise_name' => $request->exercise_name,
             'ma_de' => $request->ma_de,
             'time' => $request->time,
+            'id_mon' => $quiz->id, 
         ]);
 
         return redirect()->route('quizzes.exercises.index', $quiz->id)->with('success', 'Exercise created successfully.');
@@ -58,6 +59,7 @@ class ExerciseController extends Controller
             'exercise_name' => $request->exercise_name,
             'ma_de' => $request->ma_de,
             'time' => $request->time,
+            'id_mon' => $quiz->id, 
         ]);
 
         return redirect()->route('quizzes.exercises.index', $quiz->id)->with('success', 'Exercise updated successfully.');
@@ -70,4 +72,3 @@ class ExerciseController extends Controller
         return redirect()->route('quizzes.exercises.index', $quiz->id)->with('success', 'Exercise deleted successfully.');
     }
 }
-

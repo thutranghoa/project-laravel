@@ -8,7 +8,6 @@
 
     <form action="{{ route('quizzes.exercises.questions.store', [$quiz->id, $exercise->id]) }}" method="POST" enctype="multipart/form-data">
         @csrf
-
         <div class="form-group">
             <label for="content">Question Content:</label>
             <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
@@ -20,27 +19,17 @@
         </div>
 
         <div class="form-group">
-            <label for="answer1">Answer 1:</label>
-            <input type="text" class="form-control" id="answer1" name="answers[]" required>
-            <input type="radio" name="correct_answer" value="0" required> Correct Answer
-        </div>
-
-        <div class="form-group">
-            <label for="answer2">Answer 2:</label>
-            <input type="text" class="form-control" id="answer2" name="answers[]" required>
-            <input type="radio" name="correct_answer" value="1" required> Correct Answer
-        </div>
-
-        <div class="form-group">
-            <label for="answer3">Answer 3:</label>
-            <input type="text" class="form-control" id="answer3" name="answers[]" required>
-            <input type="radio" name="correct_answer" value="2" required> Correct Answer
-        </div>
-
-        <div class="form-group">
-            <label for="answer4">Answer 4:</label>
-            <input type="text" class="form-control" id="answer4" name="answers[]" required>
-            <input type="radio" name="correct_answer" value="3" required> Correct Answer
+            <label for="answers">Answers:</label>
+            @foreach(range(1, 4) as $index)
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input type="radio" name="correct_answer" value="{{ $index - 1 }}" required>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" name="answers[]" placeholder="Answer {{ $index }}" required>
+                </div>
+            @endforeach
         </div>
 
         <div class="form-group">

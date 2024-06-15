@@ -18,6 +18,6 @@ class Exercise extends Model
 
     public function quiz()
     {
-        return $this->hasMany(Question::class);
+        return $this->belongsTo(Quiz::class, 'id_mon');
     }
 }

@@ -995,6 +995,7 @@ CREATE TABLE `exercises` (
 
 --
 -- Đang đổ dữ liệu cho bảng `exercises`
+
 --
 
 INSERT INTO `exercises` (`id`, `exercise_name`, `id_mon`, `ma_de`, `time`, `created_at`, `updated_at`) VALUES
@@ -1391,7 +1392,7 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT cho bảng `quizzes`
 --
 ALTER TABLE `quizzes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
