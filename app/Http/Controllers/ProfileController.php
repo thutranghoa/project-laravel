@@ -12,7 +12,7 @@ use Illuminate\View\View;
 
 use App\Models\ExamHistory;
 use App\Models\users;
-use App\Models\Exercise;
+//use App\Models\Exercise;
 
 class ProfileController extends Controller
 {
@@ -25,10 +25,9 @@ class ProfileController extends Controller
         $users = Users::find($userId);
         $name = $users->name;
 
-        $exercises = Exercise::with('examHistories')->get();
+        //$exercises = Exercise::with('examHistories')->get();
 
-        $exam_histories = ExamHistory::where('user_id', $userId)->get();
-
+        $exam_histories = ExamHistory::where('user_id', $userId)->orderBy('created_at', 'desc')->take(10)->get();
 
         return view('profile.edit', [
             'user' => $request->user(),

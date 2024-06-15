@@ -9,7 +9,7 @@ class ExamHistory extends Model
 {
     use HasFactory;
     protected $table = 'exam_histories'; 
-    protected $fillable = ['user_id', 'exam_id', 'score'];
+    protected $fillable = ['user_id', 'exam_id', 'score', 'exam_duration','content', 'created_at'];
 
     public function exercise()
     {

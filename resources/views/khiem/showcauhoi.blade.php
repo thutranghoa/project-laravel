@@ -49,8 +49,9 @@
                             
                         </div>
                         <h3>Số lượng câu hỏi: {{$socauhoi}}</h3>
-                        <form id="quiz-form" action="{{ route('quiz.submit') }}" method="POST">
+                        <form id="quiz-form" action="{{ route('quiz.submit', ['id_exercise'=> $id_exercise]) }}" method="POST">
                             @csrf
+                            <input type="hidden" id="elapsedTime" name="elapsedTime" value="">
                             @foreach ($questions as $question)
                                 <div class="question">
                                     <h3>{{ $question->content }}</h3>
@@ -76,8 +77,9 @@
 </body>
 <script language="javascript">
     var m = {{$time}}; 
-    var s = 00;  
-    var timeout = null; 
+    var s = 0;  
+    var timeout = null;
+    var elapsedSeconds = 0; // Biến để lưu thời gian làm bài
 
     function start() {
         if (s === -1) {
@@ -92,11 +94,13 @@
             return false;
         }
 
+        document.getElementById('elapsedTime').value = elapsedSeconds;
         document.getElementById('m').innerText = m.toString();
         document.getElementById('s').innerText = s.toString();
 
         timeout = setTimeout(function() {
             s--;
+            elapsedSeconds++; 
             start();
         }, 1000);
     }

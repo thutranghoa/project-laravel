@@ -32,7 +32,7 @@
                                     <p>{{$danhsanhbaihoc->time}} phút</p>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="{{route("quiz.show",['id_mon' => $danhsanhbaihoc->id_mon, 'exercise_id' => $danhsanhbaihoc->ma_de])}}">
+                                    <a href="{{route("quiz.show",['id_mon' => $danhsanhbaihoc->id_mon, 'ma_de' => $danhsanhbaihoc->ma_de])}}">
                                         <button type="button">Bắt đầu làm bài</button>
                                     </a>
                                 </td>

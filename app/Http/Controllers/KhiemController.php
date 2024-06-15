@@ -86,32 +86,39 @@ class KhiemController extends Controller
 
     
 
-    public function showQuestions($id_mon, $exercise_id, Request $request){
+    public function showQuestions($id_mon, $ma_de, Request $request){
         $socauhoi = 10;
-        $questions = Question::with('answers')->inRandomOrder()->where(['quiz_id' => $id_mon, 'exercise_id' => $exercise_id])->take($socauhoi)->get();
-        $exercises = DanhSachBaiHoc::where(['id_mon' => $id_mon, 'ma_de' => $exercise_id])->first();
+        $questions = Question::with('answers')->inRandomOrder()->where(['quiz_id' => $id_mon, 'exercise_id' => $ma_de])->take($socauhoi)->get();
+        $exercises = DanhSachBaiHoc::where(['id_mon' => $id_mon, 'ma_de' => $ma_de])->first();
         $time = $exercises->time;
 
-        $userId = Auth::id();
         $id_exercise = $exercises->id;
-        
 
-        ExamHistory::create([
-            'user_id' =>  $userId,
-            'exam_id' => $id_exercise
-        ]);
-        
-        
-        
-        return view('khiem/showcauhoi', compact('questions','socauhoi', 'time'));
+        return view('khiem/showcauhoi', compact('questions','socauhoi', 'time', 'id_exercise'));
     }
 
 
-    public function submitAnswers(Request $request){
+    public function submitAnswers($id_exercise, Request $request){
+        //dd($request->all());
+
+        $requestData = $request->all();
+        $content = json_encode($requestData);
+
         $score = 0;
         $results = [];
 
         $tongcauhoi = count($request->answers);
+
+        $elapsedTime = $request->input('elapsedTime');
+        $minutes = floor($elapsedTime / 60);
+        $remainingSeconds = $elapsedTime % 60;
+        if ($minutes < 10) {
+            $minutes = '0'.$minutes;
+        } 
+        if ($remainingSeconds < 10) {
+            $remainingSeconds = '0'.$remainingSeconds;
+        } 
+        $time = $minutes.':'.$remainingSeconds;
 
         foreach ($request->answers as $questionId => $answerId) {
 
@@ -123,21 +130,23 @@ class KhiemController extends Controller
                 $score++;
             }
 
-            //$userId = Auth::id();
-            //ExamHistory::where('id', $userId)->update(['score' => $score]);
-            $latestExamHistory = ExamHistory::latest()->first();
-            if ($latestExamHistory) {
-                $latestExamHistory->score = $score;
-                $latestExamHistory->save();
-            }
-
-
             $results[] = [
                 'question' => $question,
                 'selected_answer' => $selectedAnswer,
                 'is_correct' => $isCorrect,
             ];
         }
+
+        $userId = Auth::id();
+
+            ExamHistory::create([
+                'user_id' =>  $userId,
+                'exam_id' => $id_exercise,
+                'score' => $score,
+                'exam_duration' => $time,
+                'content'=> $content
+
+            ]);
 
         return view('khiem.showketqua', compact('score', 'results', 'tongcauhoi'));
     }
@@ -156,6 +165,34 @@ class KhiemController extends Controller
         $questions = Question::with('answers')->where('quiz_id', 9)->take($socauhoi)->get();
 
         return view('khiem.showcauhoiaudio', compact('audioFile','questions','socauhoi'));
+    }
+
+
+    public function historical_details($exam_historie_id, $exercise_name){
+
+
+        $ExamHistory = ExamHistory::find($exam_historie_id);
+        $content = json_decode($ExamHistory->content, true); // Chuyển đổi JSON thành mảng
+    
+        $score = 0; // Khởi tạo biến $score
+        $results = []; // Khởi tạo mảng $results
+
+        foreach ($content['answers'] as $questionId => $answerId) {
+            $question = Question::with('answers')->find($questionId);
+            $selectedAnswer = Answer::find($answerId);
+            $isCorrect = $selectedAnswer->is_correct;
+
+            if ($isCorrect) {
+                $score++;
+            }
+
+            $results[] = [
+                'question' => $question,
+                'selected_answer' => $selectedAnswer,
+                'is_correct' => $isCorrect,
+            ];
+        }
+        return view('khiem.showchitietlichsu', compact('score', 'results', 'exercise_name'));
     }
 
 
