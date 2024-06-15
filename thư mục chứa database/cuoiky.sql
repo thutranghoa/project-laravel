@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 15, 2024 lúc 05:14 PM
+-- Thời gian đã tạo: Th6 15, 2024 lúc 05:30 PM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.2.0
 
@@ -1084,7 +1084,8 @@ INSERT INTO `exercises` (`id`, `exercise_name`, `id_mon`, `ma_de`, `time`, `crea
 (11, 'Bài tập Hóa Học 3', 3, 3, 20, '2024-06-13 01:45:27', '2024-06-13 01:45:27'),
 (12, 'Bài tập Hóa H4', 3, 4, 20, '2024-06-13 01:45:27', '2024-06-13 07:36:31'),
 (13, 'bài toán nâng cao', 1, 4, 20, '2024-06-15 15:03:45', '2024-06-15 15:03:45'),
-(14, 'bài hóa nân cáo', 3, 5, 50, '2024-06-15 15:10:33', '2024-06-15 15:10:33');
+(14, 'bài hóa nân cáo', 3, 5, 50, '2024-06-15 15:10:33', '2024-06-15 15:10:33'),
+(15, 'thêm bài vật lý nâng tấp', 2, 5, 30, '2024-06-15 15:28:48', '2024-06-15 15:28:48');
 
 -- --------------------------------------------------------
 
@@ -1463,7 +1464,7 @@ ALTER TABLE `exam_histories`
 -- AUTO_INCREMENT cho bảng `exercises`
 --
 ALTER TABLE `exercises`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT cho bảng `questions`
