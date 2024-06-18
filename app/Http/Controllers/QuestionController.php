@@ -114,4 +114,16 @@ class QuestionController extends Controller
                          ->with('success', 'Question deleted successfully.');
     }
 
+    public function search(Request $request, $quizId, $exerciseId)
+    {
+        $quiz = Quiz::findOrFail($quizId);
+        $exercise = Exercise::findOrFail($exerciseId);
+
+        $query = $request->input('query');
+        $questions = Question::where('exercise_id', $exerciseId)
+                            ->where('content', 'like', '%' . $query . '%')
+                            ->get();
+
+        return view('questions.index', compact('quiz', 'exercise', 'questions'));
+    }
 }

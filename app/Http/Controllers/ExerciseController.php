@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Quiz;
 use App\Models\Exercise;
+use App\Models\Question;
 use Illuminate\Http\Request;
 
 class ExerciseController extends Controller
@@ -25,16 +26,32 @@ class ExerciseController extends Controller
             'exercise_name' => 'required',
             'ma_de' => 'required|integer',
             'time' => 'required|integer',
+            'num_questions' => 'required|integer|min:1',
         ]);
 
-        $quiz->exercises()->create([
+        $exercise = $quiz->exercises()->create([
             'exercise_name' => $request->exercise_name,
             'ma_de' => $request->ma_de,
             'time' => $request->time,
-            'id_mon' => $quiz->id, 
+            'id_mon' => $quiz->id,
+            'num_questions' => $request->num_questions,
         ]);
 
-        return redirect()->route('quizzes.exercises.index', $quiz->id)->with('success', 'Exercise created successfully.');
+        $availableQuestions = Question::where('quiz_id', $quiz->id)->count();
+
+        if ($availableQuestions >= $request->num_questions) {
+            $questions = Question::where('quiz_id', $quiz->id)->inRandomOrder()->take($request->num_questions)->get();
+
+            foreach ($questions as $question) {
+                $question->exercise_id = $exercise->id;
+                $question->save();
+            }
+
+            return redirect()->route('quizzes.exercises.index', $quiz->id)->with('success', 'Exercise created successfully with questions.');
+        } else {
+            return redirect()->route('quizzes.exercises.index', $quiz->id)
+                ->with('warning', 'Not enough questions available in the quiz to create the exercise.');
+        }
     }
 
     public function show(Quiz $quiz, Exercise $exercise)
