@@ -11,7 +11,7 @@ use App\Models\Question;
 use App\Models\quiz;
 use App\Models\AudioFile;
 use App\Models\danhsachmonhoc;
-use App\Models\danhsachbaihoc;
+use App\Models\Exercise;
 use App\Models\ExamHistory;
 
 
@@ -79,7 +79,7 @@ class KhiemController extends Controller
 
 
     public function listbaihoc($id_mon){
-        $danhsachbaihocs = danhsachbaihoc::where('id_mon', $id_mon)->get();
+        $danhsachbaihocs = Exercise::where('id_mon', $id_mon)->get();
         return view('khiem/show_danh_sach_bai_hoc', compact('danhsachbaihocs'));
     }
 
@@ -87,7 +87,7 @@ class KhiemController extends Controller
     
 
     public function showQuestions($id_mon, $ma_de, Request $request){
-        $exercises = DanhSachBaiHoc::where(['id_mon' => $id_mon, 'ma_de' => $ma_de])->first();
+        $exercises = Exercise::where(['id_mon' => $id_mon, 'ma_de' => $ma_de])->first();
         $id_exercise = $exercises->id;
         $socauhoi = $exercises->num_questions;
         $time = $exercises->time;
@@ -110,7 +110,8 @@ class KhiemController extends Controller
         $score = 0;
         $results = [];
 
-        $tongcauhoi = count($request->answers);
+        $exercises = Exercise::where(['id' => $id_exercise])->first();
+        $tongcauhoi = $exercises->num_questions;
 
         $elapsedTime = $request->input('elapsedTime');
         $minutes = floor($elapsedTime / 60);
@@ -141,17 +142,20 @@ class KhiemController extends Controller
         }
 
         $userId = Auth::id();
+        
+        $score = ($score/$tongcauhoi)*10;
+        $score = number_format($score, 2);
 
-            ExamHistory::create([
-                'user_id' =>  $userId,
-                'exam_id' => $id_exercise,
-                'score' => $score,
-                'exam_duration' => $time,
-                'content'=> $content
+        ExamHistory::create([
+            'user_id' =>  $userId,
+            'exam_id' => $id_exercise,
+            'score' => $score,
+            'exam_duration' => $time,
+            'content'=> $content
 
-            ]);
+        ]);
 
-        return view('khiem.showketqua', compact('score', 'results', 'tongcauhoi'));
+        return view('khiem.showketqua', compact('score', 'results'));
     }
 
 
@@ -177,7 +181,8 @@ class KhiemController extends Controller
         $ExamHistory = ExamHistory::find($exam_historie_id);
         $content = json_decode($ExamHistory->content, true); // Chuyển đổi JSON thành mảng
     
-        $score = 0; // Khởi tạo biến $score
+
+        $score = $ExamHistory->score; // Khởi tạo biến $score
         $results = []; // Khởi tạo mảng $results
 
         foreach ($content['answers'] as $questionId => $answerId) {
@@ -186,7 +191,7 @@ class KhiemController extends Controller
             $isCorrect = $selectedAnswer->is_correct;
 
             if ($isCorrect) {
-                $score++;
+                $score;
             }
 
             $results[] = [
@@ -195,6 +200,8 @@ class KhiemController extends Controller
                 'is_correct' => $isCorrect,
             ];
         }
+
+
         return view('khiem/showchitietlichsu', compact('score', 'results', 'exercise_name'));
     }
 

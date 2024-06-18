@@ -35,7 +35,7 @@
                         <h2>Nội dung chi tiết của bài làm:</h2>
                         @foreach ($results as $result)
                             <div class="question">
-                                <h3>{{ $result['question']->content }}</h3>
+                                <h3>{{ $loop->iteration }}. {{ $result['question']->content }}</h3>
                                 <div class="answers">
                                     @foreach ($result['question']->answers as $answer)
                                         <div>

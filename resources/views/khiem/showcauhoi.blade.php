@@ -55,7 +55,7 @@
             
                             @foreach ($questions as $question)
                                 <div class="question">
-                                    <h3>{{ $loop->iteration }}.{{ $question->content }}</h3>
+                                    <h3>{{ $loop->iteration }}. {{ $question->content }}</h3>
                                     <div class="answers">
                                         @foreach ($question->answers as $answer)
                                             <div>
