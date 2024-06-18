@@ -10,31 +10,30 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
-                    <h3><a href="{{route('baihocvip.show')}}">Bài tập dành cho VIP</a></h3>
                     <table class="min-w-full divide-y divide-gray-200">
                         <br>
                         <thead>
                             <tr>
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Tên Môn Học
+                                    Tên bài Nghe
                                 </th>
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Mô Tả
+                                    Thời gian
                                 </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach($danhsachmonhocs as $danhsachmonhoc)
+                            @foreach($danhsachbainghes as $danhsanhbainghe)
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="{{route('baihoc.show',['id_mon'=> $danhsachmonhoc->id])}}">
-                                        {{$danhsachmonhoc->name}}
-                                    </a>
-                                    
+                                        {{$danhsanhbainghe->exercise_name}}                                
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="">
-                                        {{$danhsachmonhoc->description}}
+                                    <p>{{$danhsanhbainghe->time}} phút</p>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <a href="{{route("quiznghe.show",['id_mon' => $danhsanhbainghe->id_mon, 'ma_de' => $danhsanhbainghe->ma_de, 'id_audio' => $danhsanhbainghe->ma_de])}}">
+                                        <button type="button">Bắt đầu làm bài</button>
                                     </a>
                                 </td>
                             </tr>

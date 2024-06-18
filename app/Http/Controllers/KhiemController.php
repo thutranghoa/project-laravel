@@ -13,6 +13,7 @@ use App\Models\AudioFile;
 use App\Models\danhsachmonhoc;
 use App\Models\Exercise;
 use App\Models\ExamHistory;
+use App\Models\users;
 
 
 use Illuminate\Http\Request;
@@ -161,29 +162,16 @@ class KhiemController extends Controller
 
 
     
-    public function show_question_audio($id){
-        $audioFile = AudioFile::find($id);
-
-        if (!$audioFile) {
-            abort(404, 'Audio file not found.');
-        }
-
-        $socauhoi = 10;
-        $questions = Question::with('answers')->where('quiz_id', 9)->take($socauhoi)->get();
-
-        return view('khiem.showcauhoiaudio', compact('audioFile','questions','socauhoi'));
-    }
-
 
     public function historical_details($exam_historie_id, $exercise_name){
 
 
         $ExamHistory = ExamHistory::find($exam_historie_id);
-        $content = json_decode($ExamHistory->content, true); // Chuyển đổi JSON thành mảng
+        $content = json_decode($ExamHistory->content, true); 
     
 
-        $score = $ExamHistory->score; // Khởi tạo biến $score
-        $results = []; // Khởi tạo mảng $results
+        $score = $ExamHistory->score; 
+        $results = []; 
 
         foreach ($content['answers'] as $questionId => $answerId) {
             $question = Question::with('answers')->find($questionId);
@@ -210,11 +198,129 @@ class KhiemController extends Controller
     }
 
 
-    public function thanhtoanvnpay(Request $request){
+    public function thanhtoanvnpay(){
+
+        $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+        $vnp_Returnurl = "http://127.0.0.1:8000/lam_bai/thanh_toan_thanh_cong";
+        $vnp_TmnCode = "D84SB8SQ";//Mã website tại VNPAY 
+        $vnp_HashSecret = "XKE6TH3R4VTAC4FXP8BT8XSS20O5YFYU"; //Chuỗi bí mật
+        
+        //random mã đơn hàng
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < 10; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        $vnp_TxnRef = $randomString; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này 
+        $vnp_OrderInfo = "thanh toán hóa đơn";
+        $vnp_OrderType = "nap lan đầu";
+        $vnp_Amount = 20000 * 100;
+        $vnp_Locale = "vn";
+        $vnp_BankCode = "NCB";
+        $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+
+        $inputData = array(
+            "vnp_Version" => "2.1.0",
+            "vnp_TmnCode" => $vnp_TmnCode,
+            "vnp_Amount" => $vnp_Amount,
+            "vnp_Command" => "pay",
+            "vnp_CreateDate" => date('YmdHis'),
+            "vnp_CurrCode" => "VND",
+            "vnp_IpAddr" => $vnp_IpAddr,
+            "vnp_Locale" => $vnp_Locale,
+            "vnp_OrderInfo" => $vnp_OrderInfo,
+            "vnp_OrderType" => $vnp_OrderType,
+            "vnp_ReturnUrl" => $vnp_Returnurl,
+            "vnp_TxnRef" => $vnp_TxnRef 
+        );
+        
+        if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+            $inputData['vnp_BankCode'] = $vnp_BankCode;
+        }
+        if (isset($vnp_Bill_State) && $vnp_Bill_State != "") {
+            $inputData['vnp_Bill_State'] = $vnp_Bill_State;
+        }
+        
+        //var_dump($inputData);
+        ksort($inputData);
+        $query = "";
+        $i = 0;
+        $hashdata = "";
+        foreach ($inputData as $key => $value) {
+            if ($i == 1) {
+                $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
+            } else {
+                $hashdata .= urlencode($key) . "=" . urlencode($value);
+                $i = 1;
+            }
+            $query .= urlencode($key) . "=" . urlencode($value) . '&';
+        }
+        
+        $vnp_Url = $vnp_Url . "?" . $query;
+        if (isset($vnp_HashSecret)) {
+            $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);//  
+            $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
+        }
+        $returnData = array('code' => '00'
+            , 'message' => 'success'
+            , 'data' => $vnp_Url);
+            if (isset($_POST['redirect'])) {
+                header('Location: ' . $vnp_Url);
+                die();
+            } else {
+                echo json_encode($returnData);
+            }
         
     }
 
+    public function thanhtoanthanhcong(){
+        $userId = Auth::id();
+        $users = users::findOrFail($userId);
+        $users->update([
+            'role' => 'user_vip'
+        ]);
+        return view('khiem/thanhtoanthanhcong');
+    }
 
+    public function listbainghe($id_mon){
+        $danhsachbainghes = Exercise::where('id_mon', $id_mon)->get();
+        return view('khiem/vip/show_danh_sach_bai_nghe', compact('danhsachbainghes'));
+    }
+
+
+    public function show_question_audio($id_mon, $ma_de, $id_audio,  Request $request){
+        $exercises = Exercise::where(['id_mon' => $id_mon, 'ma_de' => $ma_de])->first();
+        $id_exercise = $exercises->id;
+        $socauhoi = $exercises->num_questions;
+        $time = $exercises->time;
+        
+        $questions = Question::with('answers')->where(['quiz_id' => $id_mon, 'exercise_id' => $ma_de])->take($socauhoi)->get();
+        
+        $audioFile = AudioFile::find($id_audio);
+        if (!$audioFile) {
+            abort(404, 'Audio file not found.');
+        }
+
+        return view('khiem/vip/showcauhoiaudio', compact('questions','socauhoi', 'time', 'id_exercise','audioFile'));
+    }
+
+/*
+    public function show_question_audio($id){
+        $audioFile = AudioFile::find($id);
+
+        if (!$audioFile) {
+            abort(404, 'Audio file not found.');
+        }
+
+        $socauhoi = 10;
+        $questions = Question::with('answers')->where('quiz_id', 9)->take($socauhoi)->get();
+
+
+
+        return view('khiem.showcauhoiaudio', compact('audioFile','questions','socauhoi'));
+    }
+*/
 
 
 }

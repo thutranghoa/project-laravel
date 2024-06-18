@@ -41,12 +41,28 @@
                         </audio>
 
                         <h1>Quiz</h1>
+                        <div class="phan_tren">
+                            
+                            <div></div>
+                            <div>
+                                <div>
+                                    <strong>Thời gian còn lại: </strong>
+                                    <span id="m">00</span>:
+                                    <span id="s">00</span>
+                                    <span>s</span>
+                                </div>
+                            
+                            </div>
+                            
+                        </div>
                         <h3>Số lượng câu hỏi: {{$socauhoi}}</h3>
-                        <form action="{{ route('quiz.submit') }}" method="POST">
+                        <form id="quiz-form" action="{{ route('quiz.submit', ['id_exercise'=> $id_exercise]) }}" method="POST">
                             @csrf
+                            <input type="hidden" id="elapsedTime" name="elapsedTime" value="">
+            
                             @foreach ($questions as $question)
                                 <div class="question">
-                                    <h3>{{ $question->content }}</h3>
+                                    <h3>{{ $loop->iteration }}. {{ $question->content }}</h3>
                                     <div class="answers">
                                         @foreach ($question->answers as $answer)
                                             <div>
@@ -66,4 +82,42 @@
         </div>
     </x-app-layout>
 </body>
+<script language="javascript">
+    var m = {{$time}}; 
+    var s = 0;  
+    var timeout = null;
+    var elapsedSeconds = 0; // Biến để lưu thời gian làm bài
+
+    function start() {
+        if (s === -1) {
+            m -= 1;
+            s = 59;
+        }
+
+        if (m === -1) {
+            clearTimeout(timeout);
+            alert('Hết giờ');
+            document.getElementById('quiz-form').submit();
+            return false;
+        }
+
+        document.getElementById('elapsedTime').value = elapsedSeconds;
+        document.getElementById('m').innerText = m.toString();
+        document.getElementById('s').innerText = s.toString();
+
+        timeout = setTimeout(function() {
+            s--;
+            elapsedSeconds++; 
+            start();
+        }, 1000);
+    }
+
+    function stop() {
+        clearTimeout(timeout);
+    }
+
+    window.onload = function() {
+        start();
+    }
+</script>
 </html>

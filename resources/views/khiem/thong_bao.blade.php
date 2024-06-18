@@ -10,6 +10,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <p>bạn chưa phải là vip hãy nạp lần đầu để trở thành vip</p>
                     <form action="{{ route('thanhtoan.submit') }}" method="POST">
+                        @csrf
                         <button type="submit" name = "redirect">bấm vào đây để thực hiện thanh toán</button>
                     </form>
                 </div>

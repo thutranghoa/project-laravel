@@ -26,7 +26,6 @@ Route::prefix('lam_bai')->group(function(){
     Route::get('/quiz/{id_mon}/{ma_de}', [KhiemController::class, 'showQuestions'])->middleware(['auth', 'verified'])->name('quiz.show');
     Route::post('/quiz/{id_exercise}', [KhiemController::class, 'submitAnswers'])->middleware(['auth', 'verified'])->name('quiz.submit');
 
-    Route::get('/quiz_audio/{id}', [KhiemController::class, 'show_question_audio'])->middleware(['auth', 'verified'])->name('showquestionaudio.show');
 
 
     Route::get('/lich_su_chi_tiet/{exam_historie_id}/{exercise_name}', [KhiemController::class, 'historical_details'])->middleware(['auth', 'verified'])->name('historicaldetails.show');
@@ -34,8 +33,17 @@ Route::prefix('lam_bai')->group(function(){
 
     Route::get('/bai_thi_vip', [KhiemController::class, 'baithichovip'])->middleware(['auth', 'verified','checkvip'])->name('baihocvip.show');
 
-    //Route::post('/thanh_toan_vnpay', [KhiemController::class, 'thanhtoanvnpayget'])->middleware(['auth', 'verified','checkvip'])->name('thanhtoan.get');
     Route::post('/thanh_toan_vnpay', [KhiemController::class, 'thanhtoanvnpay'])->middleware(['auth', 'verified'])->name('thanhtoan.submit');
+
+    Route::get('/thanh_toan_thanh_cong', [KhiemController::class, 'thanhtoanthanhcong'])->middleware(['auth', 'verified'])->name('thanhtoanthanhcong.show');
+});
+
+Route::prefix('vip')->group(function(){
+
+    Route::get('/danh_sach_bai_nghe/{id_mon}', [KhiemController::class, 'listbainghe'])->middleware(['auth', 'verified'])->name('bainghe.show');
+    Route::get('/quiz_audio/{id_mon}/{ma_de}/{id_audio}', [KhiemController::class, 'show_question_audio'])->middleware(['auth', 'verified'])->name('quiznghe.show');
+
+
 });
 
 
