@@ -52,9 +52,10 @@
                         <form id="quiz-form" action="{{ route('quiz.submit', ['id_exercise'=> $id_exercise]) }}" method="POST">
                             @csrf
                             <input type="hidden" id="elapsedTime" name="elapsedTime" value="">
+            
                             @foreach ($questions as $question)
                                 <div class="question">
-                                    <h3>{{ $question->content }}</h3>
+                                    <h3>{{ $loop->iteration }}.{{ $question->content }}</h3>
                                     <div class="answers">
                                         @foreach ($question->answers as $answer)
                                             <div>

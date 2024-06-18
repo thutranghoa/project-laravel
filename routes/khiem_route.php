@@ -30,7 +30,17 @@ Route::prefix('lam_bai')->group(function(){
 
 
     Route::get('/lich_su_chi_tiet/{exam_historie_id}/{exercise_name}', [KhiemController::class, 'historical_details'])->middleware(['auth', 'verified'])->name('historicaldetails.show');
+
+
+    Route::get('/bai_thi_vip', [KhiemController::class, 'baithichovip'])->middleware(['auth', 'verified','checkvip'])->name('baihocvip.show');
+
+    //Route::post('/thanh_toan_vnpay', [KhiemController::class, 'thanhtoanvnpayget'])->middleware(['auth', 'verified','checkvip'])->name('thanhtoan.get');
+    Route::post('/thanh_toan_vnpay', [KhiemController::class, 'thanhtoanvnpay'])->middleware(['auth', 'verified'])->name('thanhtoan.submit');
 });
+
+
+
+
 
 
 Route::prefix('them_bai')->group(function(){

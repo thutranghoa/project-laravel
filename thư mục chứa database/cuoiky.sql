@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 15, 2024 lúc 05:30 PM
+-- Thời gian đã tạo: Th6 18, 2024 lúc 04:05 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.2.0
 
@@ -1048,7 +1048,10 @@ INSERT INTO `exam_histories` (`id`, `user_id`, `exam_id`, `score`, `created_at`,
 (79, 4, 5, 8, '2024-06-15 07:45:22', '2024-06-15 07:45:22', '00:09', '{\"_token\":\"prTtUiuZf503KWDBjN2E63ubxUjN9BFFkgNmyrhh\",\"elapsedTime\":\"9\",\"answers\":{\"115\":\"466\",\"4\":\"109\",\"121\":\"489\",\"143\":\"578\",\"124\":\"502\",\"139\":\"562\",\"127\":\"515\",\"159\":\"642\",\"130\":\"526\",\"151\":\"609\"}}'),
 (80, 6, 1, 9, '2024-06-15 10:14:38', '2024-06-15 10:14:38', '00:33', '{\"_token\":\"jxoxiMLOv2kxvyngmzywGO7XyX5MwKbbH81se64U\",\"elapsedTime\":\"33\",\"answers\":{\"40\":\"246\",\"77\":\"394\",\"50\":\"286\",\"57\":\"313\",\"38\":\"238\",\"69\":\"364\",\"89\":\"444\",\"52\":\"294\",\"86\":\"429\",\"60\":\"326\"}}'),
 (81, 6, 4, 1, '2024-06-15 10:18:06', '2024-06-15 10:18:06', '00:15', '{\"_token\":\"jxoxiMLOv2kxvyngmzywGO7XyX5MwKbbH81se64U\",\"elapsedTime\":\"15\",\"answers\":{\"146\":\"590\",\"162\":\"654\",\"142\":\"576\",\"166\":\"670\",\"126\":\"511\",\"138\":\"560\",\"154\":\"622\",\"150\":\"607\",\"134\":\"542\",\"114\":\"461\"}}'),
-(82, 6, 1, 4, '2024-06-15 14:37:12', '2024-06-15 14:37:12', '00:18', '{\"_token\":\"TsmRS7ikYje3FVtBKAA9LRo6zseAqminFbpNcsqy\",\"elapsedTime\":\"18\",\"answers\":{\"42\":\"254\",\"72\":\"375\",\"36\":\"230\",\"2\":\"101\",\"74\":\"381\",\"46\":\"270\",\"40\":\"246\",\"66\":\"350\",\"60\":\"326\",\"54\":\"302\"}}');
+(82, 6, 1, 4, '2024-06-15 14:37:12', '2024-06-15 14:37:12', '00:18', '{\"_token\":\"TsmRS7ikYje3FVtBKAA9LRo6zseAqminFbpNcsqy\",\"elapsedTime\":\"18\",\"answers\":{\"42\":\"254\",\"72\":\"375\",\"36\":\"230\",\"2\":\"101\",\"74\":\"381\",\"46\":\"270\",\"40\":\"246\",\"66\":\"350\",\"60\":\"326\",\"54\":\"302\"}}'),
+(83, 4, 2, 4, '2024-06-16 12:13:14', '2024-06-16 12:13:14', '00:16', '{\"_token\":\"b0dePljTfINxH2TM4p609NELnfxCaqkTEFSXkBeZ\",\"elapsedTime\":\"16\",\"answers\":{\"44\":\"261\",\"50\":\"287\",\"34\":\"223\",\"89\":\"442\",\"69\":\"361\",\"86\":\"430\",\"92\":\"453\",\"83\":\"419\",\"36\":\"232\",\"60\":\"326\"}}'),
+(84, 4, 2, 3, '2024-06-17 14:40:03', '2024-06-17 14:40:03', '00:18', '{\"_token\":\"79gWimbFYKnGKiqwRFETruUEu7yaNl5fsL8pjNqa\",\"elapsedTime\":\"18\",\"answers\":{\"48\":\"277\",\"57\":\"314\",\"86\":\"430\",\"72\":\"375\",\"74\":\"382\",\"36\":\"230\",\"69\":\"362\",\"54\":\"302\",\"50\":\"286\",\"77\":\"395\"}}'),
+(85, 4, 3, 4, '2024-06-18 02:02:37', '2024-06-18 02:02:37', '00:57', '{\"_token\":\"9Hm2r6YzQsQlQv9nMssgSsI7fDS88LASevdlwg0z\",\"elapsedTime\":\"57\",\"answers\":{\"53\":\"298\",\"43\":\"258\",\"93\":\"457\",\"55\":\"306\",\"45\":\"266\",\"64\":\"343\",\"37\":\"235\",\"75\":\"387\",\"41\":\"250\",\"87\":\"435\",\"49\":\"283\",\"67\":\"354\"}}');
 
 -- --------------------------------------------------------
 
@@ -1063,29 +1066,30 @@ CREATE TABLE `exercises` (
   `ma_de` int(11) DEFAULT NULL,
   `time` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `num_questions` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `exercises`
 --
 
-INSERT INTO `exercises` (`id`, `exercise_name`, `id_mon`, `ma_de`, `time`, `created_at`, `updated_at`) VALUES
-(1, 'Bài luyện nghe tiếng anh 1', 9, 1, 40, '2024-06-14 09:03:47', '2024-06-14 09:03:47'),
-(2, 'Bài tập toán 1', 1, 1, 1, '2024-06-13 01:45:27', '2024-06-13 01:45:27'),
-(3, 'Bài tập toán 2', 1, 2, 15, '2024-06-13 01:45:27', '2024-06-13 01:45:27'),
-(4, 'Bài tập toán 3', 1, 3, 30, '2024-06-13 01:45:27', '2024-06-13 01:45:27'),
-(5, 'Bài tập Vật lý 1', 2, 1, 40, '2024-06-13 01:45:27', '2024-06-13 01:45:27'),
-(6, 'Bài tập Vật lý 2', 2, 2, 20, '2024-06-13 01:45:27', '2024-06-13 01:45:27'),
-(7, 'Bài tập Vật lý 3', 2, 3, 20, '2024-06-13 01:45:27', '2024-06-13 01:45:27'),
-(8, 'Bài tập Vật lý 4', 2, 4, 20, '2024-06-13 01:45:27', '2024-06-13 01:45:27'),
-(9, 'Bài tập Hóa Học 1', 3, 1, 20, '2024-06-13 01:45:27', '2024-06-13 01:45:27'),
-(10, 'Bài tập Hóa Học 2', 3, 2, 20, '2024-06-13 01:45:27', '2024-06-13 01:45:27'),
-(11, 'Bài tập Hóa Học 3', 3, 3, 20, '2024-06-13 01:45:27', '2024-06-13 01:45:27'),
-(12, 'Bài tập Hóa H4', 3, 4, 20, '2024-06-13 01:45:27', '2024-06-13 07:36:31'),
-(13, 'bài toán nâng cao', 1, 4, 20, '2024-06-15 15:03:45', '2024-06-15 15:03:45'),
-(14, 'bài hóa nân cáo', 3, 5, 50, '2024-06-15 15:10:33', '2024-06-15 15:10:33'),
-(15, 'thêm bài vật lý nâng tấp', 2, 5, 30, '2024-06-15 15:28:48', '2024-06-15 15:28:48');
+INSERT INTO `exercises` (`id`, `exercise_name`, `id_mon`, `ma_de`, `time`, `created_at`, `updated_at`, `num_questions`) VALUES
+(1, 'Bài luyện nghe tiếng anh 1', 9, 1, 40, '2024-06-14 09:03:47', '2024-06-18 01:49:22', 10),
+(2, 'Bài tập toán 1', 1, 1, 1, '2024-06-13 01:45:27', '2024-06-18 01:49:27', 10),
+(3, 'Bài tập toán 2', 1, 2, 15, '2024-06-13 01:45:27', '2024-06-18 01:49:31', 12),
+(4, 'Bài tập toán 3', 1, 3, 30, '2024-06-13 01:45:27', '2024-06-18 01:49:35', 13),
+(5, 'Bài tập Vật lý 1', 2, 1, 40, '2024-06-13 01:45:27', '2024-06-18 01:49:44', 11),
+(6, 'Bài tập Vật lý 2', 2, 2, 20, '2024-06-13 01:45:27', '2024-06-18 01:49:52', 10),
+(7, 'Bài tập Vật lý 3', 2, 3, 20, '2024-06-13 01:45:27', '2024-06-18 01:49:55', 10),
+(8, 'Bài tập Vật lý 4', 2, 4, 20, '2024-06-13 01:45:27', '2024-06-18 01:50:00', 10),
+(9, 'Bài tập Hóa Học 1', 3, 1, 20, '2024-06-13 01:45:27', '2024-06-18 01:50:04', 10),
+(10, 'Bài tập Hóa Học 2', 3, 2, 20, '2024-06-13 01:45:27', '2024-06-18 01:50:12', 10),
+(11, 'Bài tập Hóa Học 3', 3, 3, 20, '2024-06-13 01:45:27', '2024-06-18 01:50:16', 10),
+(12, 'Bài tập Hóa H4', 3, 4, 20, '2024-06-13 01:45:27', '2024-06-18 01:50:20', 10),
+(13, 'bài toán nâng cao', 1, 4, 20, '2024-06-15 15:03:45', '2024-06-18 01:50:23', 10),
+(14, 'bài hóa nân cáo', 3, 5, 50, '2024-06-15 15:10:33', '2024-06-18 01:50:27', 10),
+(15, 'thêm bài vật lý nâng tấp', 2, 5, 30, '2024-06-15 15:28:48', '2024-06-18 01:50:32', 10);
 
 -- --------------------------------------------------------
 
@@ -1363,7 +1367,7 @@ CREATE TABLE `users` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role` enum('user','admin') NOT NULL DEFAULT 'user',
+  `role` enum('user','admin','user_vip') NOT NULL DEFAULT 'user',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1376,9 +1380,9 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `created_at`, `u
 (1, 'Nguyen Van A', 'nguyenvana@example.com', 'hashed_password_1', 'user', '2024-06-09 12:53:39', '2024-06-09 12:53:39'),
 (2, 'Tran Thi B', 'tranthib@example.com', 'hashed_password_2', 'user', '2024-06-09 12:53:39', '2024-06-09 12:53:39'),
 (3, 'Le Van C', 'levanc@example.com', 'hashed_password_3', 'admin', '2024-06-09 12:53:39', '2024-06-09 12:53:39'),
-(4, 'khiem', 'trinhgiakhiem0112@gmail.com', '$2y$12$x4xOjZrKGK7AVta/Q8LgIuO.apuQSaQCuE0.t5dQgKYOBnZFLvWJy', 'user', '2024-06-09 20:16:24', '2024-06-09 20:52:28'),
+(4, 'khiem', 'trinhgiakhiem0112@gmail.com', '$2y$12$x4xOjZrKGK7AVta/Q8LgIuO.apuQSaQCuE0.t5dQgKYOBnZFLvWJy', 'user', '2024-06-09 20:16:24', '2024-06-17 06:29:58'),
 (5, 'Tất Đạt Đa', '20010776@st.phenikaa-uni.edu.vn', '$2y$12$myzLUdPjs71ctV17HwoqrOLEPBmCiEd2VHdTKrphEGq2M10/hHkgy', 'user', '2024-06-13 06:11:09', '2024-06-13 07:20:24'),
-(6, 'Trịnh Gia Khiêm', 'htoan3962@gmail.com', '$2y$12$cV6QyxWMdniFCVydJIHwY.2l4C236UDNxzurqNcUZShY/saIebmt.', 'user', '2024-06-15 10:13:52', '2024-06-15 10:13:52');
+(6, 'Trịnh Gia Khiêm', 'htoan3962@gmail.com', '$2y$12$cV6QyxWMdniFCVydJIHwY.2l4C236UDNxzurqNcUZShY/saIebmt.', 'user_vip', '2024-06-15 10:13:52', '2024-06-16 09:43:23');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -1458,7 +1462,7 @@ ALTER TABLE `audio_files`
 -- AUTO_INCREMENT cho bảng `exam_histories`
 --
 ALTER TABLE `exam_histories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT cho bảng `exercises`

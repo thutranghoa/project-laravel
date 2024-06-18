@@ -87,12 +87,15 @@ class KhiemController extends Controller
     
 
     public function showQuestions($id_mon, $ma_de, Request $request){
-        $socauhoi = 10;
-        $questions = Question::with('answers')->inRandomOrder()->where(['quiz_id' => $id_mon, 'exercise_id' => $ma_de])->take($socauhoi)->get();
         $exercises = DanhSachBaiHoc::where(['id_mon' => $id_mon, 'ma_de' => $ma_de])->first();
-        $time = $exercises->time;
-
         $id_exercise = $exercises->id;
+        $socauhoi = $exercises->num_questions;
+        $time = $exercises->time;
+        
+        $questions = Question::with('answers')->inRandomOrder()->where(['quiz_id' => $id_mon, 'exercise_id' => $ma_de])->take($socauhoi)->get();
+        
+
+        
 
         return view('khiem/showcauhoi', compact('questions','socauhoi', 'time', 'id_exercise'));
     }
@@ -192,7 +195,16 @@ class KhiemController extends Controller
                 'is_correct' => $isCorrect,
             ];
         }
-        return view('khiem.showchitietlichsu', compact('score', 'results', 'exercise_name'));
+        return view('khiem/showchitietlichsu', compact('score', 'results', 'exercise_name'));
+    }
+
+    public function baithichovip(){
+        return view('khiem/show_danh_sach_bai_tap_vip');
+    }
+
+
+    public function thanhtoanvnpay(Request $request){
+        
     }
 
 
