@@ -74,7 +74,7 @@ class KhiemController extends Controller
 
 
     public function listmonhoc(){
-        $danhsachmonhocs = quiz::all();
+        $danhsachmonhocs = quiz::where('id', '!=', 9)->get();
         return view('khiem/show_danh_sach_mon_hoc', compact('danhsachmonhocs'));
     }
 

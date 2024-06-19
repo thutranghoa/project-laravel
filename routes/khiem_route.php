@@ -40,8 +40,8 @@ Route::prefix('lam_bai')->group(function(){
 
 Route::prefix('vip')->group(function(){
 
-    Route::get('/danh_sach_bai_nghe/{id_mon}', [KhiemController::class, 'listbainghe'])->middleware(['auth', 'verified'])->name('bainghe.show');
-    Route::get('/quiz_audio/{id_mon}/{ma_de}/{id_audio}', [KhiemController::class, 'show_question_audio'])->middleware(['auth', 'verified'])->name('quiznghe.show');
+    Route::get('/danh_sach_bai_nghe/{id_mon}', [KhiemController::class, 'listbainghe'])->middleware(['auth', 'verified', 'checkvip'])->name('bainghe.show');
+    Route::get('/quiz_audio/{id_mon}/{ma_de}/{id_audio}', [KhiemController::class, 'show_question_audio'])->middleware(['auth', 'verified', 'checkvip'])->name('quiznghe.show');
 
 
 });
