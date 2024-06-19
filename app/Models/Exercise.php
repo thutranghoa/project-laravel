@@ -11,13 +11,19 @@ class Exercise extends Model
 
     protected $fillable = [
         'exercise_name',
-        'id_mon',
         'ma_de',
-        'time'
+        'time',
+        'num_questions',
+        'id_mon',
     ];
 
     public function quiz()
     {
         return $this->belongsTo(Quiz::class, 'id_mon');
+    }
+
+    public function questions()
+    {
+        return $this->hasMany(Question::class, 'exercise_id');
     }
 }

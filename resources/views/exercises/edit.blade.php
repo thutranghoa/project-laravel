@@ -18,6 +18,10 @@
             <label for="time">Time:</label>
             <input type="number" class="form-control" id="time" name="time" value="{{ $exercise->time }}" required>
         </div>
+        <div class="form-group">
+            <label for="num_questions">Number of Questions:</label>
+            <input type="number" class="form-control" id="num_questions" name="num_questions" value="{{ $exercise->num_questions }}" required>
+        </div>
         <button type="submit" class="btn btn-primary">Update Exercise</button>
     </form>
 </div>

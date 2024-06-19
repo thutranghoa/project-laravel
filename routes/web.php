@@ -25,6 +25,4 @@ Route::prefix('quizzes/{quiz}/exercises')->group(function () {
     Route::get('/{exercise}/questions/{question}/edit', [QuestionController::class, 'edit'])->name('quizzes.exercises.questions.edit');
     Route::put('/{exercise}/questions/{question}', [QuestionController::class, 'update'])->name('quizzes.exercises.questions.update');
     Route::delete('/{exercise}/questions/{question}', [QuestionController::class, 'destroy'])->name('quizzes.exercises.questions.destroy');
-
-    Route::get('/{exercise}/questions/search', [QuestionController::class, 'search'])->name('quizzes.exercises.questions.search');
 });

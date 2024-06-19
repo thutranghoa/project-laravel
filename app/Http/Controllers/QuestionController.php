@@ -8,6 +8,7 @@ use App\Models\Question;
 use App\Models\Answer;
 use Illuminate\Http\Request;
 
+
 class QuestionController extends Controller
 {
     public function index($quizId, $exerciseId)
@@ -73,34 +74,35 @@ class QuestionController extends Controller
         return view('questions.edit', compact('quiz', 'exercise', 'question'));
     }
 
-    public function update(Request $request, Quiz $quiz, Exercise $exercise, Question $question)
+    public function update(Request $request, $quizId, $exerciseId, $questionId)
     {
         $request->validate([
             'content' => 'required',
             'difficulty_level' => 'required|integer',
-            'answers' => 'required|array',
+            'answers.*' => 'required|string',
             'correct_answer' => 'required|integer',
+            'audio_file' => 'nullable|mimes:mp3,wav', 
         ]);
     
-        $question->update([
-            'content' => $request->content,
-            'difficulty_level' => $request->difficulty_level,
-        ]);
+        $question = Question::findOrFail($questionId);
+        $question->content = $request->content;
+        $question->difficulty_level = $request->difficulty_level;
     
-        foreach ($request->answers as $key => $answerContent) {
-            $isCorrect = $key == $request->correct_answer;
-    
-            $answer = $question->answers()->where('id', $key)->first();
-            if (!$answer) {
-                $answer = new Answer();
-            }
-    
-            $answer->content = $answerContent;
-            $answer->is_correct = $isCorrect;
+        foreach ($question->answers as $key => $answer) {
+            $answer->content = $request->answers[$key];
+            $answer->is_correct = $key == $request->correct_answer;
             $answer->save();
         }
     
-        return redirect()->route('quizzes.exercises.questions.index', [$quiz->id, $exercise->id])->with('success', 'Question updated successfully.');
+        if ($request->hasFile('audio_file')) {
+            $file = $request->file('audio_file');
+            $path = $file->store('audio_files', 'public');
+            $question->audio_file = $path;
+        }
+    
+        $question->save();
+    
+        return redirect()->route('quizzes.exercises.questions.index', [$quizId, $exerciseId])->with('success', 'Question updated successfully.');
     }    
 
     public function destroy($quizId, $exerciseId, Question $question)
@@ -112,18 +114,5 @@ class QuestionController extends Controller
     
         return redirect()->route('quizzes.exercises.questions.index', [$quiz->id, $exercise->id])
                          ->with('success', 'Question deleted successfully.');
-    }
-
-    public function search(Request $request, $quizId, $exerciseId)
-    {
-        $quiz = Quiz::findOrFail($quizId);
-        $exercise = Exercise::findOrFail($exerciseId);
-
-        $query = $request->input('query');
-        $questions = Question::where('exercise_id', $exerciseId)
-                            ->where('content', 'like', '%' . $query . '%')
-                            ->get();
-
-        return view('questions.index', compact('quiz', 'exercise', 'questions'));
     }
 }

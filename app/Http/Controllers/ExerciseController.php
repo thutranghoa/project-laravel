@@ -70,13 +70,14 @@ class ExerciseController extends Controller
             'exercise_name' => 'required',
             'ma_de' => 'required|integer',
             'time' => 'required|integer',
+            'num_questions' => 'required|integer|min:1',
         ]);
 
         $exercise->update([
             'exercise_name' => $request->exercise_name,
             'ma_de' => $request->ma_de,
             'time' => $request->time,
-            'id_mon' => $quiz->id, 
+            'num_questions' => $request->num_questions,
         ]);
 
         return redirect()->route('quizzes.exercises.index', $quiz->id)->with('success', 'Exercise updated successfully.');

@@ -14,9 +14,9 @@ class Question extends Model
         'content',
         'exercise_id',
         'difficulty_level',
+        'audio_file', 
     ];
 
-    // Define relationships
     public function quiz()
     {
         return $this->belongsTo(Quiz::class);
