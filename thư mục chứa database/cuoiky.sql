@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 18, 2024 lúc 08:04 PM
+-- Thời gian đã tạo: Th6 20, 2024 lúc 04:19 PM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.2.0
 
@@ -1156,7 +1156,15 @@ INSERT INTO `exam_histories` (`id`, `user_id`, `exam_id`, `score`, `created_at`,
 (98, 4, 1, '4.29', '2024-06-18 14:57:04', '2024-06-18 14:57:04', '00:07', '{\"_token\":\"kY25CB4Txb86ogIBHyPecpTF9l5sZ2VuW5hA5fag\",\"elapsedTime\":\"7\",\"answers\":{\"19\":\"163\",\"23\":\"178\",\"31\":\"211\",\"28\":\"198\",\"24\":\"181\",\"32\":\"214\",\"33\":\"218\"}}'),
 (99, 4, 1, '1.43', '2024-06-18 16:57:47', '2024-06-18 16:57:47', '00:07', '{\"_token\":\"CYybmJP6az3o6ZynCjF2KpjkQ7gxBaCaRxaalGBT\",\"elapsedTime\":\"7\",\"answers\":{\"29\":\"202\",\"31\":\"210\",\"22\":\"174\",\"25\":\"186\",\"26\":\"191\",\"32\":\"215\",\"23\":\"178\"}}'),
 (100, 4, 2, '2.00', '2024-06-18 17:24:03', '2024-06-18 17:24:03', '00:10', '{\"_token\":\"CYybmJP6az3o6ZynCjF2KpjkQ7gxBaCaRxaalGBT\",\"elapsedTime\":\"10\",\"answers\":{\"36\":\"231\",\"92\":\"455\",\"48\":\"279\",\"34\":\"222\",\"63\":\"337\",\"69\":\"361\",\"89\":\"442\",\"72\":\"374\",\"83\":\"419\",\"50\":\"287\"}}'),
-(101, 4, 17, '4.17', '2024-06-18 18:01:22', '2024-06-18 18:01:22', '00:15', '{\"_token\":\"CYybmJP6az3o6ZynCjF2KpjkQ7gxBaCaRxaalGBT\",\"elapsedTime\":\"15\",\"answers\":{\"247\":\"995\",\"253\":\"1018\",\"245\":\"985\",\"249\":\"1002\",\"244\":\"983\",\"250\":\"1007\",\"246\":\"990\",\"252\":\"1015\",\"251\":\"1009\",\"255\":\"1025\",\"254\":\"1021\",\"248\":\"999\"}}');
+(101, 4, 17, '4.17', '2024-06-18 18:01:22', '2024-06-18 18:01:22', '00:15', '{\"_token\":\"CYybmJP6az3o6ZynCjF2KpjkQ7gxBaCaRxaalGBT\",\"elapsedTime\":\"15\",\"answers\":{\"247\":\"995\",\"253\":\"1018\",\"245\":\"985\",\"249\":\"1002\",\"244\":\"983\",\"250\":\"1007\",\"246\":\"990\",\"252\":\"1015\",\"251\":\"1009\",\"255\":\"1025\",\"254\":\"1021\",\"248\":\"999\"}}'),
+(102, 4, 17, '1.67', '2024-06-19 02:26:38', '2024-06-19 02:26:38', '00:14', '{\"_token\":\"64TMvdSvNbEErbQPizP2ND4a8bJg0dMhkQTVzEJP\",\"elapsedTime\":\"14\",\"answers\":{\"244\":\"982\",\"245\":\"986\",\"246\":\"989\",\"247\":\"996\",\"248\":\"999\",\"249\":\"1003\",\"250\":\"1005\",\"251\":\"1010\",\"252\":\"1014\",\"253\":\"1019\",\"254\":\"1022\",\"255\":\"1026\"}}'),
+(103, 4, 3, '8.33', '2024-06-19 02:35:33', '2024-06-19 02:35:33', '01:33', '{\"_token\":\"64TMvdSvNbEErbQPizP2ND4a8bJg0dMhkQTVzEJP\",\"elapsedTime\":\"93\",\"answers\":{\"93\":\"460\",\"64\":\"341\",\"53\":\"299\",\"87\":\"435\",\"43\":\"258\",\"49\":\"282\",\"47\":\"275\",\"37\":\"234\",\"70\":\"367\",\"78\":\"400\",\"51\":\"291\",\"45\":\"267\"}}'),
+(104, 4, 17, '4.17', '2024-06-19 02:36:07', '2024-06-19 02:36:07', '00:13', '{\"_token\":\"64TMvdSvNbEErbQPizP2ND4a8bJg0dMhkQTVzEJP\",\"elapsedTime\":\"13\",\"answers\":{\"244\":\"982\",\"245\":\"987\",\"246\":\"990\",\"247\":\"995\",\"248\":\"998\",\"249\":\"1002\",\"250\":\"1006\",\"251\":\"1011\",\"252\":\"1015\",\"253\":\"1017\",\"254\":\"1024\",\"255\":\"1026\"}}'),
+(105, 4, 5, '6.36', '2024-06-19 08:33:38', '2024-06-19 08:33:38', '00:58', '{\"_token\":\"hYH6VuJPJgYEpyS1koRtTey4gyR0LjTm89ls0NuF\",\"elapsedTime\":\"58\",\"answers\":{\"150\":\"607\",\"142\":\"574\",\"120\":\"485\",\"123\":\"497\",\"117\":\"475\",\"146\":\"591\",\"158\":\"638\",\"114\":\"461\",\"132\":\"533\",\"162\":\"653\",\"170\":\"685\"}}'),
+(106, 4, 17, '2.50', '2024-06-19 08:42:27', '2024-06-19 08:42:27', '00:19', '{\"_token\":\"hYH6VuJPJgYEpyS1koRtTey4gyR0LjTm89ls0NuF\",\"elapsedTime\":\"19\",\"answers\":{\"244\":\"982\",\"245\":\"988\",\"246\":\"990\",\"247\":\"994\",\"248\":\"998\",\"249\":\"1002\",\"250\":\"1007\",\"251\":\"1010\",\"252\":\"1013\",\"253\":\"1017\",\"254\":\"1022\",\"255\":\"1026\"}}'),
+(107, 4, 3, '5.00', '2024-06-20 03:04:06', '2024-06-20 03:04:06', '00:13', '{\"_token\":\"pk2WCC57W4zxjwtgD4eraWW2BcxwNhLSNEdjqRCJ\",\"elapsedTime\":\"13\",\"answers\":{\"41\":\"251\",\"81\":\"411\",\"84\":\"422\",\"58\":\"319\",\"78\":\"399\",\"47\":\"274\",\"45\":\"267\",\"75\":\"387\",\"43\":\"258\",\"93\":\"458\",\"37\":\"234\",\"61\":\"330\"}}'),
+(108, 4, 1, '3.00', '2024-06-20 05:57:08', '2024-06-20 05:57:08', '00:10', '{\"_token\":\"pE4OFXSoPUiP0gPbXovW62LgISipEqkxTwx6UsJf\",\"elapsedTime\":\"10\",\"answers\":{\"19\":\"163\",\"20\":\"167\",\"21\":\"171\",\"22\":\"175\",\"23\":\"177\",\"24\":\"183\",\"25\":\"187\",\"26\":\"191\",\"27\":\"195\",\"28\":\"197\"}}'),
+(109, 4, 16, '1.00', '2024-06-20 09:22:54', '2024-06-20 09:22:54', '06:10', '{\"_token\":\"HiZwQr24I0eeA0ySyBscw8MkQU990UdLpFwP2Jxc\",\"elapsedTime\":\"370\",\"answers\":{\"234\":\"943\",\"235\":\"947\",\"236\":\"951\",\"237\":\"954\",\"238\":\"959\",\"239\":\"962\",\"240\":\"967\",\"241\":\"970\",\"242\":\"974\",\"243\":\"979\"}}');
 
 -- --------------------------------------------------------
 
@@ -1197,6 +1205,18 @@ INSERT INTO `exercises` (`id`, `exercise_name`, `id_mon`, `ma_de`, `time`, `crea
 (15, 'thêm bài vật lý nâng tấp', 2, 5, 30, '2024-06-15 15:28:48', '2024-06-18 01:50:32', 10),
 (16, 'Bài luyện nghe tiếng anh 2', 9, 2, 18, '2024-06-18 15:12:26', '2024-06-18 17:14:40', 10),
 (17, 'Bài luyện nghe tiếng anh 3\r\n', 9, 3, 15, '2024-06-18 17:13:51', '2024-06-18 17:14:47', 12);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `password_reset_tokens`
+--
+
+CREATE TABLE `password_reset_tokens` (
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1493,6 +1513,7 @@ INSERT INTO `quizzes` (`id`, `title`, `description`, `duration`, `total_question
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -1505,13 +1526,13 @@ CREATE TABLE `users` (
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `created_at`, `updated_at`) VALUES
-(1, 'Nguyen Van A', 'nguyenvana@example.com', 'hashed_password_1', 'user', '2024-06-09 12:53:39', '2024-06-09 12:53:39'),
-(2, 'Tran Thi B', 'tranthib@example.com', 'hashed_password_2', 'user', '2024-06-09 12:53:39', '2024-06-09 12:53:39'),
-(3, 'Le Van C', 'levanc@example.com', 'hashed_password_3', 'admin', '2024-06-09 12:53:39', '2024-06-09 12:53:39'),
-(4, 'khiem', 'trinhgiakhiem0112@gmail.com', '$2y$12$x4xOjZrKGK7AVta/Q8LgIuO.apuQSaQCuE0.t5dQgKYOBnZFLvWJy', 'user_vip', '2024-06-09 20:16:24', '2024-06-18 16:47:20'),
-(5, 'Tất Đạt Đa', '20010776@st.phenikaa-uni.edu.vn', '$2y$12$myzLUdPjs71ctV17HwoqrOLEPBmCiEd2VHdTKrphEGq2M10/hHkgy', 'user', '2024-06-13 06:11:09', '2024-06-13 07:20:24'),
-(6, 'Trịnh Gia Khiêm', 'htoan3962@gmail.com', '$2y$12$cV6QyxWMdniFCVydJIHwY.2l4C236UDNxzurqNcUZShY/saIebmt.', 'user_vip', '2024-06-15 10:13:52', '2024-06-16 09:43:23');
+INSERT INTO `users` (`id`, `remember_token`, `name`, `email`, `password`, `role`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'Nguyen Van A', 'nguyenvana@example.com', 'hashed_password_1', 'user', '2024-06-09 12:53:39', '2024-06-09 12:53:39'),
+(2, NULL, 'Tran Thi B', 'tranthib@example.com', 'hashed_password_2', 'user', '2024-06-09 12:53:39', '2024-06-09 12:53:39'),
+(3, NULL, 'Le Van C', 'levanc@example.com', 'hashed_password_3', 'admin', '2024-06-09 12:53:39', '2024-06-09 12:53:39'),
+(4, 'E2gDZL15xL6VWEGR7m3vMrs658p18vpPPd8hOgpE40kAuFyKYj9eqjXWYUoR', 'khiem', 'trinhgiakhiem0112@gmail.com', '$2y$12$o9aQd7jgkDjdzQCBCqQF9.QjKFPgOdFI7bZFzKyEC6jf9yac0J802', 'user', '2024-06-09 20:16:24', '2024-06-20 13:59:45'),
+(5, NULL, 'Tất Đạt Đa', '20010776@st.phenikaa-uni.edu.vn', '$2y$12$myzLUdPjs71ctV17HwoqrOLEPBmCiEd2VHdTKrphEGq2M10/hHkgy', 'user', '2024-06-13 06:11:09', '2024-06-13 07:20:24'),
+(6, NULL, 'Trịnh Gia Khiêm', 'htoan3962@gmail.com', '$2y$12$cV6QyxWMdniFCVydJIHwY.2l4C236UDNxzurqNcUZShY/saIebmt.', 'user_vip', '2024-06-15 10:13:52', '2024-06-16 09:43:23');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -1550,6 +1571,12 @@ ALTER TABLE `exam_histories`
 ALTER TABLE `exercises`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_mon` (`id_mon`);
+
+--
+-- Chỉ mục cho bảng `password_reset_tokens`
+--
+ALTER TABLE `password_reset_tokens`
+  ADD KEY `email` (`email`);
 
 --
 -- Chỉ mục cho bảng `questions`
@@ -1591,7 +1618,7 @@ ALTER TABLE `audio_files`
 -- AUTO_INCREMENT cho bảng `exam_histories`
 --
 ALTER TABLE `exam_histories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT cho bảng `exercises`

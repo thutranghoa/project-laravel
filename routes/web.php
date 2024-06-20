@@ -91,7 +91,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
 
 
 
-        Route::prefix('quizzes/{quiz}/exercises')->group(function () {
+        
+        Route::prefix('admin/quizzes/{quiz}/exercises')->group(function () {
             Route::get('/', [ExerciseController::class, 'index'])->name('quizzes.exercises.index');
             Route::get('/create', [ExerciseController::class, 'create'])->name('quizzes.exercises.create');
             Route::post('/', [ExerciseController::class, 'store'])->name('quizzes.exercises.store');
@@ -108,9 +109,14 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
             Route::put('/{exercise}/questions/{question}', [QuestionController::class, 'update'])->name('quizzes.exercises.questions.update');
             Route::delete('/{exercise}/questions/{question}', [QuestionController::class, 'destroy'])->name('quizzes.exercises.questions.destroy');
         });
+
+        
     });
 
 });
+
+
+
 
 // Route::get('/', [QuizController::class, 'index']);
 
