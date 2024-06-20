@@ -41,10 +41,7 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-<<<<<<< HEAD
             'url' => env('MAIL_URL'),
-=======
->>>>>>> DuongAn
             'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
@@ -58,7 +55,6 @@ return [
             'transport' => 'ses',
         ],
 
-<<<<<<< HEAD
         'postmark' => [
             'transport' => 'postmark',
             // 'message_stream_id' => null,
@@ -72,14 +68,6 @@ return [
             // 'client' => [
             //     'timeout' => 5,
             // ],
-=======
-        'mailgun' => [
-            'transport' => 'mailgun',
-        ],
-
-        'postmark' => [
-            'transport' => 'postmark',
->>>>>>> DuongAn
         ],
 
         'sendmail' => [
@@ -103,7 +91,6 @@ return [
                 'log',
             ],
         ],
-<<<<<<< HEAD
 
         'roundrobin' => [
             'transport' => 'roundrobin',
@@ -112,8 +99,6 @@ return [
                 'postmark',
             ],
         ],
-=======
->>>>>>> DuongAn
     ],
 
     /*

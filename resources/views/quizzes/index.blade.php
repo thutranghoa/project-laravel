@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('admin.layouts.admin')
 
 @section('content')
 <div class="container">
     <h1>Quizzes</h1>
-    <a href="{{ route('quizzes.create') }}" class="btn btn-primary mb-3">Add New Quiz</a>
+    <a href="{{ route('admin.quizzes.create') }}" class="btn btn-primary mb-3">Add New Quiz</a>
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -29,9 +29,9 @@
                     <td>{{ $quiz->duration }}</td>
                     <td>{{ $quiz->total_questions }}</td>
                     <td>
-                        <a href="{{ route('quizzes.exercises.index', $quiz->id) }}" class="btn btn-info">View</a>
-                        <a href="{{ route('quizzes.edit', $quiz->id) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('quizzes.destroy', $quiz->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this quizz?')" style="display:inline-block;">
+                        <a href="{{ route('admin.quizzes.exercises.index', $quiz->id) }}" class="btn btn-info">View</a>
+                        <a href="{{ route('admin.quizzes.edit', $quiz->id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('admin.quizzes.destroy', $quiz->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this quizz?')" style="display:inline-block;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>

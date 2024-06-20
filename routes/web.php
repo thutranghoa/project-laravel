@@ -9,9 +9,9 @@ use App\Http\Controllers\Admin\ResultController;
 use App\Http\Controllers\Admin\SubjectController;
 use Illuminate\Support\Facades\DB;
 
-use App\Http\Controllers\QuizController;
-use App\Http\Controllers\ExerciseController;
-use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\Admin\QuizController;
+use App\Http\Controllers\Admin\ExerciseController;
+use App\Http\Controllers\Admin\QuestionController;
 
 
 
@@ -74,29 +74,55 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::post('/delete-subject', [SubjectController::class, 'deleteSubject'])->name('deleteSubject');
 
         Route::get('/search-subject', [SubjectController::class, 'searchSubjects'])->name('searchSubjects');
-    
+
+        Route::get('/quizzes', [QuizController::class, 'index'])->name('quizzes');
+        Route::get('/create-quiz', [QuizController::class, 'create'])->name('quizzes.create'); // Correct route definition
+        Route::post('/store-quiz', [QuizController::class, 'store'])->name('quizzes.store');
+        Route::get('/edit-quiz/{id}', [QuizController::class, 'edit'])->name('quizzes.edit');
+        Route::put('/update-quiz/{id}', [QuizController::class, 'update'])->name('quizzes.update');
+        Route::delete('/delete-quiz/{id}', [QuizController::class, 'destroy'])->name('quizzes.destroy');
+
+
+
+        Route::prefix('quizzes/{quiz}/exercises')->group(function () {
+            Route::get('/', [ExerciseController::class, 'index'])->name('quizzes.exercises.index');
+            Route::get('/create', [ExerciseController::class, 'create'])->name('quizzes.exercises.create');
+            Route::post('/', [ExerciseController::class, 'store'])->name('quizzes.exercises.store');
+            Route::get('/{exercise}', [ExerciseController::class, 'show'])->name('quizzes.exercises.show');
+            Route::get('/{exercise}/edit', [ExerciseController::class, 'edit'])->name('quizzes.exercises.edit');
+            Route::put('/{exercise}', [ExerciseController::class, 'update'])->name('quizzes.exercises.update');
+            Route::delete('/{exercise}', [ExerciseController::class, 'destroy'])->name('quizzes.exercises.destroy');
+        
+            Route::get('/{exercise}/questions', [QuestionController::class, 'index'])->name('quizzes.exercises.questions.index');
+            Route::get('/{exercise}/questions/create', [QuestionController::class, 'create'])->name('quizzes.exercises.questions.create');
+            Route::post('/{exercise}/questions', [QuestionController::class, 'store'])->name('quizzes.exercises.questions.store');
+            Route::get('/{exercise}/questions/{question}', [QuestionController::class, 'show'])->name('quizzes.exercises.questions.show');
+            Route::get('/{exercise}/questions/{question}/edit', [QuestionController::class, 'edit'])->name('quizzes.exercises.questions.edit');
+            Route::put('/{exercise}/questions/{question}', [QuestionController::class, 'update'])->name('quizzes.exercises.questions.update');
+            Route::delete('/{exercise}/questions/{question}', [QuestionController::class, 'destroy'])->name('quizzes.exercises.questions.destroy');
+        });
     });
-   
+
 });
 
-Route::get('/', [QuizController::class, 'index']);
+// Route::get('/', [QuizController::class, 'index']);
 
-Route::resource('quizzes', QuizController::class);
+// Route::resource('quizzes', QuizController::class);
 
-Route::prefix('quizzes/{quiz}/exercises')->group(function () {
-    Route::get('/', [ExerciseController::class, 'index'])->name('quizzes.exercises.index');
-    Route::get('/create', [ExerciseController::class, 'create'])->name('quizzes.exercises.create');
-    Route::post('/', [ExerciseController::class, 'store'])->name('quizzes.exercises.store');
-    Route::get('/{exercise}', [ExerciseController::class, 'show'])->name('quizzes.exercises.show');
-    Route::get('/{exercise}/edit', [ExerciseController::class, 'edit'])->name('quizzes.exercises.edit');
-    Route::put('/{exercise}', [ExerciseController::class, 'update'])->name('quizzes.exercises.update');
-    Route::delete('/{exercise}', [ExerciseController::class, 'destroy'])->name('quizzes.exercises.destroy');
+// Route::prefix('quizzes/{quiz}/exercises')->group(function () {
+//     Route::get('/', [ExerciseController::class, 'index'])->name('quizzes.exercises.index');
+//     Route::get('/create', [ExerciseController::class, 'create'])->name('quizzes.exercises.create');
+//     Route::post('/', [ExerciseController::class, 'store'])->name('quizzes.exercises.store');
+//     Route::get('/{exercise}', [ExerciseController::class, 'show'])->name('quizzes.exercises.show');
+//     Route::get('/{exercise}/edit', [ExerciseController::class, 'edit'])->name('quizzes.exercises.edit');
+//     Route::put('/{exercise}', [ExerciseController::class, 'update'])->name('quizzes.exercises.update');
+//     Route::delete('/{exercise}', [ExerciseController::class, 'destroy'])->name('quizzes.exercises.destroy');
 
-    Route::get('/{exercise}/questions', [QuestionController::class, 'index'])->name('quizzes.exercises.questions.index');
-    Route::get('/{exercise}/questions/create', [QuestionController::class, 'create'])->name('quizzes.exercises.questions.create');
-    Route::post('/{exercise}/questions', [QuestionController::class, 'store'])->name('quizzes.exercises.questions.store');
-    Route::get('/{exercise}/questions/{question}', [QuestionController::class, 'show'])->name('quizzes.exercises.questions.show');
-    Route::get('/{exercise}/questions/{question}/edit', [QuestionController::class, 'edit'])->name('quizzes.exercises.questions.edit');
-    Route::put('/{exercise}/questions/{question}', [QuestionController::class, 'update'])->name('quizzes.exercises.questions.update');
-    Route::delete('/{exercise}/questions/{question}', [QuestionController::class, 'destroy'])->name('quizzes.exercises.questions.destroy');
-});
+//     Route::get('/{exercise}/questions', [QuestionController::class, 'index'])->name('quizzes.exercises.questions.index');
+//     Route::get('/{exercise}/questions/create', [QuestionController::class, 'create'])->name('quizzes.exercises.questions.create');
+//     Route::post('/{exercise}/questions', [QuestionController::class, 'store'])->name('quizzes.exercises.questions.store');
+//     Route::get('/{exercise}/questions/{question}', [QuestionController::class, 'show'])->name('quizzes.exercises.questions.show');
+//     Route::get('/{exercise}/questions/{question}/edit', [QuestionController::class, 'edit'])->name('quizzes.exercises.questions.edit');
+//     Route::put('/{exercise}/questions/{question}', [QuestionController::class, 'update'])->name('quizzes.exercises.questions.update');
+//     Route::delete('/{exercise}/questions/{question}', [QuestionController::class, 'destroy'])->name('quizzes.exercises.questions.destroy');
+// });

@@ -34,7 +34,7 @@
             <a href="subjects"><span class="fa fa-book mr-3"></span> Môn học</a>
           </li>
           <li class="active">
-            <a href="#"><span class="fa fa-file mr-3"></span> Đề thi</a>
+            <a href="quizzes"><span class="fa fa-file mr-3"></span> Đề thi</a>
           </li>
           <li class="active">
             
@@ -48,9 +48,7 @@
               </li>
             </ul>
           </li>
-          <li class="active">
-            <a href="#"><span class="fa fa-check mr-3"></span> Điểm</a>
-          </li>
+        
             <li>
                 <a href="logout"><span class="fa fa-sign-out mr-3"></span> Logout</a>
         </ul>

@@ -1,10 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
-<<<<<<< HEAD
 use Illuminate\Support\ServiceProvider;
-=======
->>>>>>> DuongAn
 
 return [
 
@@ -144,11 +141,7 @@ return [
 
     'maintenance' => [
         'driver' => 'file',
-<<<<<<< HEAD
         // 'store' => 'redis',
-=======
-        // 'store'  => 'redis',
->>>>>>> DuongAn
     ],
 
     /*
@@ -162,9 +155,6 @@ return [
     |
     */
 
-<<<<<<< HEAD
-    'providers' => ServiceProvider::defaultProviders()->merge([
-=======
     'providers' => [
 
         /*
@@ -193,7 +183,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
->>>>>>> DuongAn
         /*
          * Package Service Providers...
          */
@@ -206,12 +195,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-<<<<<<< HEAD
-    ])->toArray(),
-=======
 
     ],
->>>>>>> DuongAn
 
     /*
     |--------------------------------------------------------------------------
@@ -225,11 +210,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-<<<<<<< HEAD
         // 'Example' => App\Facades\Example::class,
-=======
         // 'ExampleClass' => App\Example\ExampleClass::class,
->>>>>>> DuongAn
     ])->toArray(),
 
 ];
