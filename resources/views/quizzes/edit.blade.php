@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('admin.layouts.admin')
 
 @section('content')
 <div class="container">
     <h1>Edit Quiz</h1>
 
-    <form action="{{ route('quizzes.update', $quiz->id) }}" method="POST">
+    <form action="{{ route('admin.quizzes.update', $quiz->id) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -34,7 +34,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Update Quiz</button>
-        <a href="{{ route('quizzes.index') }}" class="btn btn-secondary">Cancel</a>
+        <a href="{{ route('admin.quizzes.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 @endsection

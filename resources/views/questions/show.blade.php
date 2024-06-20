@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts.admin')
 
 @section('content')
 <div class="container">
@@ -26,7 +26,7 @@
     <!-- Additional details as needed -->
 
     <div class="mt-3">
-        <a href="{{ route('quizzes.exercises.questions.index', [$quiz->id, $exercise->id]) }}" class="btn btn-secondary">Back to Questions List</a>
+        <a href="{{ route('admin.quizzes.exercises.questions.index', [$quiz->id, $exercise->id]) }}" class="btn btn-secondary">Back to Questions List</a>
     </div>
 </div>
 @endsection

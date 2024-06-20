@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('admin.layouts.admin')
 
 @section('content')
 <div class="container">
     <h1>Create Exercise for {{ $quiz->title }}</h1>
-    <form action="{{ route('quizzes.exercises.store', $quiz->id) }}" method="POST">
+    <form action="{{ route('admin.quizzes.exercises.store', $quiz->id) }}" method="POST">
         @csrf
         <div class="form-group">
             <label for="exercise_name">Exercise Name:</label>

@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('admin.layouts.admin')
 
 @section('content')
 <div class="container">
     <h1>Edit Question</h1>
 
-    <form action="{{ route('quizzes.exercises.questions.update', [$quiz->id, $exercise->id, $question->id]) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.quizzes.exercises.questions.update', [$quiz->id, $exercise->id, $question->id]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -32,7 +32,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Update Question</button>
-        <a href="{{ route('quizzes.exercises.questions.index', [$quiz->id, $exercise->id]) }}" class="btn btn-secondary">Cancel</a>
+        <a href="{{ route('admin.quizzes.exercises.questions.index', [$quiz->id, $exercise->id]) }}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 @endsection

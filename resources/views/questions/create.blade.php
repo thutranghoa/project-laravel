@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts.admin')
 
 @section('content')
 
@@ -6,7 +6,7 @@
 
     <h1>Create New Question</h1>
 
-    <form action="{{ route('quizzes.exercises.questions.store', [$quiz->id, $exercise->id]) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.quizzes.exercises.questions.store', [$quiz->id, $exercise->id]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="content">Question Content:</label>

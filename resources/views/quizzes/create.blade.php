@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('admin.layouts.admin')
 
 @section('content')
 <div class="container">
     <h1>Create New Quiz</h1>
-    <form action="{{ route('quizzes.store') }}" method="POST">
+    <form action="{{ route('admin.quizzes.store') }}" method="POST">
         @csrf
         <div class="form-group">
             <label for="title">Title:</label>

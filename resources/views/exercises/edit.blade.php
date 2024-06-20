@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('admin.layouts.admin')
 
 @section('content')
 <div class="container">
     <h1>Edit Exercise: {{ $exercise->exercise_name }}</h1>
-    <form action="{{ route('quizzes.exercises.update', [$quiz->id, $exercise->id]) }}" method="POST">
+    <form action="{{ route('admin.quizzes.exercises.update', [$quiz->id, $exercise->id]) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="form-group">

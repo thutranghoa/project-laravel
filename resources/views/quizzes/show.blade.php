@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts.admin')
 
 @section('content')
 <div class="container">
@@ -11,9 +11,9 @@
             <p><strong>Difficulty Level:</strong> {{ $question->difficulty_level }}</p>
         </div>
         <div class="card-footer">
-            <a href="{{ route('quizzes.exercises.questions.index', [$quiz->id, $exercise->id]) }}" class="btn btn-secondary">Back to Questions</a>
-            <a href="{{ route('quizzes.exercises.questions.edit', [$quiz->id, $exercise->id, $question->id]) }}" class="btn btn-warning">Edit</a>
-            <form action="{{ route('quizzes.exercises.questions.destroy', [$quiz->id, $exercise->id, $question->id]) }}" method="POST" style="display:inline-block;">
+            <a href="{{ route('admin.quizzes.exercises.questions.index', [$quiz->id, $exercise->id]) }}" class="btn btn-secondary">Back to Questions</a>
+            <a href="{{ route('admin.quizzes.exercises.questions.edit', [$quiz->id, $exercise->id, $question->id]) }}" class="btn btn-warning">Edit</a>
+            <form action="{{ route('admin.quizzes.exercises.questions.destroy', [$quiz->id, $exercise->id, $question->id]) }}" method="POST" style="display:inline-block;">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Delete</button>
