@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\KhiemModels;
 use App\Models\Answer;
 use App\Models\Question;
-use App\Models\quiz;
+use App\Models\Quiz;
 use App\Models\AudioFile;
 use App\Models\danhsachmonhoc;
 use App\Models\Exercise;
@@ -74,7 +74,7 @@ class KhiemController extends Controller
 
 
     public function listmonhoc(){
-        $danhsachmonhocs = quiz::where('id', '!=', 9)->get();
+        $danhsachmonhocs = Quiz::where('id', '!=', 9)->get();
         return view('khiem/show_danh_sach_mon_hoc', compact('danhsachmonhocs'));
     }
 

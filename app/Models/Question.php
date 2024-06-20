@@ -9,7 +9,27 @@ class Question extends Model
 {
     use HasFactory;
     protected $table = 'questions'; 
-    protected $fillable = ['content', 'quiz_id', 'exercise_id', 'difficulty_level'];
+  
+
+
+    protected $fillable = [
+        'quiz_id',
+        'content',
+        'exercise_id',
+        'difficulty_level',
+        'audio_file', 
+    ];
+
+    public function quiz()
+    {
+        return $this->belongsTo(Quiz::class);
+    }
+
+    public function exercise()
+    {
+        return $this->belongsTo(Exercise::class);
+    }
+
 
     public function answers()
     {
