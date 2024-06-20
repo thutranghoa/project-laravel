@@ -27,6 +27,7 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSubjectModal">
   Add Subject
 </button>
+<br><br>
 
 <table class="table table-striped" id="resultsTable">
   <thead>
@@ -35,7 +36,7 @@
       <th scope="col">Subject Name</th>
       <th scope="col">Description</th>
       <th scope="col">Created at</th>
-      <th scope="col">U</th>
+      <th scope="col">Updated at</th>
       <th scope="col">Actions</th>
 
     </tr>
@@ -46,8 +47,11 @@
         <tr>
           <th scope="row">{{$subject->id}}</th>
           <td>{{$subject->name}}</td>
+          <td>{{$subject->title}}</td>
+          <td>{{$subject->created_at}}</td>
+          <td>{{$subject->updated_at}}</td>
           <td>
-            <button type="button" class="btn btn-info edit-button" data-id="{{ $subject->id }}" data-name="{{ $subject->name }}" data-toggle="modal" data-target="#editSubjectModal">
+            <button type="button" class="btn btn-info edit-button" data-id="{{ $subject->id }}" data-name="{{ $subject->name }}" data-desp =  "{{ $subject->title }}" data-created = "{{ $subject->created_at }}" data-updated = "{{ $subject->updated_at }}" data-toggle="modal" data-target="#editSubjectModal">
                 Edit
             </button>
             <button type="button" class="btn btn-danger delete-button" data-id="{{ $subject->id }}" data-name="{{ $subject->name }}" data-toggle="modal" data-target="#deleteSubjectModal">
@@ -74,12 +78,16 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form id = 'addSubject' method="post" action="{{ route('admin.addSubject') }}">
+      <form id = 'addSubject' method="post" action="{{ route('admin.addSubject') }}" >
         @csrf
         <div class="modal-body">
           <div class="form-group">
-            <!-- <label for="add-subject-name" class="col-form-label">Subject Name:</label> -->
-            <input type="text" class="w-100" placeholder="Enter Subject name" name="name" id = "add-subject-name" required>
+            <label> Subject Name:</label>
+            <input type="text" class="w-100" name="name" id = "add-subject-name" required>
+          </div>
+          <div class="form-group">
+            <label> Description:</label>
+            <input type="text" class="w-100" name="description" id="add-subject-description" >
           </div>
         </div>
         <div class="modal-footer">
@@ -104,10 +112,19 @@
       <form id = 'editSubject' method="post" action="{{ route('admin.editSubject') }}">
         @csrf
         <div class="modal-body">
-          <div class="form-group">
-            <!-- <label for="edit-subject-name" class="col-form-label">Subject Name:</label> -->
-            <input type="text" class="w-100" placeholder="Enter Subject name" name="name" id = 'edit-subject-name' required> 
-            <input type="hidden" name="id" id="edit-subject-id">
+        <input type="hidden" name="id" id="edit-subject-id">
+          <div class="row mt-3">
+            <div class="col">
+              <label> Subject Name:</label>
+              <input type="text" class="w-100" placeholder="Enter Subject name" name="name" id = 'edit-subject-name' required> 
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col">
+              <label> Description:</label>
+              <input type="text" class="w-100" placeholder="Enter Subject description" name="description" id="edit-subject-description" >
+            </div>
           </div>
         </div>
         <div class="modal-footer">
@@ -154,7 +171,8 @@
     $(document).ready(function() {
         $('#addSubject').on('submit', function(e) {
             e.preventDefault();
-            var formData = $(this).serialize();
+            var formData = new FormData(this); 
+            console.log("Form Data being sent for addition:", formData);
             $.ajax({
 
               headers: {
@@ -163,7 +181,10 @@
                 url: "{{ route('admin.addSubject') }}",
                 type: 'POST',
                 data: formData,
+                processData: false, 
+                contentType: false,
                 success: function(data) {
+                    console.log("Response Data:", data);
                     if (data.success) {
                         $('#addSubjectModal').modal('hide');
                         alert('Subject added successfully');
@@ -182,18 +203,24 @@
         $('.edit-button').on('click', function() {
             var subjectId = $(this).data('id');
             var subjectName = $(this).data('name');
+            var subjectDesp = $(this).data('desp');
 
             $('#edit-subject-id').val(subjectId);
             $('#edit-subject-name').val(subjectName);
+            $('#edit-subject-description').val(subjectDesp);
         });
 
         $('#editSubject').on('submit', function(e) {
             e.preventDefault();
-            var formData = $(this).serialize();
+            var formData = new FormData(this); 
+            console.log("Form Data being sent for editing:", formData.get('id'), formData.get('name'), formData.get('description'));
+
             $.ajax({
                 url: "{{ route('admin.editSubject') }}",
                 type: 'POST',
                 data: formData,
+                processData: false,
+                contentType: false,
                 success: function(data) {
                     if (data.success) {
                         $('#editSubjectModal').modal('hide');
@@ -250,9 +277,9 @@
                   tableBody.empty();
 
                   if (data.length > 0) {
-                      $.each(data, function(index, subject) {
-                          tableBody.append('<tr><th scope="row">' + subject.id + '</th><td>' + subject.name + '</td><td><button type="button" class="btn btn-info edit-button" data-id="' + subject.id + '" data-name="' + subject.name + '" data-toggle="modal" data-target="#editSubjectModal">Edit</button><button type="button" class="btn btn-danger delete-button" data-id="' + subject.id + '" data-name="' + subject.name + '" data-toggle="modal" data-target="#deleteSubjectModal">Delete</button></td></tr>');
-                      });
+                    $.each(data, function(index, subject) {
+                      tableBody.append('<tr><th scope="row">' + subject.id + '</th><td>' + subject.name + '</td><td>' + subject.title + '</td><td>' + subject.created_at + '</td><td>' + subject.updated_at + '</td><td> <button type="button" class="btn btn-info edit-button" data-id="' + subject.id + '" data-name="' + subject.name + '" data-desp="' + subject.title + '" data-toggle="modal" data-target="#editSubjectModal">Edit</button><button type="button" class="btn btn-danger delete-button" data-id="' + subject.id + '" data-name="' + subject.name + '" data-toggle="modal" data-target="#deleteSubjectModal">Delete</button></td></tr>');
+                  });
                   } else {
                       tableBody.append('<tr><td colspan="3">No subjects found</td></tr>');
                   }
@@ -267,20 +294,25 @@
 
     $(document).on('click', '.edit-button', function() {
 
-      $('.edit-button').on('click', function() {
-            var subjectId = $(this).data('id');
-            var subjectName = $(this).data('name');
+        var subjectId = $(this).data('id');
+        var subjectName = $(this).data('name');
+        var subjectDesp = $(this).data('desp');
 
-            $('#edit-subject-id').val(subjectId);
-            $('#edit-subject-name').val(subjectName);
-        });
+        $('#edit-subject-id').val(subjectId);
+        $('#edit-subject-name').val(subjectName);
+        $('#edit-subject-description').val(subjectDesp);
+    });
+
       $('#editSubject').on('submit', function(e) {
             e.preventDefault();
-            var formData = $(this).serialize();
+            var formData = new FormData(this); 
+
             $.ajax({
                 url: "{{ route('admin.editSubject') }}",
                 type: 'POST',
                 data: formData,
+                processData: false,
+                contentType: false,
                 success: function(data) {
                     if (data.success) {
                         $('#editSubjectModal').modal('hide');
@@ -295,10 +327,8 @@
                 }
             });
         });
-    });
 
     $(document).on('click', '.delete-button', function() {
-      $('.delete-button').on('click', function() {
             var subjectId = $(this).data('id');
             $('#delete-subject-id').val(subjectId);
             $('#deleteSubjectModal').modal('show');
@@ -325,7 +355,6 @@
                 }
             });
         });
-    });
 </script>
 
 

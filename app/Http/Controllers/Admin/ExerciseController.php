@@ -48,9 +48,9 @@ class ExerciseController extends Controller
                 $question->save();
             }
 
-            return redirect()->route('quizzes.exercises.index', $quiz->id)->with('success', 'Exercise created successfully with questions.');
+            return redirect()->route('admin.quizzes.exercises.index', $quiz->id)->with('success', 'Exercise created successfully with questions.');
         } else {
-            return redirect()->route('quizzes.exercises.index', $quiz->id)
+            return redirect()->route('admin.quizzes.exercises.index', $quiz->id)
                 ->with('warning', 'Not enough questions available in the quiz to create the exercise.');
         }
     }
@@ -81,13 +81,13 @@ class ExerciseController extends Controller
             'num_questions' => $request->num_questions,
         ]);
 
-        return redirect()->route('quizzes.exercises.index', $quiz->id)->with('success', 'Exercise updated successfully.');
+        return redirect()->route('admin.quizzes.exercises.index', $quiz->id)->with('success', 'Exercise updated successfully.');
     }
 
     public function destroy(Quiz $quiz, Exercise $exercise)
     {
         $exercise->delete();
 
-        return redirect()->route('quizzes.exercises.index', $quiz->id)->with('success', 'Exercise deleted successfully.');
+        return redirect()->route('admin.quizzes.exercises.index', $quiz->id)->with('success', 'Exercise deleted successfully.');
     }
 }

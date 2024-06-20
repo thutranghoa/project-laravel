@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\StudentEdited;
 use Illuminate\Support\Str;
 use App\Models\Subject;
 use App\Models\User;
@@ -17,8 +21,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = User::paginate(10); // Fetch 10 students per page
-        return view('admin.studentDashboard',  ['students' => $students]);
+        $students = User::all();
+        return view('admin.studentDashboard',  compact('students'));
     }
 
     public function addStudent(Request $request)
@@ -44,7 +48,8 @@ class StudentController extends Controller
             $student->image = basename($imagePath);
 
         } else {
-            return response()->json(['success' => false, 'msg' => 'Image upload failed'], 400);
+            $student->image = '';
+
         }
         $student->save();
 
@@ -54,10 +59,6 @@ class StudentController extends Controller
             'email' => $student->email,
             'password' => $student->password,
         ];
-
-        // Mail::send('admin.verifyMail', $data, function ($message) use ($data) {
-        //     $message->to($data['email'], $data['name'])->subject('Welcome to our school');
-        // });
 
         return response()->json(['success' => true, 'msg' => 'Student added successfully']);
     }
@@ -80,13 +81,18 @@ class StudentController extends Controller
 
         if ($request->hasFile('image')) {
             if ($student->image) {
-                Storage::delete($student->image);
+                // Storage::delete($student->image);
+                Storage::delete('public/images/' . $student->image);
+                Log::info('Deleted image: ' . $student->image);
             }
             $imagePath = $request->file('image')->store('public/images');
             $student->image = basename($imagePath);
         }
 
         $student->save();
+
+        Mail::to($student->email)->send(new StudentEdited($student));
+
 
         return response()->json(['success' => true, 'msg' => 'Student updated successfully']);
     }
@@ -116,7 +122,7 @@ class StudentController extends Controller
         $students = User::where('id', 'LIKE', "%{$search}%")
                             ->orWhere('name', 'LIKE', "%{$search}%")
                             ->orWhere('email', 'LIKE', "%{$search}%")
-                            ->get();
+                            ->get(); 
 
         if ($request->ajax()) {
             return response()->json($students);

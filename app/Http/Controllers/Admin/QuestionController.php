@@ -54,7 +54,7 @@ class QuestionController extends Controller
             $answer->save();
         }
     
-        return redirect()->route('quizzes.exercises.questions.index', [$quiz->id, $exercise->id])
+        return redirect()->route('admin.quizzes.exercises.questions.index', [$quiz->id, $exercise->id])
                          ->with('success', 'Question created successfully.');
     }    
 
@@ -103,7 +103,7 @@ class QuestionController extends Controller
     
         $question->save();
     
-        return redirect()->route('quizzes.exercises.questions.index', [$quizId, $exerciseId])->with('success', 'Question updated successfully.');
+        return redirect()->route('admin.quizzes.exercises.questions.index', [$quizId, $exerciseId])->with('success', 'Question updated successfully.');
     }    
 
     public function destroy($quizId, $exerciseId, Question $question)
@@ -113,7 +113,7 @@ class QuestionController extends Controller
     
         $question->delete();
     
-        return redirect()->route('quizzes.exercises.questions.index', [$quiz->id, $exercise->id])
+        return redirect()->route('admin.quizzes.exercises.questions.index', [$quiz->id, $exercise->id])
                          ->with('success', 'Question deleted successfully.');
     }
 }

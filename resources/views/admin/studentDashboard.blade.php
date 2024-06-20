@@ -38,6 +38,7 @@
       <th scope="col">Gender</th>
       <th scope="col">Email</th>
       <th scope="col">Phone</th>
+      <th scope="col">Birth</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -52,6 +53,7 @@
           <td> {{$student->gender}} </td>
           <td>{{$student->email}}</td>
           <td>{{$student->phone}}</td>
+          <td>{{$student->dob}}</td>
 
           <td>
           <button type="button" class="btn btn-info edit-button" data-id="{{ $student->id }}" data-name="{{ $student->name }}" data-email="{{ $student->email }}" data-gender = "{{ $student->gender }}" data-phone= "{{ $student->phone }}" data-dob = "{{ $student->dob }}" 
@@ -72,8 +74,6 @@
     @endif
   </tbody>
 </table>
-
-{{ $students->links() }}
 
 <!-- Add Student Modal -->
 <div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="addStudentModalLabel" aria-hidden="true">
@@ -102,8 +102,7 @@
             <div class="row mt-3">
                 <div class="col">
                   <label> Gender</label>
-                    <!-- <input type="email" class="w-100"  name="gender" required> -->
-                    <select name="gender" class="w-100" required>
+                    <select name="gender" class="w-100" >
                       <option value = "Male" > Male </option>
                       <option value = "Female"> Female </option>
                     </select>
@@ -113,21 +112,21 @@
             <div class="row mt-3">
                 <div class="col">
                    <label> Phone no.</label>
-                    <input type="text" class="w-100" name="phone" required>
+                    <input type="text" class="w-100" name="phone" >
                 </div>
             </div> 
 
             <div class="row mt-3">
                 <div class="col">
                    <label> Date of birth</label>
-                    <input type="date" class="w-100 " name="dob" required>
+                    <input type="date" class="w-100 " name="dob" >
                 </div>
             </div> 
 
             <div class="row mt-3">
               <div class="col">
                  <label> Profile image </label>
-                  <input type="file" class="w-100" name="image" required>
+                  <input type="file" class="w-100" name="image" >
               </div>
           </div>
         </div>
@@ -175,13 +174,13 @@
             <div class="row mt-3">
                 <div class="col">
                     <label> Phone </label>
-                    <input type="text" class="w-100" placeholder="Enter Student phone" name="phone" id="edit-student-phone" required>
+                    <input type="text" class="w-100" placeholder="Enter Student phone" name="phone" id="edit-student-phone" >
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col">
                     <label> Date of Birth </label>
-                    <input type="date" class="w-100" name="dob" id="edit-student-dob" required>
+                    <input type="date" class="w-100" name="dob" id="edit-student-dob" >
                 </div>
             </div>
             <div class="row mt-3">
@@ -239,7 +238,7 @@
             var studentGender = $(this).data('gender');
             var studentPhone = $(this).data('phone');
             var studentDob = $(this).data('dob');
-            // var studentImage = $(this).data('image');
+            var studentImage = $(this).data('image');
 
             $('#edit-student-id').val(studentId);
             $('#edit-student-name').val(studentName);
@@ -252,11 +251,14 @@
 
         $('#editStudent').on('submit', function(e) {
             e.preventDefault();
-            var formData = $(this).serialize();
+            var formData = new FormData(this); 
+            console.log("Form Data being sent for addition:", formData);
             $.ajax({
                 url: "{{ route('admin.editStudent') }}",
                 type: "POST",
                 data: formData,
+                processData: false,
+                contentType: false,
                 success: function(data) {
                     if (data.success) {
                         $('#editStudentModal').modal('hide');
@@ -278,9 +280,6 @@
             var formData = new FormData(this); 
             console.log("Form Data being sent for addition:", formData);
 
-            for (var pair of formData.entries()) {
-                console.log(pair[0]+ ': ' + pair[1]); 
-            }
             $.ajax({
                 url: "{{ route('admin.addStudent') }}",
                 type: "POST",
@@ -340,6 +339,8 @@
         });
 
         $('#searchForm').on('submit', function(e) {
+          var imageUrl = "{{ asset('storage/images/') }}/";
+
           e.preventDefault();
           var searchQuery = $('#searchInput').val();
           $.ajax({
@@ -352,7 +353,8 @@
 
                   if (data.length > 0) {
                       $.each(data, function(index, student) {
-                          tableBody.append('<tr><th scope="row">' + student.id + '</th><td>' + student.name + '</td><td>' + student.email + '</td><td><button type="button" class="btn btn-info edit-button" data-id="' + student.id + '" data-name="' + student.name + '" data-email="' + student.email + '" data-toggle="modal" data-target="#editStudentModal">Edit</button><button type="button" class="btn btn-danger delete-button" data-id="' + student.id + '" data-name="' + student.name + '" data-email="' + student.email + '" data-toggle="modal" data-target="#deleteStudentModal">Delete</button></td></tr>');
+                                    tableBody.append('<tr><th scope="row">' + student.id + '</th><td>' + student.name + '</td><td><img src="' + imageUrl + student.image +  '" width="50" height="50"></td><td>' + student.gender + '</td><td>' + student.email + '</td><td>' + student.phone + '</td><td>' + student.dob + '</td><td><button type="button" class="btn btn-info edit-button" data-id="' + student.id + '" data-name="' + student.name + '" data-email="' + student.email + '" data-gender="' + student.gender + '" data-phone="' + student.phone + '" data-dob="' + student.dob + '" data-image="' + student.image + '" data-toggle="modal" data-target="#editStudentModal">Edit</button><button type="button" class="btn btn-danger delete-button" data-id="' + student.id + '" data-name="' + student.name + '" data-email="' + student.email + '" data-toggle="modal" data-target="#deleteStudentModal">Delete</button></td></tr>');
+
                       });
                   }
                   else {
@@ -369,44 +371,50 @@
 
 
     $(document).on('click', '.edit-button', function() {
-      $('.edit-button').on('click', function() {
-        var studentId = $(this).data('id');
-            var studentName = $(this).data('name');
-            var studentEmail = $(this).data('email');
+      
+          var studentId = $(this).data('id');
+          var studentName = $(this).data('name');
+          var studentEmail = $(this).data('email');
+          var studentGender = $(this).data('gender');
+          var studentPhone = $(this).data('phone');
+          var studentDob = $(this).data('dob');
+          var studentImage = $(this).data('image');
 
-            $('#edit-student-id').val(studentId);
-            $('#edit-student-name').val(studentName);
-            $('#edit-student-email').val(studentEmail);
-            
-        });
+          $('#edit-student-id').val(studentId);
+          $('#edit-student-name').val(studentName);
+          $('#edit-student-email').val(studentEmail);
+          $('#edit-student-gender').val(studentGender);
+          $('#edit-student-phone').val(studentPhone);
+          $('#edit-student-dob').val(studentDob);
+          // $('#edit-student-image').val(studentImage);
+      });
       
         $('#editStudent').on('submit', function(e) {
-          e.preventDefault();
-          var formData = $(this).serialize();
-          $.ajax({
-              url: "{{ route('admin.editStudent') }}",
-              type: "POST",
-              data: formData,
-              success: function(data) {
-                  if (data.success) {
-                      $('#editStudentModal').modal('hide');
-                      alert('Student updated successfully');
-                      location.reload();
-                  } else {
-                      alert(data.msg);
-                  }
-              },
-              error: function(jqXHR, textStatus, errorThrown) {
-                  console.error(textStatus, errorThrown);
-              }
-          });
+            e.preventDefault();
+            var formData = new FormData(this); 
+            console.log("Form Data being sent for addition:", formData);
+            $.ajax({
+                url: "{{ route('admin.editStudent') }}",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    if (data.success) {
+                        $('#editStudentModal').modal('hide');
+                        alert('Student updated successfully');
+                        location.reload();
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error(textStatus, errorThrown);
+                }
+            });
         });
-      });
-
 
     $(document).on('click', '.delete-button', function() {
-
-      $('.delete-button').on('click', function() {
         var studentId = $(this).data('id');
         $('#delete-student-id').val(studentId);
         $('#deleteStudentModal').modal('show');
@@ -433,10 +441,6 @@
             }
         });
       });
-    });   
-
-      
-    
 </script>
 
 

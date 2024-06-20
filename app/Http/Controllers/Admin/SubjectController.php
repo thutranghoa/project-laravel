@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Subject;
+use Illuminate\Support\Facades\Log;
+
 
 class SubjectController extends Controller
 {
@@ -26,6 +28,7 @@ class SubjectController extends Controller
 
         $subject = new Subject();
         $subject->name = $request->name;
+        $subject->title = $request->description;
         $subject->save();
 
         return response()->json(['success' => true, 'msg' => 'Subject added successfully']);
@@ -40,10 +43,19 @@ class SubjectController extends Controller
         // ]);
 
         $subject = Subject::find($request->id);
-        $subject->name = $request->name;
-        $subject->save();
 
-        return response()->json(['success' => true, 'msg' => 'Subject updated successfully']);
+        if ($subject) {
+            $subject->name = $request->name;
+            $subject->title = $request->description;
+    
+            $subject->save();
+    
+            return response()->json(['success' => true, 'msg' => 'Subject updated successfully']);
+        } else {
+            Log::error('Subject not found with ID:', ['id' => $request->id]);
+
+            return response()->json(['success' => false, 'msg' => 'Subject not found']);
+        }
     }
 
     public function deleteSubject(Request $request)
@@ -66,6 +78,7 @@ class SubjectController extends Controller
 
         $subjects = Subject::where('id', 'LIKE', "%{$search}%")
                             ->orWhere('name', 'LIKE', "%{$search}%")
+                            ->orWhere('description', 'LIKE', "%{$search}%")
                             ->get();
 
         if ($request->ajax()) {

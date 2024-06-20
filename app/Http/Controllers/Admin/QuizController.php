@@ -83,18 +83,18 @@ class QuizController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect()->route('quizzes.index')->with('success', 'Quiz updated successfully.');
+        return redirect()->route('admin.quizzes.index')->with('success', 'Quiz updated successfully.');
     }
 
     public function destroy(Quiz $quiz)
     {
         $quiz->delete();
 
-        return redirect()->route('quizzes.index')->with('success', 'Quiz deleted successfully.');
+        return redirect()->route('admin.quizzes.index')->with('success', 'Quiz deleted successfully.');
     }
 
     public function createExam(Quiz $quiz)
     {
-        return view('quizzes.create_exam', compact('quiz'));    
+        return view('admin.quizzes.create_exam', compact('quiz'));    
     }
 }

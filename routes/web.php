@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ResultController;
 use App\Http\Controllers\Admin\SubjectController;
 use Illuminate\Support\Facades\DB;
 
+use App\Mail\StudentEdited;
 use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\Admin\ExerciseController;
 use App\Http\Controllers\Admin\QuestionController;
@@ -32,6 +33,17 @@ Route::get('/check-database', function () {
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/test-email', function () {
+    Mail::raw('This is a test email', function ($message) {
+        $message->to('tranghoathu2002@gmail.com')
+                ->subject('Test Email');
+    });
+
+    return 'Email sent!';
+});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -65,29 +77,29 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/search-student', [StudentController::class, 'searchStudents'])->name('searchStudents');
 
         Route::get('/student-results', [ResultController::class, 'index'])->name('studentResults');
-        Route :: get ('/delete-result', [ResultController::class, 'deleteResult'])->name('deleteResult');
+        Route :: post ('/delete-result', [ResultController::class, 'deleteResult'])->name('deleteResult');
+        Route::get('/search-result', [ResultController::class, 'searchResults'])->name('searchResults');
 
         // Subjects Routes
         Route::get('/subjects', [SubjectController::class, 'index'])->name('subjects');
         Route::post('/add-subject', [SubjectController::class, 'addSubject'])->name('addSubject');
         Route::post('/edit-subject', [SubjectController::class, 'editSubject'])->name('editSubject');
         Route::post('/delete-subject', [SubjectController::class, 'deleteSubject'])->name('deleteSubject');
-
         Route::get('/search-subject', [SubjectController::class, 'searchSubjects'])->name('searchSubjects');
 
-        Route::get('/quizzes', [QuizController::class, 'index'])->name('quizzes');
+        Route::get('/quizzes', [QuizController::class, 'index'])->name('quizzes.index');
         Route::get('/create-quiz', [QuizController::class, 'create'])->name('quizzes.create'); // Correct route definition
         Route::post('/store-quiz', [QuizController::class, 'store'])->name('quizzes.store');
         Route::get('/edit-quiz/{id}', [QuizController::class, 'edit'])->name('quizzes.edit');
-        Route::put('/update-quiz/{id}', [QuizController::class, 'update'])->name('quizzes.update');
+        Route::put('/update-quiz', [QuizController::class, 'update'])->name('quizzes.update');
         Route::delete('/delete-quiz/{id}', [QuizController::class, 'destroy'])->name('quizzes.destroy');
 
 
 
         Route::prefix('quizzes/{quiz}/exercises')->group(function () {
-            Route::get('/', [ExerciseController::class, 'index'])->name('quizzes.exercises.index');
+            Route::get('/index', [ExerciseController::class, 'index'])->name('quizzes.exercises.index');
             Route::get('/create', [ExerciseController::class, 'create'])->name('quizzes.exercises.create');
-            Route::post('/', [ExerciseController::class, 'store'])->name('quizzes.exercises.store');
+            Route::post('/store', [ExerciseController::class, 'store'])->name('quizzes.exercises.store');
             Route::get('/{exercise}', [ExerciseController::class, 'show'])->name('quizzes.exercises.show');
             Route::get('/{exercise}/edit', [ExerciseController::class, 'edit'])->name('quizzes.exercises.edit');
             Route::put('/{exercise}', [ExerciseController::class, 'update'])->name('quizzes.exercises.update');

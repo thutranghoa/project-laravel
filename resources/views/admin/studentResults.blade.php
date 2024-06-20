@@ -92,7 +92,6 @@
       <th scope="col">Actions</th>
     </tr>
   </thead>
-  @include('admin.studentResultpartial')
 
   <tbody>
     @if (count($results) > 0)
@@ -147,6 +146,26 @@
   </div>
 </div>
 
+<!-- View Student results Modal -->
+<div class="modal fade" id="viewResultModal" tabindex="-1" aria-labelledby="viewResultModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewResultModalLabel">View Exam Results</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Content will be dynamically loaded via AJAX -->
+                <div id="examResultsContent"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -156,7 +175,7 @@
 
       $.ajaxSetup({
         headers: {
-            // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
             'X-Requested-With': 'XMLHttpRequest'
         }
       });
@@ -200,7 +219,7 @@
           e.preventDefault();
           var searchQuery = $('#searchInput').val();
           $.ajax({
-              url: "{{ route('admin.searchStudents') }}",
+              url: "{{ route('admin.searchResults') }}",
               type: 'GET',
               data: { search: searchQuery },
               headers: {
@@ -211,8 +230,8 @@
                   tableBody.empty();
 
                   if (data.length > 0) {
-                      $.each(data, function(index, student) {
-                          tableBody.append('<tr><th scope="row">' + student.id + '</th><td>' + student.name + '</td><td>' + student.email + '</td><td><button type="button" class="btn btn-info edit-button" data-id="' + student.id + '" data-name="' + student.name + '" data-email="' + student.email + '" data-toggle="modal" data-target="#editStudentModal">Edit</button><button type="button" class="btn btn-danger delete-button" data-id="' + student.id + '" data-name="' + student.name + '" data-email="' + student.email + '" data-toggle="modal" data-target="#deleteStudentModal">Delete</button></td></tr>');
+                      $.each(data, function(index, result) {
+                        tableBody.append('<tr><th scope="row">' + result.id + '</th><td>' + result.user_id + '</td><td>' + (result.user ? result.user.name : 'N/A') + '</td><td>' + result.exam_id + '</td><td>' + (result.exercise ? result.exercise.exercise_name : 'N/A') + '</td><td>' + result.score + '</td><td>' + result.exam_duration + '</td><td>' + result.updated_at + '</td><td><button type="button" class="btn btn-danger delete-button" data-id="' + result.id + '" data-toggle="modal" data-target="#deleteResultModal">Delete</button></td></tr>');
                       });
                   }
                   else {
@@ -223,48 +242,64 @@
                   console.error(textStatus, errorThrown);
               }
           });
-        });    
+        });   
+        
+        $(document).on('click', '.view-button', function() {
+        var resultId = $(this).data('id');
+        $('#examResultsContent').html('<p>Loading exam results...</p>');
 
-        $('th a').on('click', function(e) {
-            e.preventDefault();
-            var url = $(this).attr('href');
+        // AJAX request to fetch exam details
+        $.ajax({
+            url: "{{ route('admin.viewResult') }}",
+            type: 'GET',
+            data: { id: resultId },
+            success: function(data) {
+                $('#examResultsContent').html(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error(textStatus, errorThrown);
+                $('#examResultsContent').html('<p>Error loading exam results.</p>');
+            }
+        });
+    });
+        
+    });
 
-            $.ajax({
-                url: url,
-                type: 'GET',
-                dataType: 'html',
-                headers: {
-                  'X-Requested-With': 'XMLHttpRequest'
-                },
-                success: function(data) {
-                    $('#resultsTable tbody').html(data);
-                    window.history.pushState("", "", url); // Update URL without reloading the page
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.error('Error:', textStatus, errorThrown);
-                    alert('An error occurred. Please try again.');
-                }
-            });
-         });
+    $(document).on('click', '.delete-button', function() {
+      var studentId = $(this).data('id');
+      $('#delete-result-id').val(studentId);
+      $('#deleteResultModal').modal('show');
 
-         $.ajax({
-          url: "{{ route('admin.studentResults') }}",
-          type: "GET",
-          dataType: "html",
+      console.log(studentId);
+
+    });
+
+    $('#deleteResult').on('submit', function(e) {
+      e.preventDefault();
+      var formData = $(this).serialize();
+      console.log("Form Data being sent for deletion:", formData); // Debugging step
+      $.ajax({
+          url: "{{ route('admin.deleteResult') }}",
+          type: "POST",
+          data: formData,
           headers: {
               'X-Requested-With': 'XMLHttpRequest'
           },
           success: function(data) {
-              $('#resultsTable tbody').html(data);
+              if (data.success) {
+                  $('#deleteResultModal').modal('hide');
+                  alert('Result deleted successfully');
+                  location.reload();
+              } else {
+                  alert(data.msg);
+              }
           },
           error: function(jqXHR, textStatus, errorThrown) {
-              console.error('Error:', textStatus, errorThrown);
-              alert('An error occurred. Please try again.');
+              console.error(textStatus, errorThrown);
           }
-        });
-
-      
+      });
     });
+
 
 
       
