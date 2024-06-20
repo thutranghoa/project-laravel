@@ -9,8 +9,15 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
+<<<<<<< HEAD
      */
     public function run(): void
+=======
+     *
+     * @return void
+     */
+    public function run()
+>>>>>>> DuongAn
     {
         // \App\Models\User::factory(10)->create();
 
@@ -18,6 +25,9 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+<<<<<<< HEAD
         $this->call(AdminSeeder::class);
+=======
+>>>>>>> DuongAn
     }
 }

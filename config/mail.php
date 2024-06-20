@@ -28,15 +28,23 @@ return [
     | sending an e-mail. You will specify which one you are using for your
     | mailers below. You are free to add additional mailers as required.
     |
+<<<<<<< HEAD
     | Supported: "smtp", "sendmail", "mailgun", "ses", "ses-v2",
     |            "postmark", "log", "array", "failover", "roundrobin"
+=======
+    | Supported: "smtp", "sendmail", "mailgun", "ses",
+    |            "postmark", "log", "array", "failover"
+>>>>>>> DuongAn
     |
     */
 
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
+<<<<<<< HEAD
             'url' => env('MAIL_URL'),
+=======
+>>>>>>> DuongAn
             'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
@@ -50,6 +58,7 @@ return [
             'transport' => 'ses',
         ],
 
+<<<<<<< HEAD
         'postmark' => [
             'transport' => 'postmark',
             // 'message_stream_id' => null,
@@ -63,6 +72,14 @@ return [
             // 'client' => [
             //     'timeout' => 5,
             // ],
+=======
+        'mailgun' => [
+            'transport' => 'mailgun',
+        ],
+
+        'postmark' => [
+            'transport' => 'postmark',
+>>>>>>> DuongAn
         ],
 
         'sendmail' => [
@@ -86,6 +103,7 @@ return [
                 'log',
             ],
         ],
+<<<<<<< HEAD
 
         'roundrobin' => [
             'transport' => 'roundrobin',
@@ -94,6 +112,8 @@ return [
                 'postmark',
             ],
         ],
+=======
+>>>>>>> DuongAn
     ],
 
     /*
