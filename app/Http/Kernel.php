@@ -45,6 +45,11 @@ class Kernel extends HttpKernel
         ],
     ];
 
+    protected $routeMiddleware = [
+        // ...
+        'ajax' => \App\Http\Middleware\AjaxMiddleware::class,
+    ];
+
     /**
      * The application's middleware aliases.
      *
