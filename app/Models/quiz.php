@@ -15,15 +15,16 @@ class Quiz extends Model
         'name'
     ];
 
+    public function question()
+    {
+        return $this->hasMany(Question::class);
+    }
+
     public function exercises()
     {
         return $this->hasMany(Exercise::class, 'id_mon');
     }
 
-    public function question()
-    {
-        return $this->hasMany(Question::class);
-    }
-    ///feferewewew
+    
     
 }
