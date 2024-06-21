@@ -15,8 +15,6 @@
                 <th>ID</th>
                 <th>Title</th>
                 <th>Description</th>
-                <th>Duration</th>
-                <th>Total Questions</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -26,8 +24,6 @@
                     <td>{{ $quiz->id }}</td>
                     <td>{{ $quiz->title }}</td>
                     <td>{{ $quiz->description }}</td>
-                    <td>{{ $quiz->duration }}</td>
-                    <td>{{ $quiz->total_questions }}</td>
                     <td>
                         <a href="{{ route('quizzes.exercises.index', $quiz->id) }}" class="btn btn-info">View</a>
                         <a href="{{ route('quizzes.edit', $quiz->id) }}" class="btn btn-warning">Edit</a>

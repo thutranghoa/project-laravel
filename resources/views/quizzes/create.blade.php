@@ -13,14 +13,6 @@
             <label for="description">Description:</label>
             <textarea class="form-control" id="description" name="description"></textarea>
         </div>
-        <div class="form-group">
-            <label for="duration">Duration:</label>
-            <input type="number" class="form-control" id="duration" name="duration" required>
-        </div>
-        <div class="form-group">
-            <label for="total_questions">Total Questions:</label>
-            <input type="number" class="form-control" id="total_questions" name="total_questions" required>
-        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

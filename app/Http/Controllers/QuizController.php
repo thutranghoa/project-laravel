@@ -36,16 +36,12 @@ class QuizController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'duration' => 'required|integer',
-            'total_questions' => 'required|integer',
             'name' => 'nullable|string|max:255',
         ]);
     
         $quiz = new Quiz;
         $quiz->title = $request->title;
         $quiz->description = $request->description;
-        $quiz->duration = $request->duration;
-        $quiz->total_questions = $request->total_questions;
         $quiz->name = $request->name;
         $quiz->save();
     
@@ -64,23 +60,16 @@ class QuizController extends Controller
         return view('quizzes.edit', compact('quiz'));
     }
 
-    public function update(Request $request, Quiz $quiz)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'duration' => 'required|integer',
-            'total_questions' => 'required|integer',
             'name' => 'nullable|string|max:255',
         ]);
 
-        $quiz->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'duration' => $request->duration,
-            'total_questions' => $request->total_questions,
-            'name' => $request->name,
-        ]);
+        $quiz = Quiz::findOrFail($id);
+        $quiz->update($request->all());
 
         return redirect()->route('quizzes.index')->with('success', 'Quiz updated successfully.');
     }

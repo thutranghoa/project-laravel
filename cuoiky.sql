@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 18, 2024 lúc 08:04 PM
+-- Thời gian đã tạo: Th6 21, 2024 lúc 06:54 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.2.0
 
@@ -20,9 +20,34 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `cuoiky`
 --
--- --------------------------------------------------------
 create database if not exists cuoiky;
 use cuoiky;
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `admins`
+--
+
+CREATE TABLE `admins` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `admins`
+--
+
+INSERT INTO `admins` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'admin@admin.com', NULL, '$2y$12$soaAjx84RyuyEL44B25tkuSTXyB6j79znV9kd51bS7atL/AninCDS', NULL, '2024-06-13 03:36:56', '2024-06-13 03:36:56');
+
+-- --------------------------------------------------------
+
 --
 -- Cấu trúc bảng cho bảng `answers`
 --
@@ -54,7 +79,7 @@ INSERT INTO `answers` (`id`, `question_id`, `content`, `is_correct`, `created_at
 (107, 3, 'Lực không có tác dụng gì', 0, '2024-06-09 13:47:06', '2024-06-09 13:47:06'),
 (108, 3, 'Lực làm thay đổi trạng thái tĩnh của vật', 0, '2024-06-09 13:47:06', '2024-06-09 13:47:06'),
 (109, 4, 'Đặc điểm của phản lực', 1, '2024-06-09 13:47:06', '2024-06-09 13:47:06'),
-(110, 4, 'Đặc điểm của tác dụng lực', 0, '2024-06-09 13:47:06', '2024-06-09 13:47:06'),
+(110, 4, 'Đặc điểm của tác dụng lực', 1, '2024-06-09 13:47:06', '2024-06-09 13:47:06'),
 (111, 4, 'Lực không tương tác', 0, '2024-06-09 13:47:06', '2024-06-09 13:47:06'),
 (112, 4, 'Phản lực không bằng tác dụng lực', 0, '2024-06-09 13:47:06', '2024-06-09 13:47:06'),
 (113, 5, 'Hydrogen', 1, '2024-06-09 13:47:06', '2024-06-09 13:47:06'),
@@ -704,7 +729,8 @@ INSERT INTO `answers` (`id`, `question_id`, `content`, `is_correct`, `created_at
 (757, 188, 'Oxy', 1, '2024-06-12 10:26:24', '2024-06-12 10:26:24'),
 (758, 188, 'Sắt', 0, '2024-06-12 10:26:24', '2024-06-12 10:26:24'),
 (759, 188, 'Đồng', 0, '2024-06-12 10:26:24', '2024-06-12 10:26:24'),
-(760, 188, 'Chì', 0, '2024-06-12 10:26:24', '2024-06-12 10:26:24'),
+(760, 188, 'Chì', 0, '2024-06-12 10:26:24', '2024-06-12 10:26:24');
+INSERT INTO `answers` (`id`, `question_id`, `content`, `is_correct`, `created_at`, `updated_at`) VALUES
 (761, 189, 'CH4 + 2O2 -> CO2 + 2H2O', 1, '2024-06-12 10:26:24', '2024-06-12 10:26:24'),
 (762, 189, 'CO2 + H2O -> H2CO3', 0, '2024-06-12 10:26:24', '2024-06-12 10:26:24'),
 (763, 189, 'H2 + O2 -> H2O', 0, '2024-06-12 10:26:24', '2024-06-12 10:26:24'),
@@ -1155,7 +1181,19 @@ INSERT INTO `exam_histories` (`id`, `user_id`, `exam_id`, `score`, `created_at`,
 (98, 4, 1, '4.29', '2024-06-18 14:57:04', '2024-06-18 14:57:04', '00:07', '{\"_token\":\"kY25CB4Txb86ogIBHyPecpTF9l5sZ2VuW5hA5fag\",\"elapsedTime\":\"7\",\"answers\":{\"19\":\"163\",\"23\":\"178\",\"31\":\"211\",\"28\":\"198\",\"24\":\"181\",\"32\":\"214\",\"33\":\"218\"}}'),
 (99, 4, 1, '1.43', '2024-06-18 16:57:47', '2024-06-18 16:57:47', '00:07', '{\"_token\":\"CYybmJP6az3o6ZynCjF2KpjkQ7gxBaCaRxaalGBT\",\"elapsedTime\":\"7\",\"answers\":{\"29\":\"202\",\"31\":\"210\",\"22\":\"174\",\"25\":\"186\",\"26\":\"191\",\"32\":\"215\",\"23\":\"178\"}}'),
 (100, 4, 2, '2.00', '2024-06-18 17:24:03', '2024-06-18 17:24:03', '00:10', '{\"_token\":\"CYybmJP6az3o6ZynCjF2KpjkQ7gxBaCaRxaalGBT\",\"elapsedTime\":\"10\",\"answers\":{\"36\":\"231\",\"92\":\"455\",\"48\":\"279\",\"34\":\"222\",\"63\":\"337\",\"69\":\"361\",\"89\":\"442\",\"72\":\"374\",\"83\":\"419\",\"50\":\"287\"}}'),
-(101, 4, 17, '4.17', '2024-06-18 18:01:22', '2024-06-18 18:01:22', '00:15', '{\"_token\":\"CYybmJP6az3o6ZynCjF2KpjkQ7gxBaCaRxaalGBT\",\"elapsedTime\":\"15\",\"answers\":{\"247\":\"995\",\"253\":\"1018\",\"245\":\"985\",\"249\":\"1002\",\"244\":\"983\",\"250\":\"1007\",\"246\":\"990\",\"252\":\"1015\",\"251\":\"1009\",\"255\":\"1025\",\"254\":\"1021\",\"248\":\"999\"}}');
+(101, 4, 17, '4.17', '2024-06-18 18:01:22', '2024-06-18 18:01:22', '00:15', '{\"_token\":\"CYybmJP6az3o6ZynCjF2KpjkQ7gxBaCaRxaalGBT\",\"elapsedTime\":\"15\",\"answers\":{\"247\":\"995\",\"253\":\"1018\",\"245\":\"985\",\"249\":\"1002\",\"244\":\"983\",\"250\":\"1007\",\"246\":\"990\",\"252\":\"1015\",\"251\":\"1009\",\"255\":\"1025\",\"254\":\"1021\",\"248\":\"999\"}}'),
+(102, 4, 17, '1.67', '2024-06-19 02:26:38', '2024-06-19 02:26:38', '00:14', '{\"_token\":\"64TMvdSvNbEErbQPizP2ND4a8bJg0dMhkQTVzEJP\",\"elapsedTime\":\"14\",\"answers\":{\"244\":\"982\",\"245\":\"986\",\"246\":\"989\",\"247\":\"996\",\"248\":\"999\",\"249\":\"1003\",\"250\":\"1005\",\"251\":\"1010\",\"252\":\"1014\",\"253\":\"1019\",\"254\":\"1022\",\"255\":\"1026\"}}'),
+(103, 4, 3, '8.33', '2024-06-19 02:35:33', '2024-06-19 02:35:33', '01:33', '{\"_token\":\"64TMvdSvNbEErbQPizP2ND4a8bJg0dMhkQTVzEJP\",\"elapsedTime\":\"93\",\"answers\":{\"93\":\"460\",\"64\":\"341\",\"53\":\"299\",\"87\":\"435\",\"43\":\"258\",\"49\":\"282\",\"47\":\"275\",\"37\":\"234\",\"70\":\"367\",\"78\":\"400\",\"51\":\"291\",\"45\":\"267\"}}'),
+(104, 4, 17, '4.17', '2024-06-19 02:36:07', '2024-06-19 02:36:07', '00:13', '{\"_token\":\"64TMvdSvNbEErbQPizP2ND4a8bJg0dMhkQTVzEJP\",\"elapsedTime\":\"13\",\"answers\":{\"244\":\"982\",\"245\":\"987\",\"246\":\"990\",\"247\":\"995\",\"248\":\"998\",\"249\":\"1002\",\"250\":\"1006\",\"251\":\"1011\",\"252\":\"1015\",\"253\":\"1017\",\"254\":\"1024\",\"255\":\"1026\"}}'),
+(105, 4, 5, '6.36', '2024-06-19 08:33:38', '2024-06-19 08:33:38', '00:58', '{\"_token\":\"hYH6VuJPJgYEpyS1koRtTey4gyR0LjTm89ls0NuF\",\"elapsedTime\":\"58\",\"answers\":{\"150\":\"607\",\"142\":\"574\",\"120\":\"485\",\"123\":\"497\",\"117\":\"475\",\"146\":\"591\",\"158\":\"638\",\"114\":\"461\",\"132\":\"533\",\"162\":\"653\",\"170\":\"685\"}}'),
+(106, 4, 17, '2.50', '2024-06-19 08:42:27', '2024-06-19 08:42:27', '00:19', '{\"_token\":\"hYH6VuJPJgYEpyS1koRtTey4gyR0LjTm89ls0NuF\",\"elapsedTime\":\"19\",\"answers\":{\"244\":\"982\",\"245\":\"988\",\"246\":\"990\",\"247\":\"994\",\"248\":\"998\",\"249\":\"1002\",\"250\":\"1007\",\"251\":\"1010\",\"252\":\"1013\",\"253\":\"1017\",\"254\":\"1022\",\"255\":\"1026\"}}'),
+(107, 4, 3, '5.00', '2024-06-20 03:04:06', '2024-06-20 03:04:06', '00:13', '{\"_token\":\"pk2WCC57W4zxjwtgD4eraWW2BcxwNhLSNEdjqRCJ\",\"elapsedTime\":\"13\",\"answers\":{\"41\":\"251\",\"81\":\"411\",\"84\":\"422\",\"58\":\"319\",\"78\":\"399\",\"47\":\"274\",\"45\":\"267\",\"75\":\"387\",\"43\":\"258\",\"93\":\"458\",\"37\":\"234\",\"61\":\"330\"}}'),
+(108, 4, 1, '3.00', '2024-06-20 05:57:08', '2024-06-20 05:57:08', '00:10', '{\"_token\":\"pE4OFXSoPUiP0gPbXovW62LgISipEqkxTwx6UsJf\",\"elapsedTime\":\"10\",\"answers\":{\"19\":\"163\",\"20\":\"167\",\"21\":\"171\",\"22\":\"175\",\"23\":\"177\",\"24\":\"183\",\"25\":\"187\",\"26\":\"191\",\"27\":\"195\",\"28\":\"197\"}}'),
+(109, 4, 16, '1.00', '2024-06-20 09:22:54', '2024-06-20 09:22:54', '06:10', '{\"_token\":\"HiZwQr24I0eeA0ySyBscw8MkQU990UdLpFwP2Jxc\",\"elapsedTime\":\"370\",\"answers\":{\"234\":\"943\",\"235\":\"947\",\"236\":\"951\",\"237\":\"954\",\"238\":\"959\",\"239\":\"962\",\"240\":\"967\",\"241\":\"970\",\"242\":\"974\",\"243\":\"979\"}}'),
+(110, 4, 2, '3.00', '2024-06-20 14:53:17', '2024-06-20 14:53:17', '00:45', '{\"_token\":\"8IUh3GHwXmrTniS1347EMEj68gCvNbywJTxQ0gDY\",\"elapsedTime\":\"45\",\"answers\":{\"46\":\"272\",\"36\":\"231\",\"69\":\"363\",\"60\":\"326\",\"1\":\"98\",\"77\":\"395\",\"38\":\"240\",\"66\":\"349\",\"40\":\"245\",\"72\":\"373\"}}'),
+(111, 4, 5, '3.64', '2024-06-20 14:53:57', '2024-06-20 14:53:57', '00:10', '{\"_token\":\"8IUh3GHwXmrTniS1347EMEj68gCvNbywJTxQ0gDY\",\"elapsedTime\":\"10\",\"answers\":{\"123\":\"498\",\"146\":\"591\",\"132\":\"534\",\"162\":\"654\",\"129\":\"522\",\"114\":\"463\",\"150\":\"606\",\"154\":\"621\",\"142\":\"575\",\"3\":\"106\",\"138\":\"559\"}}'),
+(112, 4, 4, '3.64', '2024-06-21 03:02:27', '2024-06-21 03:02:27', '00:13', '{\"_token\":\"RekOGiIVvpseinzKA3p52ZDKEthGfVxAwoTxLIao\",\"elapsedTime\":\"13\",\"answers\":{\"68\":\"360\",\"59\":\"322\",\"85\":\"426\",\"62\":\"334\",\"65\":\"346\",\"56\":\"311\",\"82\":\"416\",\"88\":\"439\",\"71\":\"370\",\"79\":\"401\",\"91\":\"450\"}}'),
+(113, 4, 3, '3.33', '2024-06-21 03:58:49', '2024-06-21 03:58:49', '00:15', '{\"_token\":\"1ofrLgQB2UoVFzhVSmaMUzW7X3RRe5i0f9Fr4hc9\",\"elapsedTime\":\"15\",\"answers\":{\"35\":\"226\",\"87\":\"435\",\"61\":\"330\",\"55\":\"305\",\"45\":\"267\",\"37\":\"235\",\"93\":\"459\",\"53\":\"298\",\"78\":\"397\",\"81\":\"410\",\"64\":\"341\",\"51\":\"290\"}}');
 
 -- --------------------------------------------------------
 
@@ -1195,7 +1233,19 @@ INSERT INTO `exercises` (`id`, `exercise_name`, `id_mon`, `ma_de`, `time`, `crea
 (14, 'bài hóa nân cáo', 3, 5, 50, '2024-06-15 15:10:33', '2024-06-18 01:50:27', 10),
 (15, 'thêm bài vật lý nâng tấp', 2, 5, 30, '2024-06-15 15:28:48', '2024-06-18 01:50:32', 10),
 (16, 'Bài luyện nghe tiếng anh 2', 9, 2, 18, '2024-06-18 15:12:26', '2024-06-18 17:14:40', 10),
-(17, 'Bài luyện nghe tiếng anh 3', 9, 3, 15, '2024-06-18 17:13:51', '2024-06-18 17:14:47', 12);
+(17, 'Bài luyện nghe tiếng anh 3\r\n', 9, 3, 15, '2024-06-18 17:13:51', '2024-06-18 17:14:47', 12);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `password_reset_tokens`
+--
+
+CREATE TABLE `password_reset_tokens` (
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1254,13 +1304,13 @@ INSERT INTO `questions` (`id`, `quiz_id`, `content`, `created_at`, `updated_at`,
 (36, 1, '15 x 6 bằng bao nhiêu?', '2024-06-12 03:46:19', '2024-06-12 03:46:19', 1, 2),
 (37, 1, 'Định lý Pitago nói về mối quan hệ gì trong một tam giác vuông?', '2024-06-12 03:46:19', '2024-06-12 03:46:19', 2, 2),
 (38, 1, 'Giá trị của căn bậc hai của 81 là bao nhiêu?', '2024-06-12 03:46:19', '2024-06-12 03:46:19', 1, 1),
-(39, 1, 'Chu vi của một hình tròn có bán kính 7cm là bao nhiêu?', '2024-06-12 03:46:19', '2024-06-12 03:46:19', 2, 2),
-(40, 1, '25 chia cho 5 bằng bao nhiêu?', '2024-06-12 03:46:19', '2024-06-12 03:46:19', 1, 1),
+(39, 1, 'Chu vi của một hình tròn có bán kính 7cm là bao nhiêu?', '2024-06-12 03:46:19', '2024-06-21 04:02:47', 18, 2),
+(40, 1, '25 chia cho 5 bằng bao nhiêu?', '2024-06-12 03:46:19', '2024-06-21 04:02:47', 18, 1),
 (41, 1, 'Một hình vuông có diện tích là 16cm², cạnh của hình vuông này dài bao nhiêu?', '2024-06-12 03:46:19', '2024-06-12 03:46:19', 2, 1),
 (42, 1, 'Tính tổng của dãy số: 1, 3, 5, 7, 9', '2024-06-12 03:46:19', '2024-06-12 03:46:19', 1, 2),
 (43, 1, 'Định lý gì xác định rằng tổng các góc trong một tam giác bằng 180 độ?', '2024-06-12 03:46:19', '2024-06-12 03:46:19', 2, 2),
 (44, 1, 'Giá trị của 7 x 8 là bao nhiêu?', '2024-06-12 03:46:19', '2024-06-12 03:46:19', 1, 1),
-(45, 1, 'Một hình tròn có bán kính là 10cm, diện tích của nó là bao nhiêu?', '2024-06-12 03:46:19', '2024-06-12 03:46:19', 2, 2),
+(45, 1, 'Một hình tròn có bán kính là 10cm, diện tích của nó là bao nhiêu?', '2024-06-12 03:46:19', '2024-06-21 04:02:47', 18, 2),
 (46, 1, 'Tính thể tích của một khối lập phương có cạnh dài 3m', '2024-06-12 03:46:19', '2024-06-12 03:46:19', 1, 2),
 (47, 1, 'Định lý nào cho biết đường trung tuyến của một tam giác chia tam giác đó thành hai tam giác có diện tích bằng nhau?', '2024-06-12 03:46:19', '2024-06-12 03:46:19', 2, 3),
 (48, 1, 'Tìm số đối của -9', '2024-06-12 03:46:19', '2024-06-12 03:46:19', 1, 1),
@@ -1268,24 +1318,24 @@ INSERT INTO `questions` (`id`, `quiz_id`, `content`, `created_at`, `updated_at`,
 (50, 1, 'Giá trị của phép nhân: 6 x (2 + 3)', '2024-06-12 03:46:19', '2024-06-12 03:46:19', 1, 1),
 (51, 1, 'Một hình chữ nhật có chu vi là 20m, chiều dài của nó là 6m, tìm chiều rộng của hình chữ nhật', '2024-06-12 03:46:19', '2024-06-12 03:46:19', 2, 2),
 (52, 1, 'Định lý nào nói rằng tổng các góc trong một đa giác lồi với n cạnh bằng (n-2) x 180 độ?', '2024-06-12 03:46:19', '2024-06-12 03:46:19', 1, 3),
-(53, 1, 'Giá trị của phép chia: 100 / 25', '2024-06-12 03:46:19', '2024-06-12 03:46:19', 2, 1),
+(53, 1, 'Giá trị của phép chia: 100 / 25', '2024-06-12 03:46:19', '2024-06-21 04:02:47', 18, 1),
 (54, 1, 'Tổng của 2 + 3 là bao nhiêu?', '2024-06-12 04:00:13', '2024-06-12 04:00:13', 1, 1),
 (55, 1, 'Diện tích của một hình vuông có cạnh dài 4m là bao nhiêu?', '2024-06-12 04:00:13', '2024-06-12 04:00:13', 2, 1),
-(56, 1, 'Giá trị của 9 x 7 là bao nhiêu?', '2024-06-12 04:00:13', '2024-06-12 04:00:13', 3, 2),
-(57, 1, 'Chu vi của một hình tròn có bán kính 5cm là bao nhiêu?', '2024-06-12 04:00:13', '2024-06-12 04:00:13', 1, 2),
+(56, 1, 'Giá trị của 9 x 7 là bao nhiêu?', '2024-06-12 04:00:13', '2024-06-21 04:02:47', 18, 2),
+(57, 1, 'Chu vi của một hình tròn có bán kính 5cm là bao nhiêu?', '2024-06-12 04:00:13', '2024-06-21 04:02:47', 18, 2),
 (58, 1, 'Phép chia 20 / 4 cho kết quả là gì?', '2024-06-12 04:00:13', '2024-06-12 04:00:13', 2, 1),
 (59, 1, 'Công thức để tính diện tích hình tam giác là gì?', '2024-06-12 04:00:13', '2024-06-12 04:00:13', 3, 2),
 (60, 1, 'Tìm nghiệm của phương trình x + 5 = 10', '2024-06-12 04:00:13', '2024-06-12 04:00:13', 1, 1),
 (61, 1, 'Số lớn nhất trong dãy số: 4, 6, 8, 10 là số nào?', '2024-06-12 04:00:13', '2024-06-12 04:00:13', 2, 1),
 (62, 1, 'Phép nhân 6 x 9 bằng bao nhiêu?', '2024-06-12 04:00:13', '2024-06-12 04:00:13', 3, 2),
 (63, 1, 'Giá trị của căn bậc hai của 144 là bao nhiêu?', '2024-06-12 04:00:13', '2024-06-12 04:00:13', 1, 2),
-(64, 1, 'Một hình chữ nhật có chiều dài 10m và chiều rộng 5m, chu vi của nó là bao nhiêu?', '2024-06-12 04:00:13', '2024-06-12 04:00:13', 2, 1),
+(64, 1, 'Một hình chữ nhật có chiều dài 10m và chiều rộng 5m, chu vi của nó là bao nhiêu?', '2024-06-12 04:00:13', '2024-06-21 04:02:47', 18, 1),
 (65, 1, 'Phép cộng 15 + 25 bằng bao nhiêu?', '2024-06-12 04:00:13', '2024-06-12 04:00:13', 3, 1),
 (66, 1, 'Một hình tam giác có các cạnh dài 3m, 4m, 5m, diện tích của nó là bao nhiêu?', '2024-06-12 04:00:13', '2024-06-12 04:00:13', 1, 2),
-(67, 1, 'Tổng của 1, 2, 3, 4, 5 là bao nhiêu?', '2024-06-12 04:00:13', '2024-06-12 04:00:13', 2, 1),
+(67, 1, 'Tổng của 1, 2, 3, 4, 5 là bao nhiêu?', '2024-06-12 04:00:13', '2024-06-21 04:02:47', 18, 1),
 (68, 1, 'Tìm giá trị của biểu thức: 7 + 8 - 5', '2024-06-12 04:00:13', '2024-06-12 04:00:13', 3, 1),
 (69, 1, 'Phương trình x - 3 = 7 có nghiệm là gì?', '2024-06-12 04:00:13', '2024-06-12 04:00:13', 1, 1),
-(70, 1, 'Giá trị của 100 chia cho 10 là bao nhiêu?', '2024-06-12 04:00:13', '2024-06-12 04:00:13', 2, 1),
+(70, 1, 'Giá trị của 100 chia cho 10 là bao nhiêu?', '2024-06-12 04:00:13', '2024-06-21 04:02:47', 18, 1),
 (71, 1, 'Chu vi của một hình tam giác có các cạnh dài 3m, 4m, 5m là bao nhiêu?', '2024-06-12 04:00:13', '2024-06-12 04:00:13', 3, 2),
 (72, 1, 'Phép nhân 8 x 8 cho kết quả là gì?', '2024-06-12 04:00:13', '2024-06-12 04:00:13', 1, 2),
 (73, 1, 'Một hình chữ nhật có diện tích 50 m², chiều dài là 10m, chiều rộng của nó là bao nhiêu?', '2024-06-12 04:00:13', '2024-06-12 04:00:13', 2, 1),
@@ -1302,13 +1352,13 @@ INSERT INTO `questions` (`id`, `quiz_id`, `content`, `created_at`, `updated_at`,
 (84, 1, 'Số nào lớn hơn giữa 0.75 và 0.57?', '2024-06-12 04:51:53', '2024-06-12 04:51:53', 2, 1),
 (85, 1, 'Tìm giá trị của biểu thức: 100 - 25 + 10', '2024-06-12 04:51:53', '2024-06-12 04:51:53', 3, 1),
 (86, 1, 'Giá trị của căn bậc ba của 27 là bao nhiêu?', '2024-06-12 04:51:53', '2024-06-12 04:51:53', 1, 2),
-(87, 1, 'Một hình vuông có cạnh dài 10cm, chu vi của nó là bao nhiêu?', '2024-06-12 04:51:53', '2024-06-12 04:51:53', 2, 1),
+(87, 1, 'Một hình vuông có cạnh dài 10cm, chu vi của nó là bao nhiêu?', '2024-06-12 04:51:53', '2024-06-21 04:02:47', 18, 1),
 (88, 1, 'Công thức tính chu vi của một hình tam giác là gì?', '2024-06-12 04:51:53', '2024-06-12 04:51:53', 3, 2),
 (89, 1, 'Phép nhân 4 x 9 cho kết quả là gì?', '2024-06-12 04:51:53', '2024-06-12 04:51:53', 1, 1),
-(90, 1, 'Tìm giá trị của biểu thức: 20 + 15 - 5', '2024-06-12 04:51:53', '2024-06-12 04:51:53', 2, 1),
-(91, 1, 'Giá trị của 2/3 của 27 là bao nhiêu?', '2024-06-12 04:51:53', '2024-06-12 04:51:53', 3, 1),
+(90, 1, 'Tìm giá trị của biểu thức: 20 + 15 - 5', '2024-06-12 04:51:53', '2024-06-21 04:02:47', 18, 1),
+(91, 1, 'Giá trị của 2/3 của 27 là bao nhiêu?', '2024-06-12 04:51:53', '2024-06-21 04:02:47', 18, 1),
 (92, 1, 'Một hình tròn có bán kính là 10cm, chu vi của nó là bao nhiêu?', '2024-06-12 04:51:53', '2024-06-12 04:51:53', 1, 2),
-(93, 1, 'Phép chia 99 cho 11 cho kết quả là gì?', '2024-06-12 04:51:53', '2024-06-12 04:51:53', 2, 1),
+(93, 1, 'Phép chia 99 cho 11 cho kết quả là gì?', '2024-06-12 04:51:53', '2024-06-21 04:02:47', 18, 1),
 (114, 2, 'Tốc độ của ánh sáng trong chân không là bao nhiêu?', '2024-06-12 09:43:22', '2024-06-12 09:43:22', 1, 2),
 (115, 2, 'Định luật nào giải thích sự phản xạ của ánh sáng?', '2024-06-12 09:43:22', '2024-06-12 09:43:22', 2, 2),
 (116, 2, 'Đơn vị đo lường cường độ dòng điện là gì?', '2024-06-12 09:43:22', '2024-06-12 09:43:22', 3, 1),
@@ -1487,30 +1537,60 @@ INSERT INTO `quizzes` (`id`, `title`, `description`, `duration`, `total_question
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `subjects`
+--
+
+CREATE TABLE `subjects` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `subjects`
+--
+
+INSERT INTO `subjects` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'Toán 1', NULL, '2024-06-21 04:09:29'),
+(2, 'English', '2024-06-13 13:56:18', '2024-06-13 13:56:18'),
+(3, 'Ly', '2024-06-13 13:57:25', '2024-06-13 13:57:25'),
+(4, 'Anh', '2024-06-13 14:04:51', '2024-06-13 18:56:01');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `users`
 --
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` enum('user','admin','user_vip') NOT NULL DEFAULT 'user',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `created_at`, `updated_at`) VALUES
-(1, 'Nguyen Van A', 'nguyenvana@example.com', 'hashed_password_1', 'user', '2024-06-09 12:53:39', '2024-06-09 12:53:39'),
-(2, 'Tran Thi B', 'tranthib@example.com', 'hashed_password_2', 'user', '2024-06-09 12:53:39', '2024-06-09 12:53:39'),
-(3, 'Le Van C', 'levanc@example.com', 'hashed_password_3', 'admin', '2024-06-09 12:53:39', '2024-06-09 12:53:39'),
-(4, 'khiem', 'trinhgiakhiem0112@gmail.com', '$2y$12$x4xOjZrKGK7AVta/Q8LgIuO.apuQSaQCuE0.t5dQgKYOBnZFLvWJy', 'user_vip', '2024-06-09 20:16:24', '2024-06-18 16:47:20'),
-(5, 'Tất Đạt Đa', '20010776@st.phenikaa-uni.edu.vn', '$2y$12$myzLUdPjs71ctV17HwoqrOLEPBmCiEd2VHdTKrphEGq2M10/hHkgy', 'user', '2024-06-13 06:11:09', '2024-06-13 07:20:24'),
-(6, 'Trịnh Gia Khiêm', 'htoan3962@gmail.com', '$2y$12$cV6QyxWMdniFCVydJIHwY.2l4C236UDNxzurqNcUZShY/saIebmt.', 'user_vip', '2024-06-15 10:13:52', '2024-06-16 09:43:23');
+INSERT INTO `users` (`id`, `remember_token`, `name`, `email`, `password`, `role`, `created_at`, `updated_at`, `image`) VALUES
+(1, NULL, 'Nguyen Van A', 'nguyenvana@example.com', 'hashed_password_1', 'user', '2024-06-09 12:53:39', '2024-06-09 12:53:39', NULL),
+(2, NULL, 'Tran Thi B', 'tranthib@example.com', 'hashed_password_2', 'user', '2024-06-09 12:53:39', '2024-06-09 12:53:39', NULL),
+(3, NULL, 'Le Van C', 'levanc@example.com', 'hashed_password_3', 'admin', '2024-06-09 12:53:39', '2024-06-09 12:53:39', NULL),
+(4, 'yqMK4Bm1MTdapBHJfBnZoW7rpXo54XT4L3L5CbO4rgnErsOZTjzoWCUKAnwM', 'khiem', 'trinhgiakhiem0112@gmail.com', '$2y$12$aJyM7uD7k1/VgkgJBiPsLelLtPdZHObvFm9UVzhGsuzwDMcmlZkue', 'user', '2024-06-09 20:16:24', '2024-06-21 04:01:20', NULL),
+(5, NULL, 'Tất Đạt Đa', '20010776@st.phenikaa-uni.edu.vn', '$2y$12$myzLUdPjs71ctV17HwoqrOLEPBmCiEd2VHdTKrphEGq2M10/hHkgy', 'user', '2024-06-13 06:11:09', '2024-06-13 07:20:24', NULL),
+(6, NULL, 'Trịnh Gia Khiêm', 'htoan3962@gmail.com', '$2y$12$cV6QyxWMdniFCVydJIHwY.2l4C236UDNxzurqNcUZShY/saIebmt.', 'user_vip', '2024-06-15 10:13:52', '2024-06-16 09:43:23', NULL),
+(7, NULL, 'Nguyễn Văn Hùng', 'nguyenvanhung@example.com', 'password123', 'user', '2024-06-20 03:00:00', '2024-06-20 03:00:00', 'nguyenvanhung_image.png'),
+(8, NULL, 'Trần Thị Mai', 'tranthimai@example.com', 'password456', 'user', '2024-06-20 03:05:00', '2024-06-20 03:05:00', 'tranthimai_image.png'),
+(9, NULL, 'Lê Thị Hoa', 'lethihhoa@example.com', 'password789', 'user', '2024-06-20 03:10:00', '2024-06-20 03:10:00', 'lethihhoa_image.png'),
+(10, NULL, 'Phạm Văn Minh', 'phamvanminh@example.com', 'password101112', 'user', '2024-06-20 03:15:00', '2024-06-20 03:15:00', 'phamvanminh_image.png'),
+(11, NULL, 'Đặng Thị Lan', 'dangthilan@example.com', 'password131415', 'user', '2024-06-20 03:20:00', '2024-06-20 03:20:00', 'dangthilan_image.png');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -1529,9 +1609,6 @@ ALTER TABLE `answers`
 ALTER TABLE `audio_files`
   ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `audio_files`
-  ADD column question_id int(10) NOT NULL;
-  
 --
 -- Chỉ mục cho bảng `difficulty_levels`
 --
@@ -1552,6 +1629,12 @@ ALTER TABLE `exam_histories`
 ALTER TABLE `exercises`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_mon` (`id_mon`);
+
+--
+-- Chỉ mục cho bảng `password_reset_tokens`
+--
+ALTER TABLE `password_reset_tokens`
+  ADD PRIMARY KEY (`email`);
 
 --
 -- Chỉ mục cho bảng `questions`
@@ -1593,13 +1676,13 @@ ALTER TABLE `audio_files`
 -- AUTO_INCREMENT cho bảng `exam_histories`
 --
 ALTER TABLE `exam_histories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 
 --
 -- AUTO_INCREMENT cho bảng `exercises`
 --
 ALTER TABLE `exercises`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT cho bảng `questions`
@@ -1611,13 +1694,13 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT cho bảng `quizzes`
 --
 ALTER TABLE `quizzes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

@@ -19,16 +19,6 @@
         </div>
 
         <div class="form-group">
-            <label for="duration">Duration:</label>
-            <input type="number" class="form-control" id="duration" name="duration" value="{{ $quiz->duration }}" required>
-        </div>
-
-        <div class="form-group">
-            <label for="total_questions">Total Questions:</label>
-            <input type="number" class="form-control" id="total_questions" name="total_questions" value="{{ $quiz->total_questions }}" required>
-        </div>
-
-        <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" class="form-control" id="name" name="name" value="{{ $quiz->name }}">
         </div>
