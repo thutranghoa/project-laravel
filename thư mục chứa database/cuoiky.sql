@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 20, 2024 lúc 04:19 PM
+-- Thời gian đã tạo: Th6 20, 2024 lúc 06:31 PM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.2.0
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `cuoiky`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `admins`
+--
+
+CREATE TABLE `admins` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `admins`
+--
+
+INSERT INTO `admins` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'admin@admin.com', NULL, '$2y$12$soaAjx84RyuyEL44B25tkuSTXyB6j79znV9kd51bS7atL/AninCDS', NULL, '2024-06-13 03:36:56', '2024-06-13 03:36:56');
 
 -- --------------------------------------------------------
 
@@ -1164,7 +1188,9 @@ INSERT INTO `exam_histories` (`id`, `user_id`, `exam_id`, `score`, `created_at`,
 (106, 4, 17, '2.50', '2024-06-19 08:42:27', '2024-06-19 08:42:27', '00:19', '{\"_token\":\"hYH6VuJPJgYEpyS1koRtTey4gyR0LjTm89ls0NuF\",\"elapsedTime\":\"19\",\"answers\":{\"244\":\"982\",\"245\":\"988\",\"246\":\"990\",\"247\":\"994\",\"248\":\"998\",\"249\":\"1002\",\"250\":\"1007\",\"251\":\"1010\",\"252\":\"1013\",\"253\":\"1017\",\"254\":\"1022\",\"255\":\"1026\"}}'),
 (107, 4, 3, '5.00', '2024-06-20 03:04:06', '2024-06-20 03:04:06', '00:13', '{\"_token\":\"pk2WCC57W4zxjwtgD4eraWW2BcxwNhLSNEdjqRCJ\",\"elapsedTime\":\"13\",\"answers\":{\"41\":\"251\",\"81\":\"411\",\"84\":\"422\",\"58\":\"319\",\"78\":\"399\",\"47\":\"274\",\"45\":\"267\",\"75\":\"387\",\"43\":\"258\",\"93\":\"458\",\"37\":\"234\",\"61\":\"330\"}}'),
 (108, 4, 1, '3.00', '2024-06-20 05:57:08', '2024-06-20 05:57:08', '00:10', '{\"_token\":\"pE4OFXSoPUiP0gPbXovW62LgISipEqkxTwx6UsJf\",\"elapsedTime\":\"10\",\"answers\":{\"19\":\"163\",\"20\":\"167\",\"21\":\"171\",\"22\":\"175\",\"23\":\"177\",\"24\":\"183\",\"25\":\"187\",\"26\":\"191\",\"27\":\"195\",\"28\":\"197\"}}'),
-(109, 4, 16, '1.00', '2024-06-20 09:22:54', '2024-06-20 09:22:54', '06:10', '{\"_token\":\"HiZwQr24I0eeA0ySyBscw8MkQU990UdLpFwP2Jxc\",\"elapsedTime\":\"370\",\"answers\":{\"234\":\"943\",\"235\":\"947\",\"236\":\"951\",\"237\":\"954\",\"238\":\"959\",\"239\":\"962\",\"240\":\"967\",\"241\":\"970\",\"242\":\"974\",\"243\":\"979\"}}');
+(109, 4, 16, '1.00', '2024-06-20 09:22:54', '2024-06-20 09:22:54', '06:10', '{\"_token\":\"HiZwQr24I0eeA0ySyBscw8MkQU990UdLpFwP2Jxc\",\"elapsedTime\":\"370\",\"answers\":{\"234\":\"943\",\"235\":\"947\",\"236\":\"951\",\"237\":\"954\",\"238\":\"959\",\"239\":\"962\",\"240\":\"967\",\"241\":\"970\",\"242\":\"974\",\"243\":\"979\"}}'),
+(110, 4, 2, '3.00', '2024-06-20 14:53:17', '2024-06-20 14:53:17', '00:45', '{\"_token\":\"8IUh3GHwXmrTniS1347EMEj68gCvNbywJTxQ0gDY\",\"elapsedTime\":\"45\",\"answers\":{\"46\":\"272\",\"36\":\"231\",\"69\":\"363\",\"60\":\"326\",\"1\":\"98\",\"77\":\"395\",\"38\":\"240\",\"66\":\"349\",\"40\":\"245\",\"72\":\"373\"}}'),
+(111, 4, 5, '3.64', '2024-06-20 14:53:57', '2024-06-20 14:53:57', '00:10', '{\"_token\":\"8IUh3GHwXmrTniS1347EMEj68gCvNbywJTxQ0gDY\",\"elapsedTime\":\"10\",\"answers\":{\"123\":\"498\",\"146\":\"591\",\"132\":\"534\",\"162\":\"654\",\"129\":\"522\",\"114\":\"463\",\"150\":\"606\",\"154\":\"621\",\"142\":\"575\",\"3\":\"106\",\"138\":\"559\"}}');
 
 -- --------------------------------------------------------
 
@@ -1205,18 +1231,6 @@ INSERT INTO `exercises` (`id`, `exercise_name`, `id_mon`, `ma_de`, `time`, `crea
 (15, 'thêm bài vật lý nâng tấp', 2, 5, 30, '2024-06-15 15:28:48', '2024-06-18 01:50:32', 10),
 (16, 'Bài luyện nghe tiếng anh 2', 9, 2, 18, '2024-06-18 15:12:26', '2024-06-18 17:14:40', 10),
 (17, 'Bài luyện nghe tiếng anh 3\r\n', 9, 3, 15, '2024-06-18 17:13:51', '2024-06-18 17:14:47', 12);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `password_reset_tokens`
---
-
-CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) NOT NULL,
-  `token` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1519,20 +1533,26 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `role` enum('user','admin','user_vip') NOT NULL DEFAULT 'user',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `remember_token`, `name`, `email`, `password`, `role`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'Nguyen Van A', 'nguyenvana@example.com', 'hashed_password_1', 'user', '2024-06-09 12:53:39', '2024-06-09 12:53:39'),
-(2, NULL, 'Tran Thi B', 'tranthib@example.com', 'hashed_password_2', 'user', '2024-06-09 12:53:39', '2024-06-09 12:53:39'),
-(3, NULL, 'Le Van C', 'levanc@example.com', 'hashed_password_3', 'admin', '2024-06-09 12:53:39', '2024-06-09 12:53:39'),
-(4, 'E2gDZL15xL6VWEGR7m3vMrs658p18vpPPd8hOgpE40kAuFyKYj9eqjXWYUoR', 'khiem', 'trinhgiakhiem0112@gmail.com', '$2y$12$o9aQd7jgkDjdzQCBCqQF9.QjKFPgOdFI7bZFzKyEC6jf9yac0J802', 'user', '2024-06-09 20:16:24', '2024-06-20 13:59:45'),
-(5, NULL, 'Tất Đạt Đa', '20010776@st.phenikaa-uni.edu.vn', '$2y$12$myzLUdPjs71ctV17HwoqrOLEPBmCiEd2VHdTKrphEGq2M10/hHkgy', 'user', '2024-06-13 06:11:09', '2024-06-13 07:20:24'),
-(6, NULL, 'Trịnh Gia Khiêm', 'htoan3962@gmail.com', '$2y$12$cV6QyxWMdniFCVydJIHwY.2l4C236UDNxzurqNcUZShY/saIebmt.', 'user_vip', '2024-06-15 10:13:52', '2024-06-16 09:43:23');
+INSERT INTO `users` (`id`, `remember_token`, `name`, `email`, `password`, `role`, `created_at`, `updated_at`, `image`) VALUES
+(1, NULL, 'Nguyen Van A', 'nguyenvana@example.com', 'hashed_password_1', 'user', '2024-06-09 12:53:39', '2024-06-09 12:53:39', NULL),
+(2, NULL, 'Tran Thi B', 'tranthib@example.com', 'hashed_password_2', 'user', '2024-06-09 12:53:39', '2024-06-09 12:53:39', NULL),
+(3, NULL, 'Le Van C', 'levanc@example.com', 'hashed_password_3', 'admin', '2024-06-09 12:53:39', '2024-06-09 12:53:39', NULL),
+(4, '0g3U9Du4m0YUHXSr99vp9Qsgi9y59xXoe6PgPUnnIhaSbzaahe46LfZEDwbu', 'khiem', 'trinhgiakhiem0112@gmail.com', '$2y$12$qnzh5WWDt.JY9OTaGKqIte6RHtstqTfXZiKH4Dw9losbUT6LQZWnm', 'user', '2024-06-09 20:16:24', '2024-06-20 14:46:42', NULL),
+(5, NULL, 'Tất Đạt Đa', '20010776@st.phenikaa-uni.edu.vn', '$2y$12$myzLUdPjs71ctV17HwoqrOLEPBmCiEd2VHdTKrphEGq2M10/hHkgy', 'user', '2024-06-13 06:11:09', '2024-06-13 07:20:24', NULL),
+(6, NULL, 'Trịnh Gia Khiêm', 'htoan3962@gmail.com', '$2y$12$cV6QyxWMdniFCVydJIHwY.2l4C236UDNxzurqNcUZShY/saIebmt.', 'user_vip', '2024-06-15 10:13:52', '2024-06-16 09:43:23', NULL),
+(7, NULL, 'Nguyễn Văn Hùng', 'nguyenvanhung@example.com', 'password123', 'user', '2024-06-20 03:00:00', '2024-06-20 03:00:00', 'nguyenvanhung_image.png'),
+(8, NULL, 'Trần Thị Mai', 'tranthimai@example.com', 'password456', 'user', '2024-06-20 03:05:00', '2024-06-20 03:05:00', 'tranthimai_image.png'),
+(9, NULL, 'Lê Thị Hoa', 'lethihhoa@example.com', 'password789', 'user', '2024-06-20 03:10:00', '2024-06-20 03:10:00', 'lethihhoa_image.png'),
+(10, NULL, 'Phạm Văn Minh', 'phamvanminh@example.com', 'password101112', 'user', '2024-06-20 03:15:00', '2024-06-20 03:15:00', 'phamvanminh_image.png'),
+(11, NULL, 'Đặng Thị Lan', 'dangthilan@example.com', 'password131415', 'user', '2024-06-20 03:20:00', '2024-06-20 03:20:00', 'dangthilan_image.png');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -1571,12 +1591,6 @@ ALTER TABLE `exam_histories`
 ALTER TABLE `exercises`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_mon` (`id_mon`);
-
---
--- Chỉ mục cho bảng `password_reset_tokens`
---
-ALTER TABLE `password_reset_tokens`
-  ADD KEY `email` (`email`);
 
 --
 -- Chỉ mục cho bảng `questions`
@@ -1618,7 +1632,7 @@ ALTER TABLE `audio_files`
 -- AUTO_INCREMENT cho bảng `exam_histories`
 --
 ALTER TABLE `exam_histories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT cho bảng `exercises`
@@ -1642,7 +1656,7 @@ ALTER TABLE `quizzes`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

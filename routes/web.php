@@ -91,8 +91,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
 
 
 
-        
-        Route::prefix('admin/quizzes/{quiz}/exercises')->group(function () {
+
+        Route::prefix('quizzes/{quiz}/exercises')->group(function () {
             Route::get('/', [ExerciseController::class, 'index'])->name('quizzes.exercises.index');
             Route::get('/create', [ExerciseController::class, 'create'])->name('quizzes.exercises.create');
             Route::post('/', [ExerciseController::class, 'store'])->name('quizzes.exercises.store');
